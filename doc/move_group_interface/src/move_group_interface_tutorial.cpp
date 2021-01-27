@@ -58,12 +58,12 @@ int main(int argc, char** argv)
 
   // BEGIN_TUTORIAL
   //
-  // Setup
+  // 设置
   // ^^^^^
   //
-  // MoveIt operates on sets of joints called "planning groups" and stores them in an object called
-  // the `JointModelGroup`. Throughout MoveIt the terms "planning group" and "joint model group"
-  // are used interchangably.
+  // MoveIt 操作一组被称为 "planning groups" 的多个关节，并将它们存储在一个名为 
+  // `JointModelGroup` 的对象中。在整个 MoveIt 中，术语 "planning groups" 和 "joint model group" 
+  // 可互相指代。
   static const std::string PLANNING_GROUP = "panda_arm";
 
   // The :planning_interface:`MoveGroupInterface` class can be easily

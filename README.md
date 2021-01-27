@@ -1,4 +1,6 @@
-# MoveIt Tutorials
+# MoveIt 中文教程（翻译版本）
+
+官方教程的 Master 分支的中文翻译，同步于 2021 年 1 月 19 日，commit id：ea5ab20a1bfd162d59fb351593950b0136b72864。
 
 [https://ros-planning.github.io/moveit_tutorials/](https://ros-planning.github.io/moveit_tutorials/)
 

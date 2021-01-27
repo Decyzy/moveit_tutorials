@@ -1,55 +1,48 @@
-Move Group Python Interface
+移动组 (Move Group) 的 Python 接口
 ================================================
 .. image:: move_group_python_interface.png
    :width: 700px
 
-One of the simplest MoveIt user interfaces is through the Python-based Move Group Interface. These wrappers
-provide functionality for most operations that the average user will likely need,
-specifically setting joint or pose goals, creating motion plans, moving the
-robot, adding objects into the environment and attaching/detaching objects from
-the robot.
+最简单的 MoveIt 用户接口之一是基于 python 的移动组 (Move Group) 接口。这些 python 包装 (wrappers) 为用户想要执行的大多数操作提供了简便的功能，特别是设置关节或目标姿态，创建运动规划，移动机器人，添加对象到环境里和附加/分离对象到机器人上。
 
-Watch this quick `YouTube video demo <https://youtu.be/3MA5ebXPLsc>`_ to see the power of the Move Group Python interface!
+观看这个简短的 `YouTube 演示视频 <https://youtu.be/3MA5ebXPLsc>`_ 看看 Move Group 的 python 接口的能力吧!
 
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`_ 里的步骤。
 
-Start RViz and MoveGroup node
+打开 RViz 和 MoveGroup 节点
 -----------------------------
-Open two shells. Start RViz and wait for everything to finish loading in the first shell: ::
+打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成： ::
 
   roslaunch panda_moveit_config demo.launch
 
-Now run the Python code directly in the other shell using ``rosrun``.
-Note in some instances you may need to make the python script executable: ::
+现在直接在另一个 shell 里使用 ``rosrun`` 运行 Python 代码。注意在某些情况下，你可能需要让 python 脚本拥有可执行权限：::
 
  rosrun moveit_tutorials move_group_python_interface_tutorial.py
 
-Expected Output
+预期效果
 ---------------
-In RViz, we should be able to see the following:
+在 RViz 里，我们应该能看到以下效果：
 
-Press *<enter>* in the shell terminal where you ran the ``rosrun`` command in between each step
- #. The robot plans and moves its arm to the joint goal.
- #. The robot plans a path to a pose goal.
- #. The robot plans a Cartesian path.
- #. The robot displays the Cartesian path plan again.
- #. The robot executes the Cartesian path plan.
- #. A box appears at the location of the Panda end effector.
- #. The box changes colors to indicate that it is now attached.
- #. The robot plans and executes a Cartesian path with the box attached.
- #. The box changes colors again to indicate that it is now detached.
- #. The box disappears.
+当你在 shell 终端里执行完 ``rosrun`` 命令后，在每个步骤间敲 *<回车>* 。
+ #. 机器人规划路径，并将手臂移动到目标关节位置处。
+ #. 机器人规划了一条到目标位姿的路径。
+ #. 机器人规划了一条笛卡尔路径。
+ #. 机器人再次演示了笛卡尔路径规划.
+ #. 机器人执行了笛卡尔路径规划.
+ #. 一个 box 出现在 Panda 的末端执行器位置处。
+ #. box 的颜色变了，以显示其当前被固连了。
+ #. 机器人在保持 box 固连的情况下，规划并执行了一个笛卡尔路径。
+ #. box 的颜色再次变了，以显示其当前脱离连接了。
+ #. box 消失。
 
-The Entire Code
+整个代码
 ---------------
-Note: the entire code can be seen :codedir:`here in the tutorials GitHub repository<move_group_python_interface/scripts/move_group_python_interface_tutorial.py>`.
+注意: 整个代码见 :codedir:`本教程的 GitHub 仓库<move_group_python_interface/scripts/move_group_python_interface_tutorial.py>` 。
 
 .. tutorial-formatter:: ./scripts/move_group_python_interface_tutorial.py
 
-The Launch File
+Launch 文件
 ---------------
-The entire launch file is :codedir:`here<move_group_python_interface/launch/move_group_python_interface_tutorial.launch>`
-on GitHub. All the code in this tutorial can be run from the
-``moveit_tutorials`` package that you have as part of your MoveIt setup.
+整个 launch 文件在 GitHub 上的 :codedir:`这里<move_group_python_interface/launch/move_group_python_interface_tutorial.launch>` 可见。本教程中的所有代码都可从 **moveit_tutorials** 包中运行，这个包是 MoveIt 安装的一部分。

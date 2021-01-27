@@ -1,61 +1,60 @@
-Move Group C++ Interface
+移动组（Move Group） 的 C++ 接口
 ==================================
 .. image:: move_group_interface_tutorial_start_screen.png
    :width: 700px
 
-In MoveIt, the simplest user interface is through the :planning_interface:`MoveGroupInterface` class. It provides easy to use functionality for most operations that a user may want to carry out, specifically setting joint or pose goals, creating motion plans, moving the robot, adding objects into the environment and attaching/detaching objects from the robot. This interface communicates over ROS topics, services, and actions to the `MoveGroup Node <http://docs.ros.org/noetic/api/moveit_ros_move_group/html/annotated.html>`_.
+在 MoveIt 里，最简单的用户接口是 :planning_interface:`MoveGroupInterface` 类。这个类为用户想要执行的大多数操作提供了简便的功能，特别是设置关节或目标姿态，创建运动规划，移动机器人，添加对象到环境里和附加/分离对象到机器人上。此接口借助 ROS 的 topics 、services 和 actions 来和 `MoveGroup 节点 <http://docs.ros.org/noetic/api/moveit_ros_move_group/html/annotated.html>`_ 通信。
 
+观看这个简短的 `YouTube 演示视频 <https://youtu.be/_5siHkFQPBQ>`_ ，看看 Move Group 接口的能力吧！
 
-Watch this quick `YouTube video demo <https://youtu.be/_5siHkFQPBQ>`_ to see the power of the move group interface!
-
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`_ 里的步骤。
 
-Running the Code
+运行代码
 ----------------
-Open two shells. In the first shell start RViz and wait for everything to finish loading: ::
+打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成： ::
 
   roslaunch panda_moveit_config demo.launch
 
-In the second shell, run the launch file: ::
+在第二个 shell 里，运行 launch 文件： ::
 
   roslaunch moveit_tutorials move_group_interface_tutorial.launch
 
-**Note:** This tutorial uses the **RvizVisualToolsGui** panel to step through the demo. To add this panel to RViz, follow the instructions in the `Visualization Tutorial <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_.
+**注意:** 本教程使用 **RvizVisualToolsGui** 面板来逐步完成演示。 要将此面板添加到 RViz ，请参考 `可视化教程 <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_ 。
 
-After a short moment, the RViz window should appear and look similar to the one at the top of this page. To progress through each demo step either press the **Next** button in the **RvizVisualToolsGui** panel at the bottom of the screen or select **Key Tool** in the **Tools** panel at the top of the screen and then press **N** on your keyboard while RViz is focused.
+RViz 窗口过一会儿就会出现，看起来和本页面顶部的窗口差不多。想要依次查看每个演示步骤，要么按下窗口底部 **RvizVisualToolsGui** 面板里的 **Next** 按钮，或者在 RViz 窗口聚焦状态下，选择窗口顶部 **Tools** 面板下的 **Key Tool** ，然后按下键盘上的 **N** 。
 
-Expected Output
+预期效果
 ---------------
-See the `YouTube video <https://youtu.be/_5siHkFQPBQ>`_ at the top of this tutorial for expected output. In RViz, we should be able to see the following:
- 1. The robot moves its arm to the pose goal to its front.
- 2. The robot moves its arm to the joint goal at its side.
- 3. The robot moves its arm back to a new pose goal while maintaining the end-effector level.
- 4. The robot moves its arm along the desired Cartesian path (a triangle down, right, up+left).
- 5. A box object is added into the environment to the right of the arm.
+可以通过本页教程顶部的 `YouTube 视频 <https://youtu.be/_5siHkFQPBQ>`_ 来查看预期效果。在 RViz 里，我们应该能看到以下效果：
+ 1. 机器人将手臂移动到前面的目标位置。
+ 2. 机器人将其手臂移动到其一侧的目标关节位置处。
+ 3. 在保持末端执行器水平的同时，机器人将其手臂移动至一个新的目标姿态。
+ 4. 机器人沿着期望的笛卡尔路径移动手臂(沿着下、右、前左方的一个三角形路径)。
+ 5. 将一个 box 对象添加到手臂右侧的环境中。
     |B|
 
- 6. The robot moves its arm to the pose goal, avoiding collision with the box.
- 7. The object is attached to the wrist (its color will change to purple/orange/green).
- 8. The object is detached from the wrist (its color will change back to green).
- 9. The object is removed from the environment.
+ 6. 机器人将手臂移动到目标位置，同时避免了与 box 碰撞。
+ 7. 将一个物体固连到了手腕(其颜色将依次变为紫色、橙色、绿色)。
+ 8. 该物体与腕部分离(其颜色将恢复为绿色)。
+ 9. 将该物体从环境中移除。
 
 .. |B| image:: ./move_group_interface_tutorial_robot_with_box.png
 
-The Entire Code
+整个代码
 ---------------
-The entire code can be seen :codedir:`here in the MoveIt GitHub project<move_group_interface/src/move_group_interface_tutorial.cpp>`. Next we step through the code piece by piece to explain its functionality.
+全部代码可以在 :codedir:`MoveIt GitHub project<move_group_interface/src/move_group_interface_tutorial.cpp>` 里找到。接下来，我们逐步分析代码来解释其功能。
 
 .. tutorial-formatter:: ./src/move_group_interface_tutorial.cpp
 
-The Launch File
+Launch 文件
 ---------------
-The entire launch file is :codedir:`here<move_group_interface/launch/move_group_interface_tutorial.launch>` on GitHub. All the code in this tutorial can be run from the **moveit_tutorials** package that you have as part of your MoveIt setup.
+整个 launch 文件在 GitHub 上的 :codedir:`这里<move_group_interface/launch/move_group_interface_tutorial.launch>` 可见。本教程中的所有代码都可从 **moveit_tutorials** 包中运行，这个包是 MoveIt 安装的一部分。
 
 
-A Note on Setting Tolerances
+关于精度设置的说明
 ----------------------------
-Note that the `MoveGroupInterface's <http://docs.ros.org/noetic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1MoveGroupInterface.html>`_ `setGoalTolerance()` and related methods sets the tolerance for **planning**, not execution.
+注意 `MoveGroupInterface <http://docs.ros.org/noetic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1MoveGroupInterface.html>`_ 中的 `setGoalTolerance()` 及其相关方法是为 **规划过程（planning）** 设置精度，而不是设置执行过程（execution）的精度。
 
-If you want to configure the execution tolerances, you will have to edit the `controller.yaml` file if using a FollowJointTrajectory controller, or manually add it into the generated trajectory message from the planner.
+如果你想配置执行过程中的精度，且使用了一个 FollowJointTrajectory 控制器（controller），你必须编辑 `controller.yaml` 文件，或者手动将其添加到从规划器（planner）生成的轨迹消息中。

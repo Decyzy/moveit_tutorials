@@ -1,9 +1,9 @@
-Getting Started
+入门
 ===============
 
-This tutorial will install MoveIt and create a workspace sandbox to run the tutorials and example robot.
+本教程将This tutorial will install MoveIt and create a workspace sandbox to run the tutorials and example robot.
 
-Install ROS and Catkin
+安装 ROS and Catkin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 `Install ROS Noetic <http://wiki.ros.org/noetic/Installation/Ubuntu>`_.
 It is easy to miss steps when going through the ROS installation tutorial. If you run into errors in the next few steps, a good place to start is to go back and make sure you have installed ROS correctly.
