@@ -4,10 +4,10 @@
 test -x `which rosdoc_lite` || sudo apt install ros-$ROS_DISTRO-rosdoc-lite
 
 # Setup Environment
-rm -rf docs
+rm -rf build
 
 # Build
-rosdoc_lite -o docs .
+rosdoc_lite -o build .
 
 # Run
 # xdg-open ./build/html/index.html
