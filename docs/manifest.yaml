@@ -1,0 +1,42 @@
+actions: []
+authors: Sachin Chitta <sachinc@willowgarage.com>, Dave Coleman <dave@picknik.ai>,
+  Mike Lautman <mike@picknik.ai>
+brief: ''
+bugtracker: https://github.com/ros-planning/moveit_tutorials/issues
+depends:
+- catkin
+- eigen
+- interactive_markers
+- moveit_ros_planning
+- panda_moveit_config
+- pcl_conversions
+- moveit_ros_planning_interface
+- pcl_ros
+- rviz
+- franka_description
+- rviz_visual_tools
+- tf2_ros
+- geometric_shapes
+- moveit_fake_controller_manager
+- moveit_commander
+- joy
+- robot_state_publisher
+- moveit_visual_tools
+- tf2_eigen
+- rosunit
+- moveit_resources_panda_moveit_config
+- xacro
+- moveit_core
+- moveit_ros_perception
+- pluginlib
+- joint_state_publisher
+- tf2_geometry_msgs
+- rosbag
+description: The moveit_tutorials package
+license: BSD
+maintainers: Dave Coleman <dave@picknik.ai>, Mike Lautman <mike@picknik.ai>
+msgs: []
+package_type: package
+repo_url: https://github.com/ros-planning/moveit_tutorials
+srvs: []
+url: https://ros-planning.github.io/moveit_tutorials
