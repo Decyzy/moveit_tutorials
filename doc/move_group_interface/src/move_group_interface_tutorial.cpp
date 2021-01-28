@@ -270,7 +270,7 @@ int main(int argc, char** argv)
   // 完成含姿态约束的规划后，请务必从 move_group 里清除它。
   move_group.clearPathConstraints();
 
-  // 笛卡尔路径
+  // 笛卡尔路径规划
   // ^^^^^^^^^^^^^^^
   // 您可以通过一系列末端执行器要通过的沿途路径点来直接进行笛卡尔路径规划。
   // 请注意，我们从先前设置的新初始状态开始。
@@ -293,8 +293,8 @@ int main(int argc, char** argv)
   waypoints.push_back(target_pose3);  // 上左
 
   // 我们希望以 1 cm 的精度插值笛卡尔路径，
-  // 这就是为什么我们在笛卡尔换算 computeCartesianPath 中将 0.01 指定为最大步长的原因。
-  // 我们将 jump_threshold 指定为 0.0，以禁用跳跃阈值。
+  // 这就是为什么我们在笛卡尔换算 computeCartesianPath() 函数中将最大步长设置为 0.01 的原因。
+  // 我们将 jump_threshold 设置为 0.0 以禁用跳跃阈值。
   // 警告 - 在在实际硬件上执行规划结果时，禁用 jump_threshold 可能会导致冗余关节进行大量无法预测的运动，
   // 并且可能会带来安全问题。
   moveit_msgs::RobotTrajectory trajectory;

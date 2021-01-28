@@ -36,9 +36,9 @@ html_static_path = ['_static']
 
 html_context = {
     "display_github": True,
-    "github_user": "ros-planning",
+    "github_user": "Decyzy",
     "github_repo": "moveit_tutorials",
-    "github_version": "master",
+    "github_version": "Noetic_CN_zh-dev",
     "conf_py_path": "",
     "source_suffix": source_suffix,
     "css_files": ['_static/override.css'],

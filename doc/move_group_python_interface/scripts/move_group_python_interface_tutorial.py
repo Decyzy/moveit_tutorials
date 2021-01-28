@@ -127,12 +127,11 @@ class MoveGroupPythonIntefaceTutorial(object):
     eef_link = move_group.get_end_effector_link()
     print("============ End effector link: %s" % eef_link)
 
-    # We can get a list of all the groups in the robot:
+    # 我们可以获得机器人中所有 planning group 的列表:
     group_names = robot.get_group_names()
     print("============ Available Planning Groups:", robot.get_group_names())
 
-    # Sometimes for debugging it is useful to print the entire state of the
-    # robot:
+    # 有时输出机械臂的所有状态对于调试很有用:
     print("============ Printing robot state")
     print(robot.get_current_state())
     print("")
@@ -150,18 +149,17 @@ class MoveGroupPythonIntefaceTutorial(object):
 
 
   def go_to_joint_state(self):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     move_group = self.move_group
 
     ## BEGIN_SUB_TUTORIAL plan_to_joint_state
     ##
-    ## Planning to a Joint Goal
+    ## 目标关节角度的运动规划
     ## ^^^^^^^^^^^^^^^^^^^^^^^^
-    ## The Panda's zero configuration is at a `singularity <https://www.quora.com/Robotics-What-is-meant-by-kinematic-singularity>`_ so the first
-    ## thing we want to do is move it to a slightly better configuration.
-    # We can get the joint values from the group and adjust some of the values:
+    ## Panda 机械臂的未被修改过的初始位姿是在一个 `奇异状态 <https://www.quora.com/Robotics-What-is-meant-by-kinematic-singularity>`_ ，
+    ## 所以我们要做的第一件事就是将其移到稍微更好的位姿。
+    # 我们可以从 planning group 中获取并调整各关节角度:
     joint_goal = move_group.get_current_joint_values()
     joint_goal[0] = 0
     joint_goal[1] = -pi/4
@@ -171,11 +169,11 @@ class MoveGroupPythonIntefaceTutorial(object):
     joint_goal[5] = pi/3
     joint_goal[6] = 0
 
-    # The go command can be called with joint values, poses, or without any
-    # parameters if you have already set the pose or joint target for the group
+    # 使用关节值或位姿来调用 go 命令，
+    # 在已经设置了 planning group 的目标位姿或或目标关节角度的情况下可以不带任何参数。
     move_group.go(joint_goal, wait=True)
 
-    # Calling ``stop()`` ensures that there is no residual movement
+    # 调用 ``stop()`` 以确保没有未完成的运动。
     move_group.stop()
 
     ## END_SUB_TUTORIAL
@@ -186,17 +184,16 @@ class MoveGroupPythonIntefaceTutorial(object):
 
 
   def go_to_pose_goal(self):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     move_group = self.move_group
 
     ## BEGIN_SUB_TUTORIAL plan_to_pose
     ##
-    ## Planning to a Pose Goal
+    ## 目标位姿的运动规划
     ## ^^^^^^^^^^^^^^^^^^^^^^^
-    ## We can plan a motion for this group to a desired pose for the
-    ## end-effector:
+    ## 我们可以为这个 planning group 规划一个运动，
+    ## 使其末端执行器达到所需的位姿:
     pose_goal = geometry_msgs.msg.Pose()
     pose_goal.orientation.w = 1.0
     pose_goal.position.x = 0.4
@@ -205,12 +202,12 @@ class MoveGroupPythonIntefaceTutorial(object):
 
     move_group.set_pose_target(pose_goal)
 
-    ## Now, we call the planner to compute the plan and execute it.
+    ## 现在，我们调用规划器 (planner) 来进行运动规划，然后执行规划的路径。
     plan = move_group.go(wait=True)
-    # Calling `stop()` ensures that there is no residual movement
+    # 调用 `stop()` 以确保没有未完成的运动。
     move_group.stop()
-    # It is always good to clear your targets after planning with poses.
-    # Note: there is no equivalent function for clear_joint_value_targets()
+    # 对某一目标位姿进行运动规划以后，最好清除这个目标位姿。
+    # 注意: 没有类似于 clear_joint_value_targets() 的函数
     move_group.clear_pose_targets()
 
     ## END_SUB_TUTORIAL
@@ -223,152 +220,145 @@ class MoveGroupPythonIntefaceTutorial(object):
 
 
   def plan_cartesian_path(self, scale=1):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     move_group = self.move_group
 
     ## BEGIN_SUB_TUTORIAL plan_cartesian_path
     ##
-    ## Cartesian Paths
+    ## 笛卡尔路径规划
     ## ^^^^^^^^^^^^^^^
-    ## You can plan a Cartesian path directly by specifying a list of waypoints
-    ## for the end-effector to go through. If executing  interactively in a
-    ## Python shell, set scale = 1.0.
+    ## 您可以通过一系列末端执行器要通过的沿途路径点来直接进行笛卡尔路径规划。
+    ## 如果想要在 Python shell 里交互执行，
+    ## 设置 scale = 1.0 。
     ##
     waypoints = []
 
     wpose = move_group.get_current_pose().pose
-    wpose.position.z -= scale * 0.1  # First move up (z)
-    wpose.position.y += scale * 0.2  # and sideways (y)
+    wpose.position.z -= scale * 0.1  # 1 向上 (z)
+    wpose.position.y += scale * 0.2  # 以及侧边 (y)
     waypoints.append(copy.deepcopy(wpose))
 
-    wpose.position.x += scale * 0.1  # Second move forward/backwards in (x)
+    wpose.position.x += scale * 0.1  # 2 向前/向后 in (x)
     waypoints.append(copy.deepcopy(wpose))
 
-    wpose.position.y -= scale * 0.1  # Third move sideways (y)
+    wpose.position.y -= scale * 0.1  # 3 侧边移动 (y)
     waypoints.append(copy.deepcopy(wpose))
 
-    # We want the Cartesian path to be interpolated at a resolution of 1 cm
-    # which is why we will specify 0.01 as the eef_step in Cartesian
-    # translation.  We will disable the jump threshold by setting it to 0.0,
-    # ignoring the check for infeasible jumps in joint space, which is sufficient
-    # for this tutorial.
+    # 我们希望以 1 cm 的精度插值笛卡尔路径，
+    # 这就是为什么我们在笛卡尔换算 compute_cartesian_path() 函数中将最大步长 eef_step 设置为 0.01 的原因。
+    # 我们将 jump_threshold 指定为 0.0 以禁用跳跃阈值，即
+    # 忽略检查关节空间中不可行的 jump 。这对本教程而言禁用跳跃阈值无妨。
     (plan, fraction) = move_group.compute_cartesian_path(
-                                       waypoints,   # waypoints to follow
-                                       0.01,        # eef_step
+                                       waypoints,   # 要求经过的沿途路径点
+                                       0.01,        # eef_step, 末端执行器步长
                                        0.0)         # jump_threshold
 
-    # Note: We are just planning, not asking move_group to actually move the robot yet:
+    # 注意: 注意，我们只是在进行规划，而不是要求 move_group 真的让机器人运动。
     return plan, fraction
 
     ## END_SUB_TUTORIAL
 
 
   def display_trajectory(self, plan):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     robot = self.robot
     display_trajectory_publisher = self.display_trajectory_publisher
 
     ## BEGIN_SUB_TUTORIAL display_trajectory
     ##
-    ## Displaying a Trajectory
+    ## 显示轨迹
     ## ^^^^^^^^^^^^^^^^^^^^^^^
-    ## You can ask RViz to visualize a plan (aka trajectory) for you. But the
-    ## group.plan() method does this automatically so this is not that useful
-    ## here (it just displays the same trajectory again):
+    ## 您可以要求 RViz 为您可视化一个规划结果（plan, 也称为轨迹）。但是
+    ## group.plan() 方法会自动可视化轨迹，所以这里单独再显示一下有点多余。
+    ## (它只是再次显示相同的轨迹):
     ##
-    ## A `DisplayTrajectory`_ msg has two primary fields, trajectory_start and trajectory.
-    ## We populate the trajectory_start with our current robot state to copy over
-    ## any AttachedCollisionObjects and add our plan to the trajectory.
+    ## `DisplayTrajectory`_ 消息有两个主要的字段: trajectory_start 和 trajectory。
+    ## 我们使用当前机器人状态填充 trajectory_start 以拷贝所有的
+    ## AttachedCollisionObjects，同时将我们的规划结果加入到我 trajectory 字段里面。
     display_trajectory = moveit_msgs.msg.DisplayTrajectory()
     display_trajectory.trajectory_start = robot.get_current_state()
     display_trajectory.trajectory.append(plan)
-    # Publish
+    # 发布消息
     display_trajectory_publisher.publish(display_trajectory);
 
     ## END_SUB_TUTORIAL
 
 
   def execute_plan(self, plan):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     move_group = self.move_group
 
     ## BEGIN_SUB_TUTORIAL execute_plan
     ##
-    ## Executing a Plan
-    ## ^^^^^^^^^^^^^^^^
-    ## Use execute if you would like the robot to follow
-    ## the plan that has already been computed:
+    ## 执行轨迹规划的结果
+    ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ## 如果您希望机器人沿着已经规划好的轨迹运动，
+    ## 请使用 execute 方法
     move_group.execute(plan, wait=True)
 
-    ## **Note:** The robot's current joint state must be within some tolerance of the
-    ## first waypoint in the `RobotTrajectory`_ or ``execute()`` will fail
+    ## **注意:** 机器人的当前关节状态必须在 `RobotTrajectory`_ 或 ``execute()`` 中的第一个沿途路径点的容许误差范围内，
+    ## 否则执行 execute 将失败。
     ## END_SUB_TUTORIAL
 
 
   def wait_for_state_update(self, box_is_known=False, box_is_attached=False, timeout=4):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     box_name = self.box_name
     scene = self.scene
 
     ## BEGIN_SUB_TUTORIAL wait_for_scene_update
     ##
-    ## Ensuring Collision Updates Are Received
+    ## 确保收到碰撞关系的更新消息
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ## If the Python node dies before publishing a collision object update message, the message
-    ## could get lost and the box will not appear. To ensure that the updates are
-    ## made, we wait until we see the changes reflected in the
-    ## ``get_attached_objects()`` and ``get_known_object_names()`` lists.
-    ## For the purpose of this tutorial, we call this function after adding,
-    ## removing, attaching or detaching an object in the planning scene. We then wait
-    ## until the updates have been made or ``timeout`` seconds have passed
+    ## 如果 Python 节点在发布冲突对象的更新消息之前死亡，
+    ## 则该消息可能会丢失并且该 box 将不会出现。
+    ## 为了确保更新生效，我们等到
+    ## ``get_attached_objects()`` 和 ``get_known_object_names()`` 列表中出现更改的内容为止。
+    ## 就本教程而言，我们在规划场景中添加、移除、附加或分离对象之后都将调用此函数。
+    ## 然后我们等待更新完成，或超过 ``timeout`` 这么多秒。
     start = rospy.get_time()
     seconds = rospy.get_time()
     while (seconds - start < timeout) and not rospy.is_shutdown():
-      # Test if the box is in attached objects
+      # 测试 box 是否在已附着的物体列表 attached_objects 中
       attached_objects = scene.get_attached_objects([box_name])
       is_attached = len(attached_objects.keys()) > 0
 
-      # Test if the box is in the scene.
-      # Note that attaching the box will remove it from known_objects
+      # 测试 box 是否在场景中。
+      # 请注意，附加 box 的操作会删除 known_objects 中的 box
       is_known = box_name in scene.get_known_object_names()
 
-      # Test if we are in the expected state
+      # 测试我们是否处于预期状态
       if (box_is_attached == is_attached) and (box_is_known == is_known):
         return True
 
-      # Sleep so that we give other threads time on the processor
+      # 休眠一会，使处理器上可以调度运行其他线程
       rospy.sleep(0.1)
       seconds = rospy.get_time()
 
-    # If we exited the while loop without returning then we timed out
+    # 如果我们退出了 while 循环而没有 return，那么就意味着超时了
     return False
     ## END_SUB_TUTORIAL
 
 
   def add_box(self, timeout=4):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     box_name = self.box_name
     scene = self.scene
 
     ## BEGIN_SUB_TUTORIAL add_box
     ##
-    ## Adding Objects to the Planning Scene
+    ## 将物体添加到规划场景里 (planning scene)
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ## First, we will create a box in the planning scene between the fingers:
+    ## 首先，我们在规划场景中的夹抓之间创建一个 box：
     box_pose = geometry_msgs.msg.PoseStamped()
     box_pose.header.frame_id = "panda_hand"
     box_pose.pose.orientation.w = 1.0
-    box_pose.pose.position.z = 0.11 # above the panda_hand frame
+    box_pose.pose.position.z = 0.11 # 在 panda_hand 坐标系上方
     box_name = "box"
     scene.add_box(box_name, box_pose, size=(0.075, 0.075, 0.075))
 
@@ -380,9 +370,8 @@ class MoveGroupPythonIntefaceTutorial(object):
 
 
   def attach_box(self, timeout=4):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     box_name = self.box_name
     robot = self.robot
     scene = self.scene
@@ -391,14 +380,14 @@ class MoveGroupPythonIntefaceTutorial(object):
 
     ## BEGIN_SUB_TUTORIAL attach_object
     ##
-    ## Attaching Objects to the Robot
+    ## 将物体固连到机器人
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ## Next, we will attach the box to the Panda wrist. Manipulating objects requires the
-    ## robot be able to touch them without the planning scene reporting the contact as a
-    ## collision. By adding link names to the ``touch_links`` array, we are telling the
-    ## planning scene to ignore collisions between those links and the box. For the Panda
-    ## robot, we set ``grasping_group = 'hand'``. If you are using a different robot,
-    ## you should change this value to the name of your end effector group name.
+    ## 接下来, 我们将 box 固连到 Panda 机械臂的腕部。机械臂移动物体需要
+    ## 其能够接触物体，但是当前规划场景会将这报告为发生碰撞。
+    ## 因此，我们将 link 的名字添加到 ``touch_links`` 数组里，
+    ## 让规划场景忽略那些 link 和 box 之间的碰撞。
+    ## 对于 Panda 机器人，即设置 ``grasping_group = 'hand'`` 。如果使用其他机器人，
+    ## 则应将该变量设置为对应的末端执行器 group 的名称。
     grasping_group = 'hand'
     touch_links = robot.get_link_names(group=grasping_group)
     scene.attach_box(eef_link, box_name, touch_links=touch_links)
@@ -409,18 +398,17 @@ class MoveGroupPythonIntefaceTutorial(object):
 
 
   def detach_box(self, timeout=4):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     box_name = self.box_name
     scene = self.scene
     eef_link = self.eef_link
 
     ## BEGIN_SUB_TUTORIAL detach_object
     ##
-    ## Detaching Objects from the Robot
+    ## 从机器人上取下物体
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ## We can also detach and remove the object from the planning scene:
+    ## 我们还可以从规划场景中分离和移除对象:
     scene.remove_attached_object(eef_link, name=box_name)
     ## END_SUB_TUTORIAL
 
@@ -429,20 +417,19 @@ class MoveGroupPythonIntefaceTutorial(object):
 
 
   def remove_box(self, timeout=4):
-    # Copy class variables to local variables to make the web tutorials more clear.
-    # In practice, you should use the class variables directly unless you have a good
-    # reason not to.
+    # 这里将类成员变量复制到局部变量是为了使本教程更加清楚。
+    # 但是在实际使用中，除非有充分的理由，否则应该直接使用类成员变量。
     box_name = self.box_name
     scene = self.scene
 
     ## BEGIN_SUB_TUTORIAL remove_object
     ##
-    ## Removing Objects from the Planning Scene
+    ## 从规划场景中删除对象
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    ## We can remove the box from the world.
+    ## 我们可以将 box 从世界里移走。
     scene.remove_world_object(box_name)
 
-    ## **Note:** The object must be detached before we can remove it from the world
+    ## **注意:** 必须先将物体分离，然后才能将其从世界上移除。
     ## END_SUB_TUTORIAL
 
     # We wait for the planning scene to update.
