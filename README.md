@@ -1,12 +1,17 @@
-# MoveIt 中文教程（翻译版本）
+# MoveIt 中文教程（个人翻译版）
 
-官方教程的 Master 分支的中文翻译，同步于 2021 年 1 月 19 日。
+官方教程的 Master 分支的中文翻译，内容同步于 2021 年 1 月 19 日。
 
 > commit id：ea5ab20a1bfd162d59fb351593950b0136b72864
 
-## 完成度
+[MoveIt 中文教程（个人翻译版）](https://decyzy.github.io/moveit_tutorials/index.html)
 
-3节
+## 已翻译章节
+
+- [入门](https://decyzy.github.io/moveit_tutorials/doc/getting_started/getting_started.html)
+- [在 RViz 中快速入门 MoveIt](https://decyzy.github.io/moveit_tutorials/doc/quickstart_in_rviz/quickstart_in_rviz_tutorial.html)
+- [移动组 (Move Group) 的 C++ 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_interface/move_group_interface_tutorial.html)
+- [移动组 (Move Group) 的 Python 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html)
 
 ## 以下是原README
 
