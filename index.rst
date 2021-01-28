@@ -1,14 +1,14 @@
-MoveIt Tutorials
+MoveIt 教程
 =================
 
-These tutorials will quickly get you, and your robot, using the MoveIt Motion Planning Framework.
+这些教程将使用 MoveIt 运动规划快速地为您和您的机器人提供帮助。
 
 .. image:: doc/quickstart_in_rviz/rviz_plugin_head.png
    :width: 700px
 
-In these tutorials, the Franka Emika Panda robot is used as a quick-start demo. Alternatively, you can easily use any robot that has already been configured to work with MoveIt - check the `list of robots running MoveIt <http://moveit.ros.org/robots/>`_ to see whether MoveIt is already available for your robot. Otherwise, you can setup MoveIt to work with your custom robot in the tutorial section "Integration with a New Robot", below.
+在本教程中，我们使用 Franka Emika 的 Panda 机器人作为快速入门的演示案例。另外，你可以轻松使用已配置为可与 MoveIt 配合使用的任何机机械臂 - 通过 `已经运行 MoveIt 机器人列表 <http://moveit.ros.org/robots/>`_ 来查看 MoveIt 是否已可用于您的机器人。否则，您可以在之后的 "与新机器人集成" 章节中设置 MoveIt ，从而用于您的自定义机器人。
 
-Getting Started with MoveIt and RViz
+MoveIt 和 RViz 入门
 -------------------------------------
 .. toctree::
    :maxdepth: 1
@@ -16,9 +16,9 @@ Getting Started with MoveIt and RViz
    doc/getting_started/getting_started
    doc/quickstart_in_rviz/quickstart_in_rviz_tutorial
 
-MoveGroup - ROS Wrappers in C++ and Python
-------------------------------------------
-The simplest way to use MoveIt through scripting is using the ``move_group_interface``. This interface is ideal for beginners and provides unified access to many of the features of MoveIt.
+MoveGroup - C++ 和 Python 封装的 ROS 接口
+------------------------------------------------------------
+通过脚本使用 MoveIt 的最简单方法是使用 ``move_group_interface`` 。该接口非常适合初学者，并提供了对 MoveIt 的许多功能的统一访问。
 
 .. toctree::
    :maxdepth: 1
@@ -27,9 +27,9 @@ The simplest way to use MoveIt through scripting is using the ``move_group_inter
    doc/move_group_python_interface/move_group_python_interface_tutorial
    doc/moveit_commander_scripting/moveit_commander_scripting_tutorial
 
-Using MoveIt Directly Through the C++ API
-------------------------------------------
-Building more complex applications with MoveIt often requires developers to dig into MoveIt’s C++ API. As an added plus, using the C++ API directly skips many of the ROS Service/Action layers resulting in significantly faster performance.
+通过 C ++ API 直接使用 MoveIt
+---------------------------------------------------
+使用 MoveIt 构建更复杂的应用程序通常需要开发人员深入研究 MoveIt 的 C ++ API 。另外，使用 C++ API 会直接跳过许多 ROS 服务或操作层，从而显着提高性能。
 
 .. toctree::
    :maxdepth: 1
@@ -52,9 +52,9 @@ Building more complex applications with MoveIt often requires developers to dig 
    doc/moveit_cpp/moveitcpp_tutorial
    doc/bullet_collision_checker/bullet_collision_checker
 
-Integration with a New Robot
+与新机器人集成
 ----------------------------
-Before attempting to integrate a new robot with MoveIt, check whether your robot has already been setup (see the `list of robots running MoveIt <http://moveit.ros.org/robots/>`_). Otherwise, follow the tutorials in this section to integrate your robot with MoveIt (and share your results on the MoveIt mailing list)
+在尝试将新机器人与 MoveIt 集成之前，请检查是否已有设置好的机器人 (查看 `已经运行 MoveIt 机器人列表 <http://moveit.ros.org/robots/>`_)。否则，请按照本节中的教程将您的机器人与 MoveIt 集成在一起（并可在 MoveIt 邮件列表中分享您的结果）
 
 .. toctree::
    :maxdepth: 1
@@ -67,7 +67,7 @@ Before attempting to integrate a new robot with MoveIt, check whether your robot
    doc/ikfast/ikfast_tutorial
    doc/trac_ik/trac_ik_tutorial
 
-Configuration
+配置
 -------------
 .. toctree::
    :maxdepth: 1
@@ -81,7 +81,7 @@ Configuration
    doc/pilz_industrial_motion_planner/pilz_industrial_motion_planner
    doc/planning_adapters/planning_adapters_tutorial.rst
 
-Miscellaneous
+其他
 ----------------------------
 
 .. toctree::
@@ -92,11 +92,12 @@ Miscellaneous
    doc/benchmarking/benchmarking_tutorial
    doc/tests/tests_tutorial
 
-Attribution
+贡献
 -----------
-Major contributors to the MoveIt tutorials are listed in chronological order: Sachin Chitta, Dave Hershberger, Acorn Pooley, Dave Coleman, Michael Gorner, Francisco Suarez, Mike Lautman. Help us improve these docs and we'll be happy to include you here also!
 
-The tutorials had a major update in 2018 during a code sprint sponsored by Franka Emika in collaboration with PickNik (`Check out the blog post! <http://moveit.ros.org/moveit!/ros/2018/02/26/tutorials-documentation-codesprint.html>`_)
+MoveIt 教程的主要贡献者按时间顺序列出为：Sachin Chitta，Dave Hershberger，Acorn Pooley，Dave Coleman，Michael Gorner，Francisco Suarez，Mike Lautman。请帮助我们改善这些文档，我们很乐意将您也包括在这里面！
+
+在 Franka Emika 与 PickNik 合作赞助的 code sprint 中，这些教程在 2018 年进行了重大更新。 (`查看博客文章！ <http://moveit.ros.org/moveit!/ros/2018/02/26/tutorials-documentation-codesprint.html>`_)
 
 .. image:: ./_static/franka_logo.png
    :width: 300px
