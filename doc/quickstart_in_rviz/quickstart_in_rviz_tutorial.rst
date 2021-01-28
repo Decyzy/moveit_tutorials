@@ -1,36 +1,36 @@
-MoveIt Quickstart in RViz
+在 RViz 中快速入门 MoveIt
 ==========================
 .. image:: rviz_plugin_head.png
    :width: 700px
 
-This tutorial will quickly get you motion planning using MoveIt via RViz and the MoveIt plugin. Rviz is the primary visualizer in ROS and an incredibly useful tool for debugging robotics. The MoveIt Rviz plugin allows you to setup virtual environments (scenes), create start and goal states for the robot interactively, test various motion planners, and visualize the output. Let's go!
+本教程通过 RViz 和 MoveIt 插件来让你快速进行运动规划。Rviz 是 ROS 中主要的可视化工具，对于调试机器人来说非常有用。MoveIt 的 Rviz 插件允许你设置虚拟环境（场景），交互地设置机器人的初始和目标状态，测试各种运动规划方案，并可视化输出。开始吧!
 
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保你已经完成了 `入门 <../getting_started/getting_started.html>`__ 。
 
-Step 1: Launch the Demo and Configure the Plugin
+步骤 1: 启动 Demo 并配置插件
 ------------------------------------------------
 
-* Launch the demo: ::
+* 启动 demo: ::
 
    roslaunch panda_moveit_config demo.launch rviz_tutorial:=true
 
-* If you are doing this for the first time, you should see an empty world in RViz and will have to add the Motion Planning Plugin:
+* 如果是初次打开，你应该会在 RViz 里看到一个空的场景。接下来需要为其添加在运动规划插件（Motion Planning Plugin）：
 
-  * You should see an empty world in RViz:
+  * 你应该会在 RViz 里看到一个空的场景：
 
   |A|
 
-  * In the RViz Displays Tab, press *Add*:
+  * 在 RViz 的 Displays 子窗口的底部选项卡里, 点击 *Add*：
 
   |B|
 
-  * From the moveit_ros_visualization folder, choose "MotionPlanning" as the DisplayType. Press "Ok".
+  * 选择 By display type 选项卡，在 moveit_ros_visualization 文件夹下, 选择 "MotionPlanning" 。 点击 "Ok"。
 
   |C|
 
-  * You should now see the Panda robot in RViz:
+  * 现在你应该能在 RViz 中看到 Panda 机械臂了：
 
   |D|
 
@@ -46,93 +46,95 @@ Step 1: Launch the Demo and Configure the Plugin
 .. |D| image:: rviz_start.png
                :width: 700px
 
-* Once you have the Motion Planning Plugin loaded, we can configure it. In the "Global Options" tab of the "Displays" subwindow, set the **Fixed Frame** field to ``/panda_link0``
+* 一旦你加载了运动规划插件，我们就可以配置它了。在 "Displays" 子窗口中的 "Global Options" 选项卡中，将 **Fixed Frame** 字段设置为 ``/panda_link0`` 。
 
-* Now, you can start configuring the Plugin for your robot (the Panda in this case). Click on "MotionPlanning" within "Displays".
+* 现在，你可以开始为你的机器人（本例中是 Panda 机械臂）配置插件了。点击"Displays" 子窗口中的 "MotionPlanning" 。
 
-  * Make sure the **Robot Description** field is set to ``robot_description``.
+  * 确保 **Robot Description** 字段被设置为 ``robot_description`` 。
 
-  * Make sure the **Planning Scene Topic** field is set to ``move_group/monitored_planning_scene``.
-    Click on topic name to expose topic-name drop-down.
+  * 确保 **Planning Scene Topic** 字段被设置为 ``move_group/monitored_planning_scene`` 。
+    通过点击该字段的值来显示下拉菜单，从而选择正确的话题名称。
 
-  * Make sure the **Trajectory Topic** under **Planned Path** is set to ``/move_group/display_planned_path``.
+  * 确保 **Planned Path** 下的 **Trajectory Topic** 被设置为 ``/move_group/display_planned_path`` 。
 
-  * In **Planning Request**, change the **Planning Group** to ``panda_arm``. You can also see this in the MotionPlanning panel in the bottom left.
+  * 在 **Planning Request** 中， 将 **Planning Group** 修改为 ``panda_arm`` 。 你也可以在左下角的 MotionPlanning 面板中的 Planning 选项卡下看到这一点。
 
 
 .. image:: rviz_plugin_start.png
    :width: 700px
 
 
-Step 2: Play with the Visualized Robots
+步骤 2: 控制可视化机器人
 ---------------------------------------
-There are four different overlapping visualizations:
+这里将出现四种不同的、可能互相重叠的显示效果：
 
-#. The robot's configuration in the ``move_group/monitored_planning_scene`` planning environment (active by default).
+#. 在 ``move_group/monitored_planning_scene`` 规划环境中的机器人配置（默认显示）。
 
-#. The planned path for the robot (active by default).
+#. 为机器人规划好的路径（默认显示）。
 
-#. Green: The start state for motion planning (disabled by default).
+#. 绿色：运动规划的起始状态（默认隐藏）。
 
-#. Orange: The goal state for motion planning (active by default).
+#. 橙色: 运动规划的目标状态（默认显示）。
 
-The display states for each of these visualizations can be toggled on and off using checkboxes:
+每一种可视化的显示状态都可以使用复选框来开启和关闭：
 
-#. The planning scene robot using the **Show Robot Visual** checkbox in the **Scene Robot** tab.
+#. 场景规划机器人，通过 **Scene Robot** 项下的 **Show Robot Visual** 复选框控制。
 
-#. The planned path using the **Show Robot Visual** checkbox in the **Planned Path** tab.
+#. 规划好的路径，通过 **Planned Path** 项下的 **Show Robot Visual** 复选框控制。
 
-#. The start state using the **Query Start State** checkbox in the **Planning Request** tab.
+#. 起始状态， 通过 **Planning Request** 项下的 **Query Start State** 复选框控制。
 
-#. The goal state using the **Query Goal State** checkbox in the **Planning Request** tab.
+#. 目标状态，通过 **Planning Request** 项下的 **Query Goal State** 复选框控制。
 
-* Play with all these checkboxes to switch on and off different visualizations.
+* 试一试开关这些复选框来展现不同的可视化效果。
 
 .. image:: rviz_plugin_visualize_robots.png
    :width: 700px
 
-Step 3: Interact with the Panda
+步骤 3： 和 Panda 机械臂交互
 -------------------------------
 
-For the next steps we will want only the scene robot, start state and goal state:
+在接下来的步骤中，我们只需要场景机器人、起始状态和目标状态：
 
-#. Check the **Show Robot Visual** checkbox in the **Planned Path** tab
+#. 勾选 **Planned Path** 项下的 **Show Robot Visual** 复选框。
 
-#. Un-check the **Show Robot Visual** checkbox in the **Scene Robot** tab
+#. 取消勾选 **Scene Robot** 项下的 **Show Robot Visual** 复选框。
 
-#. Check the **Query Goal State** checkbox in the **Planning Request** tab.
+#. 勾选 the **Planning Request** 项下的 **Query Goal State** 复选框。
 
-#. Check the **Query Start State** checkbox in the **Planning Request** tab.
+#. 勾选 the **Planning Request** 项下的 **Query Start State** 复选框。
 
-There should now be two interactive markers. One marker corresponding to the orange colored arm will be used to set the "Goal State" for motion planning and the other marker corresponding to a green colored arm are used to set the "Start State" for motion planning. If you don't see the interactive markers press **Interact** in the top menu of RViz (Note: some tools may be hidden, press **"+"** in the top menu to add the **Interact** tool as shown below).
+现在应该有两个交互式标记。现在应该有两个交互式标记。与橙色机械臂对应的那个是用来设置运动规划的“目标状态”；另一个与绿色手臂对应，用于设置运动规划的“起始状态”。如果没有看到交互标记，按下 RViz 顶部菜单中的 **Interact** （注意：有些工具可能是隐藏的，按下顶部菜单中的 **"+"** ，添加如下所示的 **Interact** 工具）。
 
 .. image:: rviz_plugin_interact.png
    :width: 700px
 
-You should now be able to use these markers to drag the arm around and change its orientation. Try it!
+现在，你应该能够使用这些标记来拖动机械臂并改变它的方向了。试他一试！
 
-Moving into collision
+当移动至碰撞状态时
 +++++++++++++++++++++
-Note what happens when you try to move one of the arms into collision with the other. The two links that are in collision will turn red.
+
+看看当你试图移动其中一个机械臂与另一个机械臂相碰撞时会发生什么。碰撞中的两个 links 将变成红色。
 
 .. image:: rviz_plugin_collision.png
    :width: 700px
 
-The "Use Collision-Aware IK" checkbox found within the MotionPlanning plugin under the Planning tab allows you to toggle the behavior of the IK solver. When the checkbox is ticked, the solver will keep attempting to find a collision-free solution for the desired end-effector pose. When it is not checked, the solver will allow collisions to happen in the solution. The links in collision will always still be visualized in red, regardless of the state of the checkbox.
+MotionPlanning 插件中 Planning 选项卡下的 "Use Collision-Aware IK （使用碰撞感知的逆运动学）" 复选框允许您切换 IK 求解器的模式。当复选框被选中时，求解器将继续尝试为期望的末端执行器姿态找到一个无碰撞的解。当这个复选框没有被选中时，求解器将允许得到会发生碰撞和干涉的解。无论复选框的状态如何，被碰撞的 link 将始终显示为红色。
 
 .. image:: rviz_plugin_collision_aware_ik_checkbox.png
    :width: 700px
 
-Moving out of Reachable Workspace
+当试图移动至机械臂工作空间以外时
 +++++++++++++++++++++++++++++++++
-Note what happens when you try to move an end-effector out of its reachable workspace.
+
+看看当你试图将机械臂的末端执行器移出其可到达的工作空间时会发生什么。
 
 .. image:: rviz_plugin_invalid.png
    :width: 700px
 
 Moving Joints or in Null Space
 ++++++++++++++++++++++++++++++
-You can use the **Joints** tab to move single joints and the redundant joints of 7-DOF robots. Try moving the "null space exploration" slider as shown in the animation below.
+你可以使用 **Joints** 选项卡来移动单个关节以及7自由度机器人的冗余关节。尝试移动 "null space exploration" 滑块，将如下面的动画所示。
 
 .. raw:: html
 
@@ -141,46 +143,45 @@ You can use the **Joints** tab to move single joints and the redundant joints of
         The joints moving while the end effector stays still
     </video>
 
-Step 4: Use Motion Planning with the Panda
--------------------------------------------
 
-* Now, you can start motion planning with the Panda in the MoveIt RViz Plugin.
+步骤 4: 给 Panda 机械臂做运动规划
+-------------------------------------------------
 
-  * Move the Start State to a desired location.
+* 现在，你可以开始在 MoveIt RViz插件里为 Panda 机械臂做运动规划。
 
-  * Move the Goal State to another desired location.
+  * 移动起始状态（绿色）至需要的位置。
 
-  * Make sure both states are not in collision with the robot itself.
+  * 移动目标状态（橙色）至需要的位置。
 
-  * Make sure the Planned Path is being visualized. Also check the
-    **Show Trail** checkbox in the **Planned Path** tab.
+  * 确保上述两个状态都没有发生自碰撞。
 
-* In the **MotionPlanning** window under the **Planning** tab, press the **Plan** button. You
-  should be able to see a visualization of the arm moving and a trail.
+  * 确保规划好的路径是显示状态： displays 子窗口内 **Planned Path** 选项下的 **Show Trail** 复选框应该是勾选状态。
+
+* 在 **MotionPlanning** 窗口下的 **Planning** 选项卡里, 点击 **Plan** 按钮。你应该能看到一个机械臂移动和其移动踪迹的可视化效果。
 
 .. image:: rviz_plugin_planned_path.png
    :width: 700px
 
-Introspecting Trajectory Waypoints
+检查轨迹路线点
 ++++++++++++++++++++++++++++++++++
 
-You can visually introspect trajectories point by point in RViz.
+你可以在 RViz 中逐点查看轨迹。
 
-* From "`Panels`" menu, select "`MotionPlanning - Slider`". You'll see a new Slider panel on RViz.
+* 从 "`Panels`" 菜单里, 选择 "`MotionPlanning - Slider`" 。你将在 RViz 里看到一个带滑动条的新面板。
 
-* Set your goal pose, then run `Plan`.
+* 设置你想要的目标姿态，然后点击 `Plan` 按钮以运行。
 
-* Play with the "`Slider`" panel, e.g. move the slider, push "`Play`" button.
+* 尝试操作 "`Slider`" 面板, 比如移动滑块，点击 "`Play`" 按钮等。
 
-NOTE: Once you placed your EEF to a new goal, be sure to run `Plan` before running `Play` -- otherwise you'll see the waypoints for the previous goal if available.
+注意: 一旦你将末端执行器移动至一个新的目标位姿，请确保先点击运行 `Plan` ，然后再点击运行 `Play` -- 否则你将会看到为前一个目标位姿（如果可用的话）规划的路径。
 
 .. image:: rviz_plugin_slider.png
    :width: 700px
 
-Plan Cartesian motions
+笛卡尔运动规划
 ++++++++++++++++++++++
 
-If the "Use Cartesian Path" checkbox is activated, the robot will attempt to move the end effector linearly in cartesian space.
+如果勾选了 "Use Cartesian Path （使用笛卡尔路径） " 复选框，则机器人将尝试在笛卡儿空间内线性移动末端执行器。
 
 .. image:: rviz_plan_free.png
    :width: 700px
@@ -189,37 +190,38 @@ If the "Use Cartesian Path" checkbox is activated, the robot will attempt to mov
    :width: 700px
 
 
-Executing Trajectories, Adjusting Speed
+沿轨迹运动和速度调整
 +++++++++++++++++++++++++++++++++++++++
 
-Clicking "Plan & Execute" or "Execute" after a successful plan will send the trajectory to the robot - in this tutorial, since you used `demo.launch`, the robot is only simulated.
+在一个成功进行了轨迹规划后，点击 "Plan & Execute" 或 "Execute" 按钮将会将轨迹发送给机器人 - 在本教程中，因为用的是 `demo.launch` ，因此机器人是仿真环境下的。
 
-Initially, the default velocity and acceleration are scaled to 10% (`0.1`) of the robot's maximum. You can change these scaling factors in the Planning tab shown below, or change these default values in the `moveit_config` of your robot (in `joint_limits.yaml`).
+初始状态下，默认速度和加速度都被设置为机器人对应最大值的 10% (`0.1`) 。你可以在下图里的 Planning 选项卡中更改这些缩放因子，或者更改机器人的 `moveit_config` (在 `joint_limits.yaml` 文件中)里的这些默认值。
 
 .. image:: rviz_plugin_collision_aware_ik_checkbox.png
    :width: 700px
 
 
-Next Steps
+下一步
 ----------
 
 RViz Visual Tools
 +++++++++++++++++
-Many of the tutorials use ``moveit_visual_tools`` to step through a demo. Before continuing on to the next tutorials it is a good idea to enable the **RvizVisualToolsGui**.
 
-From "`Panels`" menu, select "`RvizVisualToolsGui`". You'll see the new panel added to RViz.
+许多教程使用 ``moveit_visual_tools`` 来进行逐步演示。在继续下一个教程之前，建议启用 **RvizVisualToolsGui** 。
+
+从 "`Panels`" 菜单里, 选择 "`RvizVisualToolsGui`" 。你会在 RViz 里看到一个新添加的面板。
 
 .. image:: rviz_panels.png
    :width: 700px
 
-Saving Your Configuration
+保存配置
 +++++++++++++++++++++++++
-RViz enables you to save your configuration under ``File->Save Config``. You should do this before continuing on to the next tutorials.
+RViz 提供了 ``File->Save Config`` 来保存界面布局等配置。在继续学习下一个教程之前，你应该保存一下。
 
-Next Tutorials
+接下来的教程
 ++++++++++++++
-* To easily control your robot using C++, check out the `Move Group C++ Interface <../move_group_interface/move_group_interface_tutorial.html>`_
+* 要使用 c++ 来轻松地控制机器人，请查看 `移动组 (Move Group) 的 C++ 接口 <../move_group_interface/move_group_interface_tutorial.html>`_
 
-* To easily control your robot using Python, check out the `Move Group Python Interface <../move_group_python_interface/move_group_python_interface_tutorial.html>`_
+* 要使用 Python 来轻松地控制机器人，请查看 `移动组 (Move Group) 的 Python 接口 <../move_group_python_interface/move_group_python_interface_tutorial.html>`_
 
-* To create your own ``*_moveit_config`` package, check out the `Setup Assistant <../setup_assistant/setup_assistant_tutorial.html>`_
+* 要创建你自己的 ``*_moveit_config`` 包，请查看 `设置助手 <../setup_assistant/setup_assistant_tutorial.html>`_

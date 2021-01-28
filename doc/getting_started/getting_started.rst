@@ -1,20 +1,21 @@
 入门
 ===============
 
-本教程将This tutorial will install MoveIt and create a workspace sandbox to run the tutorials and example robot.
+本教程将安装 MoveIt，并创建一个工作区来运行本教程和示例机器人。
 
-安装 ROS and Catkin
+安装 ROS 和 Catkin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-`Install ROS Noetic <http://wiki.ros.org/noetic/Installation/Ubuntu>`_.
-It is easy to miss steps when going through the ROS installation tutorial. If you run into errors in the next few steps, a good place to start is to go back and make sure you have installed ROS correctly.
+`安装 ROS Noetic <http://wiki.ros.org/noetic/Installation/Ubuntu>`_ 。
 
-Once you have ROS installed, make sure you have the most up to date packages: ::
+在学习 ROS 安装指南时，很容易漏掉一些步骤。如果你在后面的几个步骤中遇到了报错，那么最好从这里重新开始，以确保你正确地安装了 ROS 。
+
+一旦你安装好了 ROS ，确保有最新的软件包： ::
 
   rosdep update
   sudo apt update
   sudo apt dist-upgrade
 
-Install `catkin <http://wiki.ros.org/catkin>`_ the ROS build system: ::
+安装 `catkin <http://wiki.ros.org/catkin>`_  ，即 ROS 构建系统（ROS build system）： ::
 
   sudo apt install ros-noetic-catkin python3-catkin-tools
 
@@ -22,10 +23,9 @@ Install `wstool <http://wiki.ros.org/wstool>`_ : ::
 
   sudo apt install python3-wstool
 
-Create A Catkin Workspace and Download MoveIt Source
+创建一个 Catkin 工作空间以及下载 MoveIt 源码
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-These tutorials rely on the master branch of MoveIt, which requires a build from source.
-You will need to have a `catkin <http://wiki.ros.org/catkin>`_ workspace setup: ::
+本教程依赖于 MoveIt 的 master 分支。我们需要从源代码构建它。你将需要设置一个 `catkin <http://wiki.ros.org/catkin>`_ 工作空间: ::
 
   mkdir -p ~/ws_moveit/src
   cd ~/ws_moveit/src
@@ -34,49 +34,46 @@ You will need to have a `catkin <http://wiki.ros.org/catkin>`_ workspace setup: 
   wstool merge -t . https://raw.githubusercontent.com/ros-planning/moveit/master/moveit.rosinstall
   wstool update -t .
 
-Download Example Code
+下载示例代码
 ^^^^^^^^^^^^^^^^^^^^^
+为了方便学习，你需要一个类似于叫做 **ROBOT_moveit_config** 的包。我们默认使用的演示机器人是 Panda 机械臂（来自 Franka Emika ）。我们建议你从源代码安装 **panda_moveit_config** 包以获得一个 working package （译者：活动包？）。
 
-To easily follow along with these tutorials, you will need a **ROBOT_moveit_config** package. The default demo robot is the Panda arm from Franka Emika. To get a working **panda_moveit_config** package, we recommend you install from source.
-
-Within your `catkin <http://wiki.ros.org/catkin>`_ workspace, download the tutorials as well as the ``panda_moveit_config`` package: ::
+在你的 `catkin <http://wiki.ros.org/catkin>`_ 工作空间里, 下载本教程以及 ``panda_moveit_config`` 包: ::
 
   cd ~/ws_moveit/src
   git clone https://github.com/ros-planning/moveit_tutorials.git -b master
   git clone https://github.com/ros-planning/panda_moveit_config.git -b melodic-devel
 
-.. note:: For now we will use a pre-generated ``panda_moveit_config`` package but later we will learn how to make our own in the `MoveIt Setup Assistant tutorial <../setup_assistant/setup_assistant_tutorial.html>`_.
+.. Note:: 现在我们将使用预先生成的 ``panda_moveit_config`` 包，但是之后在 `MoveIt 设置助手教程 <../setup_assistant/setup_assistant_tutorial.html>`_ 中，将介绍如何制作我们自己的包。
 
-Build your Catkin Workspace
+构建和编译 Catkin 工作空间
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The following will install from Debian any package dependencies not already in your workspace: ::
+以下代码将从 Debian 中安装你工作空间要求但尚未安装的依赖： ::
 
   cd ~/ws_moveit/src
   rosdep install -y --from-paths . --ignore-src --rosdistro noetic
   
-**Note** In case an upstream package is not (yet) available from the standard ROS repositories or if you experience any build errors in those packages, please try to fetch the latest release candidates from the `ROS testing repositories <http://wiki.ros.org/TestingRepository>`_ instead: ::
+**注意** 如果标准 ROS 软件源中还没有上游包，或者在这些包的安装中遇到任何构建错误，请尝试使用 `ROS 测试软件源 <http://wiki.ros.org/TestingRepository>`_ ： ::
 
         sudo sh -c 'echo "deb http://packages.ros.org/ros-testing/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
         sudo apt update
 
-The next command will configure your catkin workspace: ::
+下一个命令将配置你的 catkin 工作空间： ::
 
   cd ~/ws_moveit
   catkin config --extend /opt/ros/${ROS_DISTRO} --cmake-args -DCMAKE_BUILD_TYPE=Release
   catkin build
 
-Source the catkin workspace: ::
+使能（ source ） catkin 工作空间配置: ::
 
   source ~/ws_moveit/devel/setup.bash
 
-Optional: add the previous command to your ``.bashrc``: ::
+可选: 将上述命令添加到您的 ``.bashrc``: ::
 
    echo 'source ~/ws_moveit/devel/setup.bash' >> ~/.bashrc
 
-.. note:: Sourcing the ``setup.bash`` automatically in your ``~/.bashrc`` is
-   not required and often skipped by advanced users who use more than one
-   catkin workspace at a time, but we recommend it for simplicity.
+.. note:: 在 ``~/.bashrc`` 中自动使能（ source ） ``setup.bash`` 不是必须的，且很多老手会同时使用不止一个 catkin 工作空间。但这样做会简单许多，因此我们仍然这样建议。
 
-Next Step
+下一步
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-`Visualize a robot with the interactive motion planning plugin for RViz <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html>`_
+`在 RViz 中可视化一个机器人和运动规划的交互插件 <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html>`_

@@ -1,6 +1,14 @@
 # MoveIt 中文教程（翻译版本）
 
-官方教程的 Master 分支的中文翻译，同步于 2021 年 1 月 19 日，commit id：ea5ab20a1bfd162d59fb351593950b0136b72864。
+官方教程的 Master 分支的中文翻译，同步于 2021 年 1 月 19 日。
+
+> commit id：ea5ab20a1bfd162d59fb351593950b0136b72864
+
+## 完成度
+
+3节
+
+## 以下是原README
 
 [https://ros-planning.github.io/moveit_tutorials/](https://ros-planning.github.io/moveit_tutorials/)
 
@@ -32,7 +40,7 @@ Run in the root of the moveit_tutorials package:
     export ROS_DISTRO=kinetic # 16.04
     export ROS_DISTRO=melodic # 18.04
     export ROS_DISTRO=noetic  # 20.04
-
+    
     sudo apt install ros-$ROS_DISTRO-rosdoc-lite
     source /opt/ros/$ROS_DISTRO/setup.bash
     ./build_locally.sh

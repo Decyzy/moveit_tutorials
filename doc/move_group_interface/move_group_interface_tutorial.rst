@@ -1,15 +1,15 @@
-移动组（Move Group） 的 C++ 接口
+移动组 (Move Group) 的 C++ 接口
 ==================================
 .. image:: move_group_interface_tutorial_start_screen.png
    :width: 700px
 
 在 MoveIt 里，最简单的用户接口是 :planning_interface:`MoveGroupInterface` 类。这个类为用户想要执行的大多数操作提供了简便的功能，特别是设置关节或目标姿态，创建运动规划，移动机器人，添加对象到环境里和附加/分离对象到机器人上。此接口借助 ROS 的 topics 、services 和 actions 来和 `MoveGroup 节点 <http://docs.ros.org/noetic/api/moveit_ros_move_group/html/annotated.html>`_ 通信。
 
-观看这个简短的 `YouTube 演示视频 <https://youtu.be/_5siHkFQPBQ>`_ ，看看 Move Group 接口的能力吧！
+观看这个简短的 `YouTube 演示视频 <https://youtu.be/_5siHkFQPBQ>`__ ，看看 Move Group 接口的能力吧！
 
 开始
 ---------------
-请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`_ 里的步骤。
+请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
 运行代码
 ----------------
@@ -27,7 +27,8 @@ RViz 窗口过一会儿就会出现，看起来和本页面顶部的窗口差不
 
 预期效果
 ---------------
-可以通过本页教程顶部的 `YouTube 视频 <https://youtu.be/_5siHkFQPBQ>`_ 来查看预期效果。在 RViz 里，我们应该能看到以下效果：
+可以通过本页教程顶部的 `YouTube 视频 <https://youtu.be/_5siHkFQPBQ>`__ 来查看预期效果。在 RViz 里，我们应该能看到以下效果：
+
  1. 机器人将手臂移动到前面的目标位置。
  2. 机器人将其手臂移动到其一侧的目标关节位置处。
  3. 在保持末端执行器水平的同时，机器人将其手臂移动至一个新的目标姿态。

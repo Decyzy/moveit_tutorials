@@ -5,14 +5,15 @@
 
 最简单的 MoveIt 用户接口之一是基于 python 的移动组 (Move Group) 接口。这些 python 包装 (wrappers) 为用户想要执行的大多数操作提供了简便的功能，特别是设置关节或目标姿态，创建运动规划，移动机器人，添加对象到环境里和附加/分离对象到机器人上。
 
-观看这个简短的 `YouTube 演示视频 <https://youtu.be/3MA5ebXPLsc>`_ 看看 Move Group 的 python 接口的能力吧!
+观看这个简短的 `YouTube 演示视频 <https://youtu.be/3MA5ebXPLsc>`__ 看看 Move Group 的 python 接口的能力吧!
 
 开始
 ---------------
-请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`_ 里的步骤。
+请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
 打开 RViz 和 MoveGroup 节点
 -----------------------------
+
 打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成： ::
 
   roslaunch panda_moveit_config demo.launch
@@ -26,6 +27,7 @@
 在 RViz 里，我们应该能看到以下效果：
 
 当你在 shell 终端里执行完 ``rosrun`` 命令后，在每个步骤间敲 *<回车>* 。
+
  #. 机器人规划路径，并将手臂移动到目标关节位置处。
  #. 机器人规划了一条到目标位姿的路径。
  #. 机器人规划了一条笛卡尔路径。
@@ -39,6 +41,7 @@
 
 整个代码
 ---------------
+
 注意: 整个代码见 :codedir:`本教程的 GitHub 仓库<move_group_python_interface/scripts/move_group_python_interface_tutorial.py>` 。
 
 .. tutorial-formatter:: ./scripts/move_group_python_interface_tutorial.py

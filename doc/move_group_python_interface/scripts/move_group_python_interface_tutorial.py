@@ -33,12 +33,13 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 # Author: Acorn Pooley, Mike Lautman
+# Translation: Zhiyu YANG
 
 ## BEGIN_SUB_TUTORIAL imports
 ##
-## To use the Python MoveIt interfaces, we will import the `moveit_commander`_ namespace.
-## This namespace provides us with a `MoveGroupCommander`_ class, a `PlanningSceneInterface`_ class,
-## and a `RobotCommander`_ class. More on these below. We also import `rospy`_ and some messages that we will use:
+## 要使用 MoveIt 的 Python 接口, 我们将 import `moveit_commander`_ 命名空间。
+## 这个命名空间为我们提供了一个 `MoveGroupCommander`_ 类, 一个 `PlanningSceneInterface`_ 类,
+## 和一个 `RobotCommander`_ 类。 此外，我们还将 import `rospy`_ 和一些我们将使用的 messages ：
 ##
 
 # Python 2/3 compatibility imports
@@ -86,30 +87,28 @@ class MoveGroupPythonIntefaceTutorial(object):
 
     ## BEGIN_SUB_TUTORIAL setup
     ##
-    ## First initialize `moveit_commander`_ and a `rospy`_ node:
+    ## 首先初始化 `moveit_commander`_ 和 `rospy`_ 节点:
     moveit_commander.roscpp_initialize(sys.argv)
     rospy.init_node('move_group_python_interface_tutorial', anonymous=True)
 
-    ## Instantiate a `RobotCommander`_ object. Provides information such as the robot's
-    ## kinematic model and the robot's current joint states
+    ## 实例化 `RobotCommander`_ 对象。 其提供诸如机器人运动学模型、
+    ## 机器人当前关节值等信息
     robot = moveit_commander.RobotCommander()
 
-    ## Instantiate a `PlanningSceneInterface`_ object.  This provides a remote interface
-    ## for getting, setting, and updating the robot's internal understanding of the
-    ## surrounding world:
+    ## 实例化一个 `PlanningSceneInterface`_ 对象。其提供了一个远程接口， 
+    ## 用于获取、设置和更新机器人
+    ## 对其周围环境的认知：
     scene = moveit_commander.PlanningSceneInterface()
 
-    ## Instantiate a `MoveGroupCommander`_ object.  This object is an interface
-    ## to a planning group (group of joints).  In this tutorial the group is the primary
-    ## arm joints in the Panda robot, so we set the group's name to "panda_arm".
-    ## If you are using a different robot, change this value to the name of your robot
-    ## arm planning group.
-    ## This interface can be used to plan and execute motions:
+    ## 实例化一个 `MoveGroupCommander`_ 对象。
+    ## 该对象是 planning group (由一组关节组成) 的一个接口。在本教程中，
+    ## 这个 planning group 是 Panda 机器人里主要的关机，因此我们设置这个 planning group 的名称为 "panda_arm" 。
+    ## 如果当前使用其他机器人，请将此值更改为该机器人机械臂部分的 planning group 名字。
+    ## 该接口可用于运动规划和执行动作：
     group_name = "panda_arm"
     move_group = moveit_commander.MoveGroupCommander(group_name)
 
-    ## Create a `DisplayTrajectory`_ ROS publisher which is used to display
-    ## trajectories in Rviz:
+    ## 创建一个名为 `DisplayTrajectory`_ 的 ROS publisher ，用于在 Rviz 中显示轨迹：
     display_trajectory_publisher = rospy.Publisher('/move_group/display_planned_path',
                                                    moveit_msgs.msg.DisplayTrajectory,
                                                    queue_size=20)
@@ -118,13 +117,13 @@ class MoveGroupPythonIntefaceTutorial(object):
 
     ## BEGIN_SUB_TUTORIAL basic_info
     ##
-    ## Getting Basic Information
+    ## 获取基础信息
     ## ^^^^^^^^^^^^^^^^^^^^^^^^^
-    # We can get the name of the reference frame for this robot:
+    # 我们可以获得该机器人参考坐标系的名字： 
     planning_frame = move_group.get_planning_frame()
     print("============ Planning frame: %s" % planning_frame)
 
-    # We can also print the name of the end-effector link for this group:
+    # 我们还可以为该 planning group 打印末端执行器 link 的名字： 
     eef_link = move_group.get_end_effector_link()
     print("============ End effector link: %s" % eef_link)
 
@@ -536,3 +535,4 @@ if __name__ == '__main__':
 ## CALL_SUB_TUTORIAL detach_object
 ## CALL_SUB_TUTORIAL remove_object
 ## END_TUTORIAL
+ 
