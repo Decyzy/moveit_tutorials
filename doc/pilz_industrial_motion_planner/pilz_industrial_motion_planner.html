@@ -146,7 +146,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id12">在关节空间进行规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id13">含姿态约束的运动规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id14">强制在关节空间里进行规划</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id16">向环境添加对象</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id17">将物体固连到机器人</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id18">分离并删除物体</a></li>
@@ -162,16 +162,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id2">预期效果</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id3">整个代码</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id4">获取基础信息</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-joint-goal">Planning to a Joint Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-pose-goal">Planning to a Pose Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#cartesian-paths">Cartesian Paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#displaying-a-trajectory">Displaying a Trajectory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#executing-a-plan">Executing a Plan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#adding-objects-to-the-planning-scene">Adding Objects to the Planning Scene</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#ensuring-collision-updates-are-received">Ensuring Collision Updates Are Received</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#attaching-objects-to-the-robot">Attaching Objects to the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#detaching-objects-from-the-robot">Detaching Objects from the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#removing-objects-from-the-planning-scene">Removing Objects from the Planning Scene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id5">目标关节角度的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id7">目标位姿的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id8">笛卡尔路径规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id9">显示轨迹</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id10">执行轨迹规划的结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-scene">将物体添加到规划场景里 (planning scene)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id11">确保收到碰撞关系的更新消息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id12">将物体固连到机器人</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id13">从机器人上取下物体</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id14">从规划场景中删除对象</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#launch">Launch 文件</a></li>
@@ -780,7 +780,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/pilz_industrial_motion_planner/pilz_industrial_motion_planner.rst" class="fa fa-github"> Edit on GitHub</a>
+          <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/pilz_industrial_motion_planner/pilz_industrial_motion_planner.rst" class="fa fa-github"> Edit on GitHub</a>
         
       
     </li>
@@ -792,7 +792,7 @@
   <br />
 <div class="admonition note">
 <p class="first admonition-title">Tutorials Version: Noetic</p>
-<p class="last">This is the latest version, which is actively developed and best for beginners. If you are still running a Melodic release, please use the <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是最新版本，正在积极开发中，且最适合初学者。 如果您仍在使用 Melodic 版本，请参考 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -1162,7 +1162,7 @@ returned and not executed.</p>
             
             <div class="admonition note">
               <p class="first admonition-title">Open Source Feedback</p>
-              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/pilz_industrial_motion_planner/pilz_industrial_motion_planner.rst" class="fa fa-github"> GitHub page</a></p>
+              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/pilz_industrial_motion_planner/pilz_industrial_motion_planner.rst" class="fa fa-github"> GitHub page</a></p>
             </div>
             
            </div>

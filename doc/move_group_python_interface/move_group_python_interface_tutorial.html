@@ -146,7 +146,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id12">在关节空间进行规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id13">含姿态约束的运动规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id14">强制在关节空间里进行规划</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id16">向环境添加对象</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id17">将物体固连到机器人</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id18">分离并删除物体</a></li>
@@ -162,16 +162,16 @@
 <li class="toctree-l2"><a class="reference internal" href="#id2">预期效果</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">整个代码</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id4">获取基础信息</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#planning-to-a-joint-goal">Planning to a Joint Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#planning-to-a-pose-goal">Planning to a Pose Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cartesian-paths">Cartesian Paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#displaying-a-trajectory">Displaying a Trajectory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#executing-a-plan">Executing a Plan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#adding-objects-to-the-planning-scene">Adding Objects to the Planning Scene</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ensuring-collision-updates-are-received">Ensuring Collision Updates Are Received</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#attaching-objects-to-the-robot">Attaching Objects to the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#detaching-objects-from-the-robot">Detaching Objects from the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#removing-objects-from-the-planning-scene">Removing Objects from the Planning Scene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">目标关节角度的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">目标位姿的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">笛卡尔路径规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">显示轨迹</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">执行轨迹规划的结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#planning-scene">将物体添加到规划场景里 (planning scene)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">确保收到碰撞关系的更新消息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">将物体固连到机器人</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">从机器人上取下物体</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id14">从规划场景中删除对象</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#launch">Launch 文件</a></li>
@@ -780,7 +780,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_python_interface/move_group_python_interface_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
+          <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_python_interface/move_group_python_interface_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
         
       
     </li>
@@ -792,7 +792,7 @@
   <br />
 <div class="admonition note">
 <p class="first admonition-title">Tutorials Version: Noetic</p>
-<p class="last">This is the latest version, which is actively developed and best for beginners. If you are still running a Melodic release, please use the <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是最新版本，正在积极开发中，且最适合初学者。 如果您仍在使用 Melodic 版本，请参考 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -844,7 +844,7 @@
 </div>
 <div class="section" id="id3">
 <h2>整个代码<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>注意: 整个代码见 <a class="reference external" href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_python_interface/scripts/move_group_python_interface_tutorial.py">本教程的 GitHub 仓库</a> 。</p>
+<p>注意: 整个代码见 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_python_interface/scripts/move_group_python_interface_tutorial.py">本教程的 GitHub 仓库</a> 。</p>
 <p>要使用 MoveIt 的 Python 接口, 我们将 import <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_commander/html/namespacemoveit__commander.html">moveit_commander</a> 命名空间。
 这个命名空间为我们提供了一个 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_commander/html/classmoveit__commander_1_1move__group_1_1MoveGroupCommander.html">MoveGroupCommander</a> 类, 一个 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_commander/html/classmoveit__commander_1_1planning__scene__interface_1_1PlanningSceneInterface.html">PlanningSceneInterface</a> 类,
 和一个 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_commander/html/classmoveit__commander_1_1robot_1_1RobotCommander.html">RobotCommander</a> 类。 此外，我们还将 import <a class="reference external" href="http://docs.ros.org/noetic/api/rospy/html/">rospy</a> 和一些我们将使用的 messages ：</p>
@@ -904,23 +904,22 @@
 <span class="n">eef_link</span> <span class="o">=</span> <span class="n">move_group</span><span class="o">.</span><span class="n">get_end_effector_link</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============ End effector link: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">eef_link</span><span class="p">)</span>
 
-<span class="c1"># We can get a list of all the groups in the robot:</span>
+<span class="c1"># 我们可以获得机器人中所有 planning group 的列表:</span>
 <span class="n">group_names</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_group_names</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============ Available Planning Groups:&quot;</span><span class="p">,</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_group_names</span><span class="p">())</span>
 
-<span class="c1"># Sometimes for debugging it is useful to print the entire state of the</span>
-<span class="c1"># robot:</span>
+<span class="c1"># 有时输出机械臂的所有状态对于调试很有用:</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;============ Printing robot state&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">robot</span><span class="o">.</span><span class="n">get_current_state</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="planning-to-a-joint-goal">
-<h3>Planning to a Joint Goal<a class="headerlink" href="#planning-to-a-joint-goal" title="Permalink to this headline">¶</a></h3>
-<p>The Panda’s zero configuration is at a <a class="reference external" href="https://www.quora.com/Robotics-What-is-meant-by-kinematic-singularity">singularity</a> so the first
-thing we want to do is move it to a slightly better configuration.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># We can get the joint values from the group and adjust some of the values:</span>
+<div class="section" id="id5">
+<h3>目标关节角度的运动规划<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>Panda 机械臂的未被修改过的初始位姿是在一个 <a class="reference external" href="https://www.quora.com/Robotics-What-is-meant-by-kinematic-singularity">奇异状态</a> ，
+所以我们要做的第一件事就是将其移到稍微更好的位姿。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 我们可以从 planning group 中获取并调整各关节角度:</span>
 <span class="n">joint_goal</span> <span class="o">=</span> <span class="n">move_group</span><span class="o">.</span><span class="n">get_current_joint_values</span><span class="p">()</span>
 <span class="n">joint_goal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">joint_goal</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span>
@@ -930,19 +929,19 @@ thing we want to do is move it to a slightly better configuration.</p>
 <span class="n">joint_goal</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="mi">3</span>
 <span class="n">joint_goal</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
-<span class="c1"># The go command can be called with joint values, poses, or without any</span>
-<span class="c1"># parameters if you have already set the pose or joint target for the group</span>
+<span class="c1"># 使用关节值或位姿来调用 go 命令，</span>
+<span class="c1"># 在已经设置了 planning group 的目标位姿或或目标关节角度的情况下可以不带任何参数。</span>
 <span class="n">move_group</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="n">joint_goal</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="c1"># Calling ``stop()`` ensures that there is no residual movement</span>
+<span class="c1"># 调用 ``stop()`` 以确保没有未完成的运动。</span>
 <span class="n">move_group</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="planning-to-a-pose-goal">
-<h3>Planning to a Pose Goal<a class="headerlink" href="#planning-to-a-pose-goal" title="Permalink to this headline">¶</a></h3>
-<p>We can plan a motion for this group to a desired pose for the
-end-effector:</p>
+<div class="section" id="id7">
+<h3>目标位姿的运动规划<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>我们可以为这个 planning group 规划一个运动，
+使其末端执行器达到所需的位姿:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pose_goal</span> <span class="o">=</span> <span class="n">geometry_msgs</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">Pose</span><span class="p">()</span>
 <span class="n">pose_goal</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">pose_goal</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mf">0.4</span>
@@ -952,153 +951,151 @@ end-effector:</p>
 <span class="n">move_group</span><span class="o">.</span><span class="n">set_pose_target</span><span class="p">(</span><span class="n">pose_goal</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now, we call the planner to compute the plan and execute it.</p>
+<p>现在，我们调用规划器 (planner) 来进行运动规划，然后执行规划的路径。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plan</span> <span class="o">=</span> <span class="n">move_group</span><span class="o">.</span><span class="n">go</span><span class="p">(</span><span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="c1"># Calling `stop()` ensures that there is no residual movement</span>
+<span class="c1"># 调用 `stop()` 以确保没有未完成的运动。</span>
 <span class="n">move_group</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-<span class="c1"># It is always good to clear your targets after planning with poses.</span>
-<span class="c1"># Note: there is no equivalent function for clear_joint_value_targets()</span>
+<span class="c1"># 对某一目标位姿进行运动规划以后，最好清除这个目标位姿。</span>
+<span class="c1"># 注意: 没有类似于 clear_joint_value_targets() 的函数</span>
 <span class="n">move_group</span><span class="o">.</span><span class="n">clear_pose_targets</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="cartesian-paths">
-<h3>Cartesian Paths<a class="headerlink" href="#cartesian-paths" title="Permalink to this headline">¶</a></h3>
-<p>You can plan a Cartesian path directly by specifying a list of waypoints
-for the end-effector to go through. If executing  interactively in a
-Python shell, set scale = 1.0.</p>
+<div class="section" id="id8">
+<h3>笛卡尔路径规划<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>您可以通过一系列末端执行器要通过的沿途路径点来直接进行笛卡尔路径规划。
+如果想要在 Python shell 里交互执行，
+设置 scale = 1.0 。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">waypoints</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="n">wpose</span> <span class="o">=</span> <span class="n">move_group</span><span class="o">.</span><span class="n">get_current_pose</span><span class="p">()</span><span class="o">.</span><span class="n">pose</span>
-<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">-=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># First move up (z)</span>
-<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.2</span>  <span class="c1"># and sideways (y)</span>
+<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">-=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># 1 向上 (z)</span>
+<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">+=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.2</span>  <span class="c1"># 以及侧边 (y)</span>
 <span class="n">waypoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">wpose</span><span class="p">))</span>
 
-<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># Second move forward/backwards in (x)</span>
+<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># 2 向前/向后 in (x)</span>
 <span class="n">waypoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">wpose</span><span class="p">))</span>
 
-<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">-=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># Third move sideways (y)</span>
+<span class="n">wpose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">y</span> <span class="o">-=</span> <span class="n">scale</span> <span class="o">*</span> <span class="mf">0.1</span>  <span class="c1"># 3 侧边移动 (y)</span>
 <span class="n">waypoints</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">wpose</span><span class="p">))</span>
 
-<span class="c1"># We want the Cartesian path to be interpolated at a resolution of 1 cm</span>
-<span class="c1"># which is why we will specify 0.01 as the eef_step in Cartesian</span>
-<span class="c1"># translation.  We will disable the jump threshold by setting it to 0.0,</span>
-<span class="c1"># ignoring the check for infeasible jumps in joint space, which is sufficient</span>
-<span class="c1"># for this tutorial.</span>
+<span class="c1"># 我们希望以 1 cm 的精度插值笛卡尔路径，</span>
+<span class="c1"># 这就是为什么我们在笛卡尔换算 compute_cartesian_path() 函数中将最大步长 eef_step 设置为 0.01 的原因。</span>
+<span class="c1"># 我们将 jump_threshold 指定为 0.0 以禁用跳跃阈值，即</span>
+<span class="c1"># 忽略检查关节空间中不可行的 jump 。这对本教程而言禁用跳跃阈值无妨。</span>
 <span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">fraction</span><span class="p">)</span> <span class="o">=</span> <span class="n">move_group</span><span class="o">.</span><span class="n">compute_cartesian_path</span><span class="p">(</span>
-                                   <span class="n">waypoints</span><span class="p">,</span>   <span class="c1"># waypoints to follow</span>
-                                   <span class="mf">0.01</span><span class="p">,</span>        <span class="c1"># eef_step</span>
+                                   <span class="n">waypoints</span><span class="p">,</span>   <span class="c1"># 要求经过的沿途路径点</span>
+                                   <span class="mf">0.01</span><span class="p">,</span>        <span class="c1"># eef_step, 末端执行器步长</span>
                                    <span class="mf">0.0</span><span class="p">)</span>         <span class="c1"># jump_threshold</span>
 
-<span class="c1"># Note: We are just planning, not asking move_group to actually move the robot yet:</span>
+<span class="c1"># 注意: 注意，我们只是在进行规划，而不是要求 move_group 真的让机器人运动。</span>
 <span class="k">return</span> <span class="n">plan</span><span class="p">,</span> <span class="n">fraction</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="displaying-a-trajectory">
-<h3>Displaying a Trajectory<a class="headerlink" href="#displaying-a-trajectory" title="Permalink to this headline">¶</a></h3>
-<p>You can ask RViz to visualize a plan (aka trajectory) for you. But the
-group.plan() method does this automatically so this is not that useful
-here (it just displays the same trajectory again):</p>
-<p>A <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/DisplayTrajectory.html">DisplayTrajectory</a> msg has two primary fields, trajectory_start and trajectory.
-We populate the trajectory_start with our current robot state to copy over
-any AttachedCollisionObjects and add our plan to the trajectory.</p>
+<div class="section" id="id9">
+<h3>显示轨迹<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>您可以要求 RViz 为您可视化一个规划结果（plan, 也称为轨迹）。但是
+group.plan() 方法会自动可视化轨迹，所以这里单独再显示一下有点多余。
+(它只是再次显示相同的轨迹):</p>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/DisplayTrajectory.html">DisplayTrajectory</a> 消息有两个主要的字段: trajectory_start 和 trajectory。
+我们使用当前机器人状态填充 trajectory_start 以拷贝所有的
+AttachedCollisionObjects，同时将我们的规划结果加入到我 trajectory 字段里面。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">display_trajectory</span> <span class="o">=</span> <span class="n">moveit_msgs</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">DisplayTrajectory</span><span class="p">()</span>
 <span class="n">display_trajectory</span><span class="o">.</span><span class="n">trajectory_start</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_current_state</span><span class="p">()</span>
 <span class="n">display_trajectory</span><span class="o">.</span><span class="n">trajectory</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">plan</span><span class="p">)</span>
-<span class="c1"># Publish</span>
+<span class="c1"># 发布消息</span>
 <span class="n">display_trajectory_publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">display_trajectory</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="executing-a-plan">
-<h3>Executing a Plan<a class="headerlink" href="#executing-a-plan" title="Permalink to this headline">¶</a></h3>
-<p>Use execute if you would like the robot to follow
-the plan that has already been computed:</p>
+<div class="section" id="id10">
+<h3>执行轨迹规划的结果<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>如果您希望机器人沿着已经规划好的轨迹运动，
+请使用 execute 方法</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">move_group</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">plan</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Note:</strong> The robot’s current joint state must be within some tolerance of the
-first waypoint in the <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/RobotTrajectory.html">RobotTrajectory</a> or <code class="docutils literal notranslate"><span class="pre">execute()</span></code> will fail</p>
+<p><strong>注意:</strong> 机器人的当前关节状态必须在 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/RobotTrajectory.html">RobotTrajectory</a> 或 <code class="docutils literal notranslate"><span class="pre">execute()</span></code> 中的第一个沿途路径点的容许误差范围内，
+否则执行 execute 将失败。</p>
 </div>
-<div class="section" id="adding-objects-to-the-planning-scene">
-<h3>Adding Objects to the Planning Scene<a class="headerlink" href="#adding-objects-to-the-planning-scene" title="Permalink to this headline">¶</a></h3>
-<p>First, we will create a box in the planning scene between the fingers:</p>
+<div class="section" id="planning-scene">
+<h3>将物体添加到规划场景里 (planning scene)<a class="headerlink" href="#planning-scene" title="Permalink to this headline">¶</a></h3>
+<p>首先，我们在规划场景中的夹抓之间创建一个 box：</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">box_pose</span> <span class="o">=</span> <span class="n">geometry_msgs</span><span class="o">.</span><span class="n">msg</span><span class="o">.</span><span class="n">PoseStamped</span><span class="p">()</span>
 <span class="n">box_pose</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="s2">&quot;panda_hand&quot;</span>
 <span class="n">box_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">box_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.11</span> <span class="c1"># above the panda_hand frame</span>
+<span class="n">box_pose</span><span class="o">.</span><span class="n">pose</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.11</span> <span class="c1"># 在 panda_hand 坐标系上方</span>
 <span class="n">box_name</span> <span class="o">=</span> <span class="s2">&quot;box&quot;</span>
 <span class="n">scene</span><span class="o">.</span><span class="n">add_box</span><span class="p">(</span><span class="n">box_name</span><span class="p">,</span> <span class="n">box_pose</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mf">0.075</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">,</span> <span class="mf">0.075</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="ensuring-collision-updates-are-received">
-<h3>Ensuring Collision Updates Are Received<a class="headerlink" href="#ensuring-collision-updates-are-received" title="Permalink to this headline">¶</a></h3>
-<p>If the Python node dies before publishing a collision object update message, the message
-could get lost and the box will not appear. To ensure that the updates are
-made, we wait until we see the changes reflected in the
-<code class="docutils literal notranslate"><span class="pre">get_attached_objects()</span></code> and <code class="docutils literal notranslate"><span class="pre">get_known_object_names()</span></code> lists.
-For the purpose of this tutorial, we call this function after adding,
-removing, attaching or detaching an object in the planning scene. We then wait
-until the updates have been made or <code class="docutils literal notranslate"><span class="pre">timeout</span></code> seconds have passed</p>
+<div class="section" id="id11">
+<h3>确保收到碰撞关系的更新消息<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>如果 Python 节点在发布冲突对象的更新消息之前死亡，
+则该消息可能会丢失并且该 box 将不会出现。
+为了确保更新生效，我们等到
+<code class="docutils literal notranslate"><span class="pre">get_attached_objects()</span></code> 和 <code class="docutils literal notranslate"><span class="pre">get_known_object_names()</span></code> 列表中出现更改的内容为止。
+就本教程而言，我们在规划场景中添加、移除、附加或分离对象之后都将调用此函数。
+然后我们等待更新完成，或超过 <code class="docutils literal notranslate"><span class="pre">timeout</span></code> 这么多秒。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">start</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
 <span class="n">seconds</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
 <span class="k">while</span> <span class="p">(</span><span class="n">seconds</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="n">timeout</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">rospy</span><span class="o">.</span><span class="n">is_shutdown</span><span class="p">():</span>
-  <span class="c1"># Test if the box is in attached objects</span>
+  <span class="c1"># 测试 box 是否在已附着的物体列表 attached_objects 中</span>
   <span class="n">attached_objects</span> <span class="o">=</span> <span class="n">scene</span><span class="o">.</span><span class="n">get_attached_objects</span><span class="p">([</span><span class="n">box_name</span><span class="p">])</span>
   <span class="n">is_attached</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">attached_objects</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span>
 
-  <span class="c1"># Test if the box is in the scene.</span>
-  <span class="c1"># Note that attaching the box will remove it from known_objects</span>
+  <span class="c1"># 测试 box 是否在场景中。</span>
+  <span class="c1"># 请注意，附加 box 的操作会删除 known_objects 中的 box</span>
   <span class="n">is_known</span> <span class="o">=</span> <span class="n">box_name</span> <span class="ow">in</span> <span class="n">scene</span><span class="o">.</span><span class="n">get_known_object_names</span><span class="p">()</span>
 
-  <span class="c1"># Test if we are in the expected state</span>
+  <span class="c1"># 测试我们是否处于预期状态</span>
   <span class="k">if</span> <span class="p">(</span><span class="n">box_is_attached</span> <span class="o">==</span> <span class="n">is_attached</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">box_is_known</span> <span class="o">==</span> <span class="n">is_known</span><span class="p">):</span>
     <span class="k">return</span> <span class="kc">True</span>
 
-  <span class="c1"># Sleep so that we give other threads time on the processor</span>
+  <span class="c1"># 休眠一会，使处理器上可以调度运行其他线程</span>
   <span class="n">rospy</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
   <span class="n">seconds</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">get_time</span><span class="p">()</span>
 
-<span class="c1"># If we exited the while loop without returning then we timed out</span>
+<span class="c1"># 如果我们退出了 while 循环而没有 return，那么就意味着超时了</span>
 <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="attaching-objects-to-the-robot">
-<h3>Attaching Objects to the Robot<a class="headerlink" href="#attaching-objects-to-the-robot" title="Permalink to this headline">¶</a></h3>
-<p>Next, we will attach the box to the Panda wrist. Manipulating objects requires the
-robot be able to touch them without the planning scene reporting the contact as a
-collision. By adding link names to the <code class="docutils literal notranslate"><span class="pre">touch_links</span></code> array, we are telling the
-planning scene to ignore collisions between those links and the box. For the Panda
-robot, we set <code class="docutils literal notranslate"><span class="pre">grasping_group</span> <span class="pre">=</span> <span class="pre">'hand'</span></code>. If you are using a different robot,
-you should change this value to the name of your end effector group name.</p>
+<div class="section" id="id12">
+<h3>将物体固连到机器人<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>接下来, 我们将 box 固连到 Panda 机械臂的腕部。机械臂移动物体需要
+其能够接触物体，但是当前规划场景会将这报告为发生碰撞。
+因此，我们将 link 的名字添加到 <code class="docutils literal notranslate"><span class="pre">touch_links</span></code> 数组里，
+让规划场景忽略那些 link 和 box 之间的碰撞。
+对于 Panda 机器人，即设置 <code class="docutils literal notranslate"><span class="pre">grasping_group</span> <span class="pre">=</span> <span class="pre">'hand'</span></code> 。如果使用其他机器人，
+则应将该变量设置为对应的末端执行器 group 的名称。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">grasping_group</span> <span class="o">=</span> <span class="s1">&#39;hand&#39;</span>
 <span class="n">touch_links</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">get_link_names</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="n">grasping_group</span><span class="p">)</span>
 <span class="n">scene</span><span class="o">.</span><span class="n">attach_box</span><span class="p">(</span><span class="n">eef_link</span><span class="p">,</span> <span class="n">box_name</span><span class="p">,</span> <span class="n">touch_links</span><span class="o">=</span><span class="n">touch_links</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="detaching-objects-from-the-robot">
-<h3>Detaching Objects from the Robot<a class="headerlink" href="#detaching-objects-from-the-robot" title="Permalink to this headline">¶</a></h3>
-<p>We can also detach and remove the object from the planning scene:</p>
+<div class="section" id="id13">
+<h3>从机器人上取下物体<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>我们还可以从规划场景中分离和移除对象:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scene</span><span class="o">.</span><span class="n">remove_attached_object</span><span class="p">(</span><span class="n">eef_link</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">box_name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="removing-objects-from-the-planning-scene">
-<h3>Removing Objects from the Planning Scene<a class="headerlink" href="#removing-objects-from-the-planning-scene" title="Permalink to this headline">¶</a></h3>
-<p>We can remove the box from the world.</p>
+<div class="section" id="id14">
+<h3>从规划场景中删除对象<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<p>我们可以将 box 从世界里移走。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scene</span><span class="o">.</span><span class="n">remove_world_object</span><span class="p">(</span><span class="n">box_name</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><strong>Note:</strong> The object must be detached before we can remove it from the world</p>
+<p><strong>注意:</strong> 必须先将物体分离，然后才能将其从世界上移除。</p>
 </div>
 </div>
 <div class="section" id="launch">
 <h2>Launch 文件<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
-<p>整个 launch 文件在 GitHub 上的 <a class="reference external" href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_python_interface/launch/move_group_python_interface_tutorial.launch">这里</a> 可见。本教程中的所有代码都可从 <strong>moveit_tutorials</strong> 包中运行，这个包是 MoveIt 安装的一部分。</p>
+<p>整个 launch 文件在 GitHub 上的 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_python_interface/launch/move_group_python_interface_tutorial.launch">这里</a> 可见。本教程中的所有代码都可从 <strong>moveit_tutorials</strong> 包中运行，这个包是 MoveIt 安装的一部分。</p>
 </div>
 </div>
 
@@ -1106,7 +1103,7 @@ you should change this value to the name of your end effector group name.</p>
             
             <div class="admonition note">
               <p class="first admonition-title">Open Source Feedback</p>
-              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_python_interface/move_group_python_interface_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
+              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_python_interface/move_group_python_interface_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
             </div>
             
            </div>

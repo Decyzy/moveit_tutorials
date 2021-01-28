@@ -146,7 +146,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id12">在关节空间进行规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id13">含姿态约束的运动规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id14">强制在关节空间里进行规划</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id15">笛卡尔路径</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id15">笛卡尔路径规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id16">向环境添加对象</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id17">将物体固连到机器人</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id18">分离并删除物体</a></li>
@@ -162,16 +162,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id2">预期效果</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id3">整个代码</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id4">获取基础信息</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-joint-goal">Planning to a Joint Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-pose-goal">Planning to a Pose Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#cartesian-paths">Cartesian Paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#displaying-a-trajectory">Displaying a Trajectory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#executing-a-plan">Executing a Plan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#adding-objects-to-the-planning-scene">Adding Objects to the Planning Scene</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#ensuring-collision-updates-are-received">Ensuring Collision Updates Are Received</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#attaching-objects-to-the-robot">Attaching Objects to the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#detaching-objects-from-the-robot">Detaching Objects from the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#removing-objects-from-the-planning-scene">Removing Objects from the Planning Scene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id5">目标关节角度的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id7">目标位姿的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id8">笛卡尔路径规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id9">显示轨迹</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id10">执行轨迹规划的结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-scene">将物体添加到规划场景里 (planning scene)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id11">确保收到碰撞关系的更新消息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id12">将物体固连到机器人</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id13">从机器人上取下物体</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id14">从规划场景中删除对象</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#launch">Launch 文件</a></li>
@@ -780,7 +780,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_interface/move_group_interface_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
+          <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_interface/move_group_interface_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
         
       
     </li>
@@ -792,7 +792,7 @@
   <br />
 <div class="admonition note">
 <p class="first admonition-title">Tutorials Version: Noetic</p>
-<p class="last">This is the latest version, which is actively developed and best for beginners. If you are still running a Melodic release, please use the <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是最新版本，正在积极开发中，且最适合初学者。 如果您仍在使用 Melodic 版本，请参考 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -845,7 +845,7 @@
 </div>
 <div class="section" id="id5">
 <h2>整个代码<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p>全部代码可以在 <a class="reference external" href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_interface/src/move_group_interface_tutorial.cpp">MoveIt GitHub project</a> 里找到。接下来，我们逐步分析代码来解释其功能。</p>
+<p>全部代码可以在 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_interface/src/move_group_interface_tutorial.cpp">MoveIt GitHub project</a> 里找到。接下来，我们逐步分析代码来解释其功能。</p>
 <div class="section" id="id6">
 <h3>设置<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>MoveIt 操作一组关节(被称为 “planning groups”), 并将它们存储在一个名为
@@ -1083,7 +1083,7 @@ RobotState 是一个储存当前所有位置、速度、加速度信息的对象
 </div>
 </div>
 <div class="section" id="id15">
-<h3>笛卡尔路径<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
+<h3>笛卡尔路径规划<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h3>
 <p>您可以通过一系列末端执行器要通过的沿途路径点来直接进行笛卡尔路径规划。
 请注意，我们从先前设置的新初始状态开始。
 无需将初始位姿（开始状态）添加到沿途路径点列表，
@@ -1106,8 +1106,8 @@ RobotState 是一个储存当前所有位置、速度、加速度信息的对象
 </pre></div>
 </div>
 <p>我们希望以 1 cm 的精度插值笛卡尔路径，
-这就是为什么我们在笛卡尔换算 computeCartesianPath 中将 0.01 指定为最大步长的原因。
-我们将 jump_threshold 指定为 0.0，以禁用跳跃阈值。
+这就是为什么我们在笛卡尔换算 computeCartesianPath() 函数中将最大步长设置为 0.01 的原因。
+我们将 jump_threshold 设置为 0.0 以禁用跳跃阈值。
 警告 - 在在实际硬件上执行规划结果时，禁用 jump_threshold 可能会导致冗余关节进行大量无法预测的运动，
 并且可能会带来安全问题。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">moveit_msgs</span><span class="o">::</span><span class="n">RobotTrajectory</span> <span class="n">trajectory</span><span class="p">;</span>
@@ -1305,7 +1305,7 @@ RobotState 是一个储存当前所有位置、速度、加速度信息的对象
 </div>
 <div class="section" id="launch">
 <h2>Launch 文件<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
-<p>整个 launch 文件在 GitHub 上的 <a class="reference external" href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_interface/launch/move_group_interface_tutorial.launch">这里</a> 可见。本教程中的所有代码都可从 <strong>moveit_tutorials</strong> 包中运行，这个包是 MoveIt 安装的一部分。</p>
+<p>整个 launch 文件在 GitHub 上的 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_interface/launch/move_group_interface_tutorial.launch">这里</a> 可见。本教程中的所有代码都可从 <strong>moveit_tutorials</strong> 包中运行，这个包是 MoveIt 安装的一部分。</p>
 </div>
 <div class="section" id="id19">
 <h2>关于精度设置的说明<a class="headerlink" href="#id19" title="Permalink to this headline">¶</a></h2>
@@ -1318,7 +1318,7 @@ RobotState 是一个储存当前所有位置、速度、加速度信息的对象
             
             <div class="admonition note">
               <p class="first admonition-title">Open Source Feedback</p>
-              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/move_group_interface/move_group_interface_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
+              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/move_group_interface/move_group_interface_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
             </div>
             
            </div>

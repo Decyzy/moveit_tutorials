@@ -146,7 +146,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id12">在关节空间进行规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id13">含姿态约束的运动规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id14">强制在关节空间里进行规划</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id16">向环境添加对象</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id17">将物体固连到机器人</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id18">分离并删除物体</a></li>
@@ -162,16 +162,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id2">预期效果</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id3">整个代码</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id4">获取基础信息</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-joint-goal">Planning to a Joint Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-pose-goal">Planning to a Pose Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#cartesian-paths">Cartesian Paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#displaying-a-trajectory">Displaying a Trajectory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#executing-a-plan">Executing a Plan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#adding-objects-to-the-planning-scene">Adding Objects to the Planning Scene</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#ensuring-collision-updates-are-received">Ensuring Collision Updates Are Received</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#attaching-objects-to-the-robot">Attaching Objects to the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#detaching-objects-from-the-robot">Detaching Objects from the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#removing-objects-from-the-planning-scene">Removing Objects from the Planning Scene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id5">目标关节角度的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id7">目标位姿的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id8">笛卡尔路径规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id9">显示轨迹</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id10">执行轨迹规划的结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-scene">将物体添加到规划场景里 (planning scene)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id11">确保收到碰撞关系的更新消息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id12">将物体固连到机器人</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id13">从机器人上取下物体</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id14">从规划场景中删除对象</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#launch">Launch 文件</a></li>
@@ -780,7 +780,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/chomp_planner/chomp_planner_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
+          <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/chomp_planner/chomp_planner_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
         
       
     </li>
@@ -792,7 +792,7 @@
   <br />
 <div class="admonition note">
 <p class="first admonition-title">Tutorials Version: Noetic</p>
-<p class="last">This is the latest version, which is actively developed and best for beginners. If you are still running a Melodic release, please use the <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是最新版本，正在积极开发中，且最适合初学者。 如果您仍在使用 Melodic 版本，请参考 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -823,9 +823,9 @@
 <h2>Using CHOMP with Your Robot<a class="headerlink" href="#using-chomp-with-your-robot" title="Permalink to this headline">¶</a></h2>
 <p><strong>Note:</strong> if you are following this demo using the <code class="docutils literal notranslate"><span class="pre">panda_moveit_config</span></code> from the <a class="reference external" href="https://github.com/ros-planning/panda_moveit_config">ros-planning/panda_moveit_config</a> repository, these steps are already done for you and you can skip this section.</p>
 <ol class="arabic simple">
-<li><p>Simply download <a class="reference external" href="https://github.com/ros-planning/panda_moveit_config/blob/melodic-devel/launch/chomp_planning_pipeline.launch.xml">chomp_planning_pipeline.launch.xml</a> file into the launch directory of your MoveIt config package. In our case, we will save this file in the <code class="docutils literal notranslate"><span class="pre">panda_moveit_config/launch</span></code> directory.</p></li>
+<li><p>Simply download <a class="reference external" href="https://github.com/Decyzy/panda_moveit_config/blob/melodic-devel/launch/chomp_planning_pipeline.launch.xml">chomp_planning_pipeline.launch.xml</a> file into the launch directory of your MoveIt config package. In our case, we will save this file in the <code class="docutils literal notranslate"><span class="pre">panda_moveit_config/launch</span></code> directory.</p></li>
 <li><p>Adjust the line <code class="docutils literal notranslate"><span class="pre">&lt;rosparam</span> <span class="pre">command=&quot;load&quot;</span> <span class="pre">file=&quot;$(find</span> <span class="pre">panda_moveit_config)/config/chomp_planning.yaml&quot;</span> <span class="pre">/&gt;</span></code> to <code class="docutils literal notranslate"><span class="pre">&lt;rosparam</span> <span class="pre">command=&quot;load&quot;</span> <span class="pre">file=&quot;$(find</span> <span class="pre">&lt;robot_moveit_config&gt;)/config/chomp_planning.yaml&quot;</span> <span class="pre">/&gt;</span></code> replacing <code class="docutils literal notranslate"><span class="pre">&lt;robot_moveit_config&gt;</span></code> with the name of your MoveIt configuration package.</p></li>
-<li><p>Download <a class="reference external" href="https://github.com/ros-planning/panda_moveit_config/blob/melodic-devel/config/chomp_planning.yaml">chomp_planning.yaml</a> file into the config directory of your MoveIt config package. In our case, we will save this file in the <code class="docutils literal notranslate"><span class="pre">panda_moveit_config/config</span></code> directory.</p></li>
+<li><p>Download <a class="reference external" href="https://github.com/Decyzy/panda_moveit_config/blob/melodic-devel/config/chomp_planning.yaml">chomp_planning.yaml</a> file into the config directory of your MoveIt config package. In our case, we will save this file in the <code class="docutils literal notranslate"><span class="pre">panda_moveit_config/config</span></code> directory.</p></li>
 <li><p>Open <code class="docutils literal notranslate"><span class="pre">chomp_planning.yaml</span></code> in your favorite editor and change <code class="docutils literal notranslate"><span class="pre">animate_endeffector_segment:</span> <span class="pre">&quot;panda_rightfinger&quot;</span></code> to the appropriate link for your robot.</p></li>
 </ol>
 </div>
@@ -839,7 +839,7 @@
 <h3>Running CHOMP with Obstacles in the Scene<a class="headerlink" href="#running-chomp-with-obstacles-in-the-scene" title="Permalink to this headline">¶</a></h3>
 <p>To run CHOMP in an evironment with obstacles, you can run the sample python script:</p>
 <blockquote>
-<div><p><a class="reference external" href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/collision_environments/scripts/collision_scene_example.py">collision_scene_example.py</a>.</p>
+<div><p><a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/collision_environments/scripts/collision_scene_example.py">collision_scene_example.py</a>.</p>
 </div></blockquote>
 <p>This script creates a cluttered scene with four obstacles or a simple scene with one obstacle depending on the argument given to the script. One can also change the position/size of the obstacles to change the scene.</p>
 <p>To run the CHOMP planner with obstacles, open two shells. In the first shell start RViz and wait for everything to finish loading:</p>
@@ -859,7 +859,7 @@
 </div>
 <div class="section" id="tweaking-some-of-the-parameters-for-chomp">
 <h2>Tweaking some of the parameters for CHOMP<a class="headerlink" href="#tweaking-some-of-the-parameters-for-chomp" title="Permalink to this headline">¶</a></h2>
-<p>CHOMP has some optimization parameters associated with it. These can be modified for the given environment/robot you are working with and is normally present in the <a class="reference external" href="https://github.com/ros-planning/panda_moveit_config/blob/melodic-devel/config/chomp_planning.yaml">chomp_planning.yaml</a> file in config folder of the robot you are working with. If this file does not exist for your robot, you can create it and set the parameter values as you want. The following are some of the insights to set up these parameter values for some of them:</p>
+<p>CHOMP has some optimization parameters associated with it. These can be modified for the given environment/robot you are working with and is normally present in the <a class="reference external" href="https://github.com/Decyzy/panda_moveit_config/blob/melodic-devel/config/chomp_planning.yaml">chomp_planning.yaml</a> file in config folder of the robot you are working with. If this file does not exist for your robot, you can create it and set the parameter values as you want. The following are some of the insights to set up these parameter values for some of them:</p>
 <ul class="simple">
 <li><p><em>planning_time_limit</em>: the maximum time the optimizer can take to find a solution before terminating</p></li>
 <li><p><em>max_iterations</em>: this is the maximum number of iterations that the planner can take to find a good solution while optimization</p></li>
@@ -868,7 +868,7 @@
 <li><p><em>obstacle_cost_weight</em>: this controls the weight to be given to obstacles towards the final cost CHOMP optimizes over. e.g., 0.0 would have obstacles to be ignored, 1.0 would be a hard constraint</p></li>
 <li><p><em>learning_rate</em>: this is the learning rate used by the optimizer to find the local / global minima while reducing the total cost.</p></li>
 <li><p><em>smoothness_cost_velocity, smoothness_cost_acceleration, smoothness_cost_jerk</em>: variables associated with the cost in velocity, acceleration and jerk.</p></li>
-<li><p><em>ridge_factor</em>: the noise added to the diagonal of the total <a class="reference external" href="https://github.com/ros-planning/moveit/blob/master/moveit_planners/chomp/chomp_motion_planner/src/chomp_cost.cpp#L62/">quadratic cost matrix</a> in the objective function. Addition of small noise (e.g., 0.001) allows CHOMP to avoid obstacles at the cost of smoothness in trajectory.</p></li>
+<li><p><em>ridge_factor</em>: the noise added to the diagonal of the total <a class="reference external" href="https://github.com/Decyzy/moveit/blob/Noetic_CN_zh-dev/moveit_planners/chomp/chomp_motion_planner/src/chomp_cost.cpp#L62/">quadratic cost matrix</a> in the objective function. Addition of small noise (e.g., 0.001) allows CHOMP to avoid obstacles at the cost of smoothness in trajectory.</p></li>
 <li><p><em>use_pseudo_inverse</em>: enable pseudo inverse calculations or not.</p></li>
 <li><p><em>pseudo_inverse_ridge_factor</em>: set the ridge factor if pseudo inverse is enabled.</p></li>
 <li><p><em>joint_update_limit</em>: set the update limit for the robot joints</p></li>
@@ -931,7 +931,7 @@ but adding the CHOMP post-processor as a planning adapter. Also, the <code class
             
             <div class="admonition note">
               <p class="first admonition-title">Open Source Feedback</p>
-              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/chomp_planner/chomp_planner_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
+              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/chomp_planner/chomp_planner_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
             </div>
             
            </div>

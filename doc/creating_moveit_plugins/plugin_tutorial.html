@@ -146,7 +146,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id12">在关节空间进行规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id13">含姿态约束的运动规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id14">强制在关节空间里进行规划</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id15">笛卡尔路径规划</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id16">向环境添加对象</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id17">将物体固连到机器人</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id18">分离并删除物体</a></li>
@@ -162,16 +162,16 @@
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id2">预期效果</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id3">整个代码</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id4">获取基础信息</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-joint-goal">Planning to a Joint Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-to-a-pose-goal">Planning to a Pose Goal</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#cartesian-paths">Cartesian Paths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#displaying-a-trajectory">Displaying a Trajectory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#executing-a-plan">Executing a Plan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#adding-objects-to-the-planning-scene">Adding Objects to the Planning Scene</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#ensuring-collision-updates-are-received">Ensuring Collision Updates Are Received</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#attaching-objects-to-the-robot">Attaching Objects to the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#detaching-objects-from-the-robot">Detaching Objects from the Robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#removing-objects-from-the-planning-scene">Removing Objects from the Planning Scene</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id5">目标关节角度的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id7">目标位姿的运动规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id8">笛卡尔路径规划</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id9">显示轨迹</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id10">执行轨迹规划的结果</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#planning-scene">将物体添加到规划场景里 (planning scene)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id11">确保收到碰撞关系的更新消息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id12">将物体固连到机器人</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id13">从机器人上取下物体</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id14">从规划场景中删除对象</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#launch">Launch 文件</a></li>
@@ -780,7 +780,7 @@
     <li class="wy-breadcrumbs-aside">
       
         
-          <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/creating_moveit_plugins/plugin_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
+          <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/creating_moveit_plugins/plugin_tutorial.rst" class="fa fa-github"> Edit on GitHub</a>
         
       
     </li>
@@ -792,7 +792,7 @@
   <br />
 <div class="admonition note">
 <p class="first admonition-title">Tutorials Version: Noetic</p>
-<p class="last">This is the latest version, which is actively developed and best for beginners. If you are still running a Melodic release, please use the <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是最新版本，正在积极开发中，且最适合初学者。 如果您仍在使用 Melodic 版本，请参考 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -808,7 +808,7 @@
 <p><a class="reference external" href="http://wiki.ros.org/pluginlib">This Page</a> gives a detailed explanation of how to add plugins in ROS in general. The two necessary elements are base and plugin classes. The plugin class inherits from the base class and overrides its virtual functions. The main library used for this purpose is pluginlib. This tutorials contains three different types of plugins, namely, motion planner, controller manager and constraint sampler.</p>
 <div class="section" id="motion-planner-plugin">
 <h2>Motion Planner Plugin<a class="headerlink" href="#motion-planner-plugin" title="Permalink to this headline">¶</a></h2>
-<p>In this section, we will show how to add a new motion planner to MoveIt as a plugin. The base class in MoveIt is <code class="docutils literal notranslate"><span class="pre">planning_interface</span></code> from  which any new planner plugin should inherit. For demonstration purposes, a linear interpolation planner (lerp) which plans the motion between two states in joint space is created. This planner could be used as a start point for adding any new planner as it contains the necessary basics. The final source files designed in this tutorial are available <a class="reference external" href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/creating_moveit_plugins/lerp_motion_planner/src">here</a>. The following graph shows a brief overall view of the relation between classes for adding a new planner in MoveIt.</p>
+<p>In this section, we will show how to add a new motion planner to MoveIt as a plugin. The base class in MoveIt is <code class="docutils literal notranslate"><span class="pre">planning_interface</span></code> from  which any new planner plugin should inherit. For demonstration purposes, a linear interpolation planner (lerp) which plans the motion between two states in joint space is created. This planner could be used as a start point for adding any new planner as it contains the necessary basics. The final source files designed in this tutorial are available <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/creating_moveit_plugins/lerp_motion_planner/src">here</a>. The following graph shows a brief overall view of the relation between classes for adding a new planner in MoveIt.</p>
 <img alt="../../_images/lerp_planner.png" src="../../_images/lerp_planner.png" />
 <p>First we create the plugin class in the  <code class="docutils literal notranslate"><span class="pre">moveit_tutorials</span></code> package. To make the plugin class for <code class="docutils literal notranslate"><span class="pre">lerp</span></code>, create a file named <code class="docutils literal notranslate"><span class="pre">lerp_planner_manager.cpp</span></code> in src folder. In this file, <code class="docutils literal notranslate"><span class="pre">LERPPlanPlannerManager</span></code> overrides the functions of <code class="docutils literal notranslate"><span class="pre">PlannerManager</span></code> class from <code class="docutils literal notranslate"><span class="pre">planning_interface</span></code>. In the end of this file, we need to register <code class="docutils literal notranslate"><span class="pre">LERPPlanPlannerManager</span></code> class as a plugin, this is done by <code class="docutils literal notranslate"><span class="pre">CLASS_LOADER_REGISTER_CLASS</span></code> macro from <code class="docutils literal notranslate"><span class="pre">class_loader</span></code>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">CLASS_LOADER_REGISTER_CLASS</span><span class="p">(</span><span class="n">emptyplan_interface</span><span class="p">::</span><span class="n">EmptyPlanPlannerManager</span><span class="p">,</span> <span class="n">planning_interface</span><span class="p">::</span><span class="n">PlannerManager</span><span class="p">);</span>
@@ -886,8 +886,8 @@
 </div>
 <div class="section" id="example-controller-manager-plugin">
 <h2>Example Controller Manager Plugin<a class="headerlink" href="#example-controller-manager-plugin" title="Permalink to this headline">¶</a></h2>
-<p>MoveIt controller managers, somewhat a misnomer, are the interfaces to your custom low level controllers. A better way to think of them are <em>controller interfaces</em>. For most use cases, the included <a class="reference external" href="https://github.com/ros-planning/moveit/blob/master/moveit_plugins/moveit_simple_controller_manager">MoveItSimpleControllerManager</a> is sufficient if your robot controllers already provide ROS actions for FollowJointTrajectory. If you use <em>ros_control</em>, the included <a class="reference external" href="https://github.com/ros-planning/moveit/blob/master/moveit_plugins/moveit_ros_control_interface">MoveItRosControlInterface</a> is also ideal.</p>
-<p>However, for some applications you might desire a more custom controller manager. An example template for starting your custom controller manager is provided <a class="reference external" href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/controller_configuration/src/moveit_controller_manager_example.cpp">here</a>.</p>
+<p>MoveIt controller managers, somewhat a misnomer, are the interfaces to your custom low level controllers. A better way to think of them are <em>controller interfaces</em>. For most use cases, the included <a class="reference external" href="https://github.com/Decyzy/moveit/blob/Noetic_CN_zh-dev/moveit_plugins/moveit_simple_controller_manager">MoveItSimpleControllerManager</a> is sufficient if your robot controllers already provide ROS actions for FollowJointTrajectory. If you use <em>ros_control</em>, the included <a class="reference external" href="https://github.com/Decyzy/moveit/blob/Noetic_CN_zh-dev/moveit_plugins/moveit_ros_control_interface">MoveItRosControlInterface</a> is also ideal.</p>
+<p>However, for some applications you might desire a more custom controller manager. An example template for starting your custom controller manager is provided <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/controller_configuration/src/moveit_controller_manager_example.cpp">here</a>.</p>
 </div>
 <div class="section" id="example-constraint-sampler-plugin">
 <h2>Example Constraint Sampler Plugin<a class="headerlink" href="#example-constraint-sampler-plugin" title="Permalink to this headline">¶</a></h2>
@@ -907,7 +907,7 @@
             
             <div class="admonition note">
               <p class="first admonition-title">Open Source Feedback</p>
-              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/ros-planning/moveit_tutorials/blob/master/doc/creating_moveit_plugins/plugin_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
+              <p class="last">See something that needs improvement? Please open a pull request on this <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/creating_moveit_plugins/plugin_tutorial.rst" class="fa fa-github"> GitHub page</a></p>
             </div>
             
            </div>
