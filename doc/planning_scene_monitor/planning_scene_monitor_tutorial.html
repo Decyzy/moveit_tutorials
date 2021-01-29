@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Planning Scene Monitor &mdash; moveit_tutorials Noetic documentation</title>
+  <title>规划场景监控器 (PlanningSceneMonitor) &mdash; moveit_tutorials Noetic documentation</title>
   
 
   
@@ -228,12 +228,12 @@
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id11">预期输出</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Planning Scene Monitor</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#robotstate">RobotState</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#currentstatemonitor">CurrentStateMonitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#planningscene">PlanningScene</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#planningscenemonitor">PlanningSceneMonitor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#planningsceneinterface">PlanningSceneInterface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">规划场景监控器 (PlanningSceneMonitor)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#robotstate">RobotState 机器人状态</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#currentstatemonitor">CurrentStateMonitor 当前状态监视器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planningscene">PlanningScene 规划场景</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">PlanningSceneMonitor 规划场景监视器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#planningsceneinterface">PlanningSceneInterface 规划场景接口</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html">Planning Scene ROS API</a><ul>
@@ -787,7 +787,7 @@
     <li><a href="http://moveit.ros.org">MoveIt</a> &raquo;</li>
     <li><a href="../../index.html">教程</a> &raquo;</li>
       
-    <li>Planning Scene Monitor</li>
+    <li>规划场景监控器 (PlanningSceneMonitor)</li>
   </ul>
   <br />
 <div class="admonition note">
@@ -803,59 +803,59 @@
                <!-- <p class="last">Code can be found at <a href = "https://github.com/ros-planning/moveit_tutorials">moveit_tutorials repository</a> in doc folder. Use master branch.</p> -->
              <!-- </div>  -->
             
-  <div class="section" id="planning-scene-monitor">
-<h1>Planning Scene Monitor<a class="headerlink" href="#planning-scene-monitor" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> is the recommended interface for maintaining an up-to-date planning scene. The relationship between <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1CurrentStateMonitor.html">CurrentStateMonitor</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a>, and <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1PlanningSceneInterface.html">PlanningSceneInterface</a> can be really confusing at first. This tutorial aims to make clear these key concepts.</p>
+  <div class="section" id="planningscenemonitor">
+<h1>规划场景监控器 (PlanningSceneMonitor)<a class="headerlink" href="#planningscenemonitor" title="Permalink to this headline">¶</a></h1>
+<p>建议使用 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> 接口来维护最新的规划场景 (planning scene) 。<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1CurrentStateMonitor.html">CurrentStateMonitor</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a>, 和 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1PlanningSceneInterface.html">PlanningSceneInterface</a> 之间的关系一开始确实令人困惑。本教程旨在阐明这些关键概念。</p>
 <div class="section" id="robotstate">
-<h2>RobotState<a class="headerlink" href="#robotstate" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> is a snapshot of a robot. It contains the <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> and a set of joint values.</p>
+<h2>RobotState 机器人状态<a class="headerlink" href="#robotstate" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> 是机器人的一个快照。 它包含 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> 和一组关节值。</p>
 </div>
 <div class="section" id="currentstatemonitor">
-<h2>CurrentStateMonitor<a class="headerlink" href="#currentstatemonitor" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1CurrentStateMonitor.html">CurrentStateMonitor</a> (CSM) can be thought of as a ROS wrapper for the RobotState. It subscribes to a provided topic for <a class="reference external" href="http://docs.ros.org/noetic/api/sensor_msgs/html/msg/JointState.html">JointState</a> messages that provide up-to-date sensor values for single degree of freedom actuators, such as revolute or prismatic joints, and updates its internal RobotState with those joint values. In addition to the single degree of freedom joints, a robot can have joints with multiple degrees of freedom such as floating and planar joints. To maintain up-to-date transform information for links and other frames attached with multiple-degree-of-freedom joints, the CSM stores a TF2 <a class="reference external" href="http://docs.ros.org/noetic/api/tf2_ros/html/c++/classtf2__ros_1_1Buffer.html">Buffer</a> that uses a TF2 <a class="reference external" href="http://docs.ros.org/noetic/api/tf2_ros/html/c++/classtf2__ros_1_1TransformListener.html">TransformListener</a> to set their transforms in its internal data.</p>
+<h2>CurrentStateMonitor 当前状态监视器<a class="headerlink" href="#currentstatemonitor" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1CurrentStateMonitor.html">CurrentStateMonitor</a> (CSM) 可以看作是 RobotState 的 ROS 封装。 它订阅了发布 <a class="reference external" href="http://docs.ros.org/noetic/api/sensor_msgs/html/msg/JointState.html">JointState</a> 消息的 ROS 话题，此消息为单自由度执行器（例如旋转或棱柱形关节）提供了最新的传感器值，并使用这些关节值更新 CSM 内部的 RobotState 。除了单自由度关节之外，机器人还可以具有多自由度关节，比如浮动关节和平面关节。为维护 link 和其他带有多自由度关节的坐标系的最新变换信息，CSM 存储了一个 TF2 <a class="reference external" href="http://docs.ros.org/noetic/api/tf2_ros/html/c++/classtf2__ros_1_1Buffer.html">Buffer</a>，该缓冲区使用TF2 <a class="reference external" href="http://docs.ros.org/noetic/api/tf2_ros/html/c++/classtf2__ros_1_1TransformListener.html">TransformListener</a> 以在其内部数据中进行坐标系变换。</p>
 </div>
 <div class="section" id="planningscene">
-<h2>PlanningScene<a class="headerlink" href="#planningscene" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a> is a snapshot of the world that includes both the RobotState and any number of collision objects. The Planning Scene can be used for collision checking as well as getting information about the environment.</p>
+<h2>PlanningScene 规划场景<a class="headerlink" href="#planningscene" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a> 是世界的一个快照，其中包括 RobotState 和任意数量的碰撞体。Planning Scene 可用于检查碰撞以及获取有关环境的信息。</p>
 </div>
-<div class="section" id="planningscenemonitor">
-<h2>PlanningSceneMonitor<a class="headerlink" href="#planningscenemonitor" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> wraps a PlanningScene with ROS interfaces for keeping the PlanningScene up to date. To access the PlanningSceneMonitor’s underlying PlanningScene, use the provided <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1LockedPlanningSceneRW.html">LockedPlanningSceneRW</a> and <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1LockedPlanningSceneRO.html">LockedPlanningSceneRO</a> classes.</p>
-<p>The PlanningSceneMonitor has the following objects, which have their own ROS interfaces for keeping sub-components of the planning scene up to date:</p>
+<div class="section" id="id1">
+<h2>PlanningSceneMonitor 规划场景监视器<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> 使用ROS接口封装了 PlanningScene，用于保持 PlanningScene 为最新状态。要访问 PlanningSceneMonitor 底层的 PlanningScene，请使用 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1LockedPlanningSceneRW.html">LockedPlanningSceneRW</a> 类和 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1LockedPlanningSceneRO.html">LockedPlanningSceneRO</a> 类。</p>
+<p>PlanningSceneMonitor 具有以下对象，它们具都有自己的 ROS 接口来保持 planning scene 的子组件为最新状态：</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>A <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1CurrentStateMonitor.html">CurrentStateMonitor</a> for tracking updates to the RobotState via a <code class="docutils literal notranslate"><span class="pre">robot_state_subscriber_</span></code> and a <code class="docutils literal notranslate"><span class="pre">tf_buffer_</span></code>, as well as a planning scene subscriber for listening to planning scene diffs from other publishers.</p></li>
-<li><p>An OccupancyMapMonitor for tracking updates to an OccupancyMap via ROS topics and services.</p></li>
+<li><p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1CurrentStateMonitor.html">CurrentStateMonitor</a> 通过 <code class="docutils literal notranslate"><span class="pre">robot_state_subscriber_</span></code> 和 <code class="docutils literal notranslate"><span class="pre">tf_buffer_</span></code> 跟踪对 RobotState 的更新。同时还通过一个 planning scene 的订阅者收听来自其他发布者发布的规划场景变更 (planning scene diffs)。</p></li>
+<li><p>OccupancyMapMonitor 用于通过 ROS 话题和服务来跟踪对 OccupancyMap 的变更。</p></li>
 </ul>
 </div></blockquote>
-<p>The PlanningSceneMonitor has the following subscribers:</p>
+<p>PlanningSceneMonitor 有以下订阅者 (subscribers):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">collision_object_subscriber_</span></code> - Listens to a provided topic for <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/CollisionObject.html">CollisionObject</a> messages that might add, remove, or modify collision objects in the planning scene and passes them into its monitored planning scene</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">planning_scene_world_subscriber_</span></code> - Listens to a provided topic for <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/PlanningSceneWorld.html">PlanningSceneWorld</a> messages that may contain collision object information and/or octomap information. This is useful for keeping planning scene monitors in sync</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">attached_collision_object_subscriber_</span></code> - Listens on a provided topic for <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/AttachedCollisionObject.html">AttachedCollisionObject</a> messages that determine the attaching/detaching of objects to links in the robot state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">collision_object_subscriber_</span></code> - 收听话题发布的关于在规划场景中添加、删除或修改碰撞对象的 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/CollisionObject.html">CollisionObject</a> 消息，并将其传递到自身监视的规划场景中。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">planning_scene_world_subscriber_</span></code> - 收听话题发布的 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/PlanningSceneWorld.html">PlanningSceneWorld</a> 消息，该消息可能包含碰撞对象信息以及 octomap 信息。这对于使规划场景监视器 (planning scene monitor) 保持同步非常有用。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attached_collision_object_subscriber_</span></code> - 收听话题发布的 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_msgs/html/msg/AttachedCollisionObject.html">AttachedCollisionObject</a> 消息，这些消息决定了在 robot state 里附加/分离物体到 link 。</p></li>
 </ul>
 </div></blockquote>
-<p>The PlanningSceneMonitor has the following services:</p>
+<p>PlanningSceneMonitor 有以下服务 (service):</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">get_scene_service_</span></code> - Which is an optional service to get the full planning scene state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_scene_service_</span></code> - （可选）获取完整的规划场景状态。</p></li>
 </ul>
 </div></blockquote>
-<p>The PlanningSceneMonitor is initialized with:</p>
+<p>PlanningSceneMonitor 初始化为：</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">startSceneMonitor</span></code> - Which starts the <code class="docutils literal notranslate"><span class="pre">planning_scene_subscriber_</span></code>,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">startWorldGeometryMonitor</span></code> - Which starts the <code class="docutils literal notranslate"><span class="pre">collision_object_subscriber_</span></code>, the <code class="docutils literal notranslate"><span class="pre">planning_scene_world_subscriber_</span></code>, and the OccupancyMapMonitor,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">startStateMonitor</span></code> - Which starts the CurrentStateMonitor and the <code class="docutils literal notranslate"><span class="pre">attached_collision_object_subscriber_</span></code>,</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">startPublishingPlanningScene</span></code> - Which starts another thread for publishing the entire planning scene on a provided topic for other PlanningSceneMonitors to subscribe to, and</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">providePlanningSceneService</span></code> - Which starts the <code class="docutils literal notranslate"><span class="pre">get_scene_service_</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startSceneMonitor</span></code> - 启动 <code class="docutils literal notranslate"><span class="pre">planning_scene_subscriber_</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startWorldGeometryMonitor</span></code> - 启动 <code class="docutils literal notranslate"><span class="pre">collision_object_subscriber_</span></code>,  <code class="docutils literal notranslate"><span class="pre">planning_scene_world_subscriber_</span></code>, 和 OccupancyMapMonitor,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startStateMonitor</span></code> - 启动 CurrentStateMonitor 和 <code class="docutils literal notranslate"><span class="pre">attached_collision_object_subscriber_</span></code>,</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">startPublishingPlanningScene</span></code> - 开启一个线程以在一个被指定的话题上发布整个规划场景信息，以被其他的 PlanningSceneMonitors 订阅。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">providePlanningSceneService</span></code> - 启动 <code class="docutils literal notranslate"><span class="pre">get_scene_service_</span></code>.</p></li>
 </ul>
 </div></blockquote>
 </div>
 <div class="section" id="planningsceneinterface">
-<h2>PlanningSceneInterface<a class="headerlink" href="#planningsceneinterface" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1PlanningSceneInterface.html">PlanningSceneInterface</a> is a useful class for publishing updates to a MoveGroup’s <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> through a C++ API without creating your own subscribers and service clients. It may not work without MoveGroup or MoveItCpp.</p>
+<h2>PlanningSceneInterface 规划场景接口<a class="headerlink" href="#planningsceneinterface" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1PlanningSceneInterface.html">PlanningSceneInterface</a> 是一个有用的类，用于通过 C++ API 将更新发布到 MoveGroup 的 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> 中，而无需创建自己的subscriber 和 service 客户端。它可能无法在没有 MoveGroup 或 MoveItCpp 的情况下工作。</p>
 </div>
 </div>
 
