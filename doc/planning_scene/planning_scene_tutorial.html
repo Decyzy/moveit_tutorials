@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Planning Scene &mdash; moveit_tutorials Noetic documentation</title>
+  <title>规划场景 (PlanningScene) &mdash; moveit_tutorials Noetic documentation</title>
   
 
   
@@ -39,7 +39,7 @@
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="moveit_tutorials Noetic documentation" href="../../index.html"/>
         <link rel="next" title="Planning Scene Monitor" href="../planning_scene_monitor/planning_scene_monitor_tutorial.html"/>
-        <link rel="prev" title="机器人模型和机器人状态" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html"/> 
+        <link rel="prev" title="机器人模型和机器人状态 (RobotModel 和 RobotState)" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -185,8 +185,8 @@
 </li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html">机器人模型和机器人状态</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#robotmodel-robotstate">RobotModel 类和 RobotState 类</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html">机器人模型和机器人状态 (RobotModel 和 RobotState)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id1">RobotModel 类和 RobotState 类</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id2">开始</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id3">运行代码</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id4">预期输出</a></li>
@@ -203,29 +203,29 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id12">调试机器人的状态</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Planning Scene</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-entire-code">The entire code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#collision-checking">Collision Checking</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#self-collision-checking">Self-collision checking</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#change-the-state">Change the state</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#checking-for-a-group">Checking for a group</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#getting-contact-information">Getting Contact Information</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#modifying-the-allowed-collision-matrix">Modifying the Allowed Collision Matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#full-collision-checking">Full Collision Checking</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">规划场景 (PlanningScene)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">整个代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">碰撞检查</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id5">自碰撞检查</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#state">修改 state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#planning-group">检查一个 planning group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contact-information">获取关联信息 (Contact Information)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#allowed-collision-matrix">修改允许碰撞矩阵 (Allowed Collision Matrix)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">检查所有碰撞</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#constraint-checking">Constraint Checking</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#checking-kinematic-constraints">Checking Kinematic Constraints</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#user-defined-constraints">User-defined constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">检查约束</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">检查运动学约束</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">用户定义的约束</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#the-launch-file">The launch file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-code">Running the code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#expected-output">Expected Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch">launch 文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">运行代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id11">预期输出</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../planning_scene_monitor/planning_scene_monitor_tutorial.html">Planning Scene Monitor</a><ul>
@@ -785,14 +785,14 @@
       
     </li>
     <li><a href="http://moveit.ros.org">MoveIt</a> &raquo;</li>
-    <li><a href="../../index.html">Tutorials</a> &raquo;</li>
+    <li><a href="../../index.html">教程</a> &raquo;</li>
       
-    <li>Planning Scene</li>
+    <li>规划场景 (PlanningScene)</li>
   </ul>
   <br />
 <div class="admonition note">
 <p class="first admonition-title">教程版本: Noetic</p>
-<p class="last">这是正在积极开发中的最新版本（个人翻译版，<a class="reference external" href="https://ros-planning.github.io/moveit_tutorials/">Moveit 官方英文教程</a>），非常适合初学者。如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是正在积极开发中的最新版本（个人翻译版，<a class="reference external" href="https://ros-planning.github.io/moveit_tutorials/">Moveit 官方英文教程</a>），非常适合初学者。如果您仍在使用 Melodic 版本，请参考<a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">针对 Melodic 版本的官方英文教程</a>。</p>
 </div>
   <hr/>
 </div>
@@ -803,50 +803,37 @@
                <!-- <p class="last">Code can be found at <a href = "https://github.com/ros-planning/moveit_tutorials">moveit_tutorials repository</a> in doc folder. Use master branch.</p> -->
              <!-- </div>  -->
             
-  <div class="section" id="planning-scene">
-<h1>Planning Scene<a class="headerlink" href="#planning-scene" title="Permalink to this headline">¶</a></h1>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a> class provides the main interface that you will use
-for collision checking and constraint checking. In this tutorial, we
-will explore the C++ interface to this class.</p>
-<div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>If you haven’t already done so, make sure you’ve completed the steps in <a class="reference external" href="../getting_started/getting_started.html">Getting Started</a>.</p>
+  <div class="section" id="planningscene">
+<h1>规划场景 (PlanningScene)<a class="headerlink" href="#planningscene" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a> 类提供了用于干涉和约束检查的主要接口。在本教程中，我们将探索此类的 C++ 接口。</p>
+<div class="section" id="id1">
+<h2>开始<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>请先确保已经完成了 <a class="reference external" href="../getting_started/getting_started.html">入门</a> 里的步骤。</p>
 </div>
-<div class="section" id="the-entire-code">
-<h2>The entire code<a class="headerlink" href="#the-entire-code" title="Permalink to this headline">¶</a></h2>
-<p>The entire code can be seen <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene">here in the MoveIt GitHub project</a>.</p>
-<div class="section" id="setup">
-<h3>Setup<a class="headerlink" href="#setup" title="Permalink to this headline">¶</a></h3>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a> class can be easily setup and
-configured using a <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> or a URDF and
-SRDF. This is, however, not the recommended way to instantiate a
-PlanningScene. The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a>
-is the recommended method to create and maintain the current
-planning scene (and is discussed in detail in the next tutorial)
-using data from the robot’s joints and the sensors on the robot. In
-this tutorial, we will instantiate a PlanningScene class directly,
-but this method of instantiation is only intended for illustration.</p>
+<div class="section" id="id2">
+<h2>整个代码<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>整个代码见 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene">here in the MoveIt GitHub project</a> 。</p>
+<div class="section" id="id3">
+<h3>设置<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>可以使用 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> 或 URDF 和 SRDF 文件轻松设置和配置 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a> 类。
+但是，建议使用 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> 方法来实例化 PlanningScene 来维护当前的 planning scene 。
+该方法使用来自机器人关节和传感器的数据来创建和维护当前的 planning scene （将在下一节中详细讨论）。
+在本教程中，我们将直接实例化 PlanningScene 类，但是这种实例化方法仅作本教程阐述之用。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">robot_model_loader</span><span class="o">::</span><span class="n">RobotModelLoader</span> <span class="n">robot_model_loader</span><span class="p">(</span><span class="s">&quot;robot_description&quot;</span><span class="p">);</span>
 <span class="k">const</span> <span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">RobotModelPtr</span><span class="o">&amp;</span> <span class="n">kinematic_model</span> <span class="o">=</span> <span class="n">robot_model_loader</span><span class="p">.</span><span class="n">getModel</span><span class="p">();</span>
 <span class="n">planning_scene</span><span class="o">::</span><span class="n">PlanningScene</span> <span class="n">planning_scene</span><span class="p">(</span><span class="n">kinematic_model</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="collision-checking">
-<h3>Collision Checking<a class="headerlink" href="#collision-checking" title="Permalink to this headline">¶</a></h3>
-<div class="section" id="self-collision-checking">
-<h4>Self-collision checking<a class="headerlink" href="#self-collision-checking" title="Permalink to this headline">¶</a></h4>
-<p>The first thing we will do is check whether the robot in its
-current state is in <em>self-collision</em>, i.e. whether the current
-configuration of the robot would result in the robot’s parts
-hitting each other. To do this, we will construct a
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/structcollision__detection_1_1CollisionRequest.html">CollisionRequest</a> object and a
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/structcollision__detection_1_1CollisionResult.html">CollisionResult</a> object and pass them
-into the collision checking function. Note that the result of
-whether the robot is in self-collision or not is contained within
-the result. Self collision checking uses an <em>unpadded</em> version of
-the robot, i.e. it directly uses the collision meshes provided in
-the URDF with no extra padding added on.</p>
+<div class="section" id="id4">
+<h3>碰撞检查<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id5">
+<h4>自碰撞检查<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<p>我们要做的第一件事是检查机器人当前是否处于 <em>自碰撞</em> 状态，即机器人的当前配置是否会导致机器人的零件相互碰撞。
+为此，我们将构造一个 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/structcollision__detection_1_1CollisionRequest.html">CollisionRequest</a> 对象和一个
+<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/structcollision__detection_1_1CollisionResult.html">CollisionResult</a> 对象，并将它们传递给碰撞检查函数。
+注意，机器人是否处于自碰撞状态的结果都包含在结果中。 自碰撞检查使用的是机器人的
+<em>未添加边距(unpadded)</em> 版本，即它直接使用 URDF 中提供的碰撞网格，而没有添加额外的边距。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">collision_detection</span><span class="o">::</span><span class="n">CollisionRequest</span> <span class="n">collision_request</span><span class="p">;</span>
 <span class="n">collision_detection</span><span class="o">::</span><span class="n">CollisionResult</span> <span class="n">collision_result</span><span class="p">;</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">checkSelfCollision</span><span class="p">(</span><span class="n">collision_request</span><span class="p">,</span> <span class="n">collision_result</span><span class="p">);</span>
@@ -854,14 +841,12 @@ the URDF with no extra padding added on.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="change-the-state">
-<h4>Change the state<a class="headerlink" href="#change-the-state" title="Permalink to this headline">¶</a></h4>
-<p>Now, let’s change the current state of the robot. The planning
-scene maintains the current state internally. We can get a
-reference to it and change it and then check for collisions for the
-new robot configuration. Note in particular that we need to clear
-the collision_result before making a new collision checking
-request.</p>
+<div class="section" id="state">
+<h4>修改 state<a class="headerlink" href="#state" title="Permalink to this headline">¶</a></h4>
+<p>现在，让我们更改机器人的当前状态。
+planning_scene 在内部维护当前机器人状态。
+我们可以获取它的引用并进行更改，然后检查新机器人外形的碰撞情况。
+特别要注意的是，在发出新的碰撞检查请求之前，我们需要清除碰 collision_result 。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span> <span class="n">current_state</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">getCurrentStateNonConst</span><span class="p">();</span>
 <span class="n">current_state</span><span class="p">.</span><span class="n">setToRandomPositions</span><span class="p">();</span>
 <span class="n">collision_result</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
@@ -870,13 +855,11 @@ request.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="checking-for-a-group">
-<h4>Checking for a group<a class="headerlink" href="#checking-for-a-group" title="Permalink to this headline">¶</a></h4>
-<p>Now, we will do collision checking only for the hand of the
-Panda, i.e. we will check whether there are any collisions between
-the hand and other parts of the body of the robot. We can ask
-for this specifically by adding the group name “hand” to the
-collision request.</p>
+<div class="section" id="planning-group">
+<h4>检查一个 planning group<a class="headerlink" href="#planning-group" title="Permalink to this headline">¶</a></h4>
+<p>现在，我们将仅对 Panda 的手部进行碰撞检查。
+也就是说，我们将检查手部与机器人自身其他部位之间是否存在任何碰撞。
+我们可以通过将组名称 “hand” 添加到碰撞检查的请求中，以进行特定的碰撞检查。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">collision_request</span><span class="p">.</span><span class="n">group_name</span> <span class="o">=</span> <span class="s">&quot;hand&quot;</span><span class="p">;</span>
 <span class="n">current_state</span><span class="p">.</span><span class="n">setToRandomPositions</span><span class="p">();</span>
 <span class="n">collision_result</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
@@ -885,12 +868,10 @@ collision request.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="getting-contact-information">
-<h4>Getting Contact Information<a class="headerlink" href="#getting-contact-information" title="Permalink to this headline">¶</a></h4>
-<p>First, manually set the Panda arm to a position where we know
-internal (self) collisions do happen. Note that this state is now
-actually outside the joint limits of the Panda, which we can also
-check for directly.</p>
+<div class="section" id="contact-information">
+<h4>获取关联信息 (Contact Information)<a class="headerlink" href="#contact-information" title="Permalink to this headline">¶</a></h4>
+<p>首先，将 Panda 臂手动设置到我们已知会发生自碰撞的位置。
+请注意，这个位置实际上已经超出了熊猫的关节限位，但是我们仍然可以对其进行检查。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">joint_values</span> <span class="o">=</span> <span class="p">{</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">-2.9</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">,</span> <span class="mf">0.0</span> <span class="p">};</span>
 <span class="k">const</span> <span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">JointModelGroup</span><span class="o">*</span> <span class="n">joint_model_group</span> <span class="o">=</span> <span class="n">current_state</span><span class="p">.</span><span class="n">getJointModelGroup</span><span class="p">(</span><span class="s">&quot;panda_arm&quot;</span><span class="p">);</span>
 <span class="n">current_state</span><span class="p">.</span><span class="n">setJointGroupPositions</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">,</span> <span class="n">joint_values</span><span class="p">);</span>
@@ -898,11 +879,9 @@ check for directly.</p>
                 <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">current_state</span><span class="p">.</span><span class="n">satisfiesBounds</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">)</span> <span class="o">?</span> <span class="s">&quot;valid&quot;</span> <span class="o">:</span> <span class="s">&quot;not valid&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Now, we can get contact information for any collisions that might
-have happened at a given configuration of the Panda arm. We can ask
-for contact information by filling in the appropriate field in the
-collision request and specifying the maximum number of contacts to
-be returned as a large number.</p>
+<p>现在，我们可以获得在给定状态配置的 Panda 臂上可能发生的任何碰撞的关联信息。
+我们可以通过在碰撞检查请求中的 contacts 字段中填写 true 并在
+max_contacts 字段里指定要返回的最大关联数量来请求关联信息。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">collision_request</span><span class="p">.</span><span class="n">contacts</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
 <span class="n">collision_request</span><span class="p">.</span><span class="n">max_contacts</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">;</span>
 </pre></div>
@@ -918,19 +897,13 @@ be returned as a large number.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="modifying-the-allowed-collision-matrix">
-<h4>Modifying the Allowed Collision Matrix<a class="headerlink" href="#modifying-the-allowed-collision-matrix" title="Permalink to this headline">¶</a></h4>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classcollision__detection_1_1AllowedCollisionMatrix.html">AllowedCollisionMatrix</a> (ACM)
-provides a mechanism to tell the collision world to ignore
-collisions between certain object: both parts of the robot and
-objects in the world. We can tell the collision checker to ignore
-all collisions between the links reported above, i.e. even though
-the links are actually in collision, the collision checker will
-ignore those collisions and return not in collision for this
-particular state of the robot.</p>
-<p>Note also in this example how we are making copies of both the
-allowed collision matrix and the current state and passing them in
-to the collision checking function.</p>
+<div class="section" id="allowed-collision-matrix">
+<h4>修改允许碰撞矩阵 (Allowed Collision Matrix)<a class="headerlink" href="#allowed-collision-matrix" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classcollision__detection_1_1AllowedCollisionMatrix.html">AllowedCollisionMatrix</a> （ACM）提供了一种机制，
+用于忽略某些对象之间的碰撞：机器人上的部分和世界中的对象。
+我们可以告诉碰撞检查器忽略上面报告的 link 之间的所有碰撞。也就是说，即使
+link 实际上处于碰撞状态，碰撞检查器也将忽略它们，不返回碰撞信息。</p>
+<p>在此例中还要注意我们是如何制作允许碰撞矩阵和当前状态的副本的，并将它们传递给碰撞检查函数。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">collision_detection</span><span class="o">::</span><span class="n">AllowedCollisionMatrix</span> <span class="n">acm</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">getAllowedCollisionMatrix</span><span class="p">();</span>
 <span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">RobotState</span> <span class="n">copied_state</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">getCurrentState</span><span class="p">();</span>
 
@@ -945,16 +918,13 @@ to the collision checking function.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="full-collision-checking">
-<h4>Full Collision Checking<a class="headerlink" href="#full-collision-checking" title="Permalink to this headline">¶</a></h4>
-<p>While we have been checking for self-collisions, we can use the
-checkCollision functions instead which will check for both
-self-collisions and for collisions with the environment (which is
-currently empty).  This is the set of collision checking
-functions that you will use most often in a planner. Note that
-collision checks with the environment will use the padded version
-of the robot. Padding helps in keeping the robot further away
-from obstacles in the environment.</p>
+<div class="section" id="id6">
+<h4>检查所有碰撞<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h4>
+<p>当我们一直在检查自碰撞时，我们可以改用 checkCollision 函数，
+它将同时检查自碰撞和与环境物体（当前为空）的碰撞。
+这是在规划器（planner）中最常使用的一组碰撞检查功能。
+请注意，与环境物体的碰撞检查将使用机器人的带边距（padded）版本。
+增加边距有助于使机器人远离环境中的障碍物。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">collision_result</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">checkCollision</span><span class="p">(</span><span class="n">collision_request</span><span class="p">,</span> <span class="n">collision_result</span><span class="p">,</span> <span class="n">copied_state</span><span class="p">,</span> <span class="n">acm</span><span class="p">);</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Test 7: Current state is &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">collision_result</span><span class="p">.</span><span class="n">collision</span> <span class="o">?</span> <span class="s">&quot;in&quot;</span> <span class="o">:</span> <span class="s">&quot;not in&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; self collision&quot;</span><span class="p">);</span>
@@ -962,25 +932,19 @@ from obstacles in the environment.</p>
 </div>
 </div>
 </div>
-<div class="section" id="constraint-checking">
-<h3>Constraint Checking<a class="headerlink" href="#constraint-checking" title="Permalink to this headline">¶</a></h3>
-<p>The PlanningScene class also includes easy to use function calls
-for checking constraints. The constraints can be of two types:
-(a) constraints chosen from the
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1KinematicConstraint.html">KinematicConstraint</a> set:
-i.e. <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1JointConstraint.html">JointConstraint</a>,
+<div class="section" id="id7">
+<h3>检查约束<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>PlanningScene 类还包括用于检查约束的函数调用。
+约束可以有两种类型：（a）从集合 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1KinematicConstraint.html">KinematicConstraint</a> 中，如
+<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1JointConstraint.html">JointConstraint</a>,
 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1PositionConstraint.html">PositionConstraint</a>,
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1OrientationConstraint.html">OrientationConstraint</a> and
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1VisibilityConstraint.html">VisibilityConstraint</a> and (b) user
-defined constraints specified through a callback. We will first
-look at an example with a simple KinematicConstraint.</p>
-<div class="section" id="checking-kinematic-constraints">
-<h4>Checking Kinematic Constraints<a class="headerlink" href="#checking-kinematic-constraints" title="Permalink to this headline">¶</a></h4>
-<p>We will first define a simple position and orientation constraint
-on the end-effector of the panda_arm group of the Panda robot. Note the
-use of convenience functions for filling up the constraints
-(these functions are found in the <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/utils_8h.html">utils.h</a> file from the
-kinematic_constraints directory in moveit_core).</p>
+<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1OrientationConstraint.html">OrientationConstraint</a> 和
+<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classkinematic__constraints_1_1VisibilityConstraint.html">VisibilityConstraint</a> ；
+（b）通过回调指定的自定义约束。我们首先来看一个使用 KinematicConstraint 的简单示例。</p>
+<div class="section" id="id8">
+<h4>检查运动学约束<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h4>
+<p>我们将首先在 Panda 机器人的 planning group “panda_arm” 里的末端执行器上定义一个简单的位置和方向约束。
+请注意这里使用了比较方便的方便函数来构造约束（这些功能可以在 moveit_core 的 kinematic_constraints 目录里的 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/utils_8h.html">utils.h</a> 文件中找到）。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">string</span> <span class="n">end_effector_name</span> <span class="o">=</span> <span class="n">joint_model_group</span><span class="o">-&gt;</span><span class="n">getLinkModelNames</span><span class="p">().</span><span class="n">back</span><span class="p">();</span>
 
 <span class="n">geometry_msgs</span><span class="o">::</span><span class="n">PoseStamped</span> <span class="n">desired_pose</span><span class="p">;</span>
@@ -993,40 +957,33 @@ kinematic_constraints directory in moveit_core).</p>
     <span class="n">kinematic_constraints</span><span class="o">::</span><span class="n">constructGoalConstraints</span><span class="p">(</span><span class="n">end_effector_name</span><span class="p">,</span> <span class="n">desired_pose</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Now, we can check a state against this constraint using the
-isStateConstrained functions in the PlanningScene class.</p>
+<p>现在，我们可以使用 PlanningScene 类中的 isStateConstrained 函数来检查此状态下的约束。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">copied_state</span><span class="p">.</span><span class="n">setToRandomPositions</span><span class="p">();</span>
 <span class="n">copied_state</span><span class="p">.</span><span class="n">update</span><span class="p">();</span>
 <span class="kt">bool</span> <span class="n">constrained</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">isStateConstrained</span><span class="p">(</span><span class="n">copied_state</span><span class="p">,</span> <span class="n">goal_constraint</span><span class="p">);</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Test 8: Random state is &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">constrained</span> <span class="o">?</span> <span class="s">&quot;constrained&quot;</span> <span class="o">:</span> <span class="s">&quot;not constrained&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>There’s a more efficient way of checking constraints (when you want
-to check the same constraint over and over again, e.g. inside a
-planner). We first construct a KinematicConstraintSet which
-pre-processes the ROS Constraints messages and sets it up for quick
-processing.</p>
+<p>检查约束有一种更有效的的方法（当您想一遍又一遍地检查相同的约束时，例如在规划器 planner 内部）。
+我们首先构造一个 KinematicConstraintSet 来快速预处理 ROS 的约束消息。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">kinematic_constraints</span><span class="o">::</span><span class="n">KinematicConstraintSet</span> <span class="n">kinematic_constraint_set</span><span class="p">(</span><span class="n">kinematic_model</span><span class="p">);</span>
 <span class="n">kinematic_constraint_set</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">goal_constraint</span><span class="p">,</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">getTransforms</span><span class="p">());</span>
 <span class="kt">bool</span> <span class="n">constrained_2</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">isStateConstrained</span><span class="p">(</span><span class="n">copied_state</span><span class="p">,</span> <span class="n">kinematic_constraint_set</span><span class="p">);</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Test 9: Random state is &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">constrained_2</span> <span class="o">?</span> <span class="s">&quot;constrained&quot;</span> <span class="o">:</span> <span class="s">&quot;not constrained&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>There’s a direct way to do this using the KinematicConstraintSet
-class.</p>
+<p>有一种使用 KinematicConstraintSet 类直接完成的方法</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">kinematic_constraints</span><span class="o">::</span><span class="n">ConstraintEvaluationResult</span> <span class="n">constraint_eval_result</span> <span class="o">=</span>
     <span class="n">kinematic_constraint_set</span><span class="p">.</span><span class="n">decide</span><span class="p">(</span><span class="n">copied_state</span><span class="p">);</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Test 10: Random state is &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">constraint_eval_result</span><span class="p">.</span><span class="n">satisfied</span> <span class="o">?</span> <span class="s">&quot;constrained&quot;</span> <span class="o">:</span> <span class="s">&quot;not constrained&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="user-defined-constraints">
-<h4>User-defined constraints<a class="headerlink" href="#user-defined-constraints" title="Permalink to this headline">¶</a></h4>
-<p>User defined constraints can also be specified to the PlanningScene
-class. This is done by specifying a callback using the
-setStateFeasibilityPredicate function. Here’s a simple example of a
-user-defined callback that checks whether the “panda_joint1” of
-the Panda robot is at a positive or negative angle:</p>
+<div class="section" id="id9">
+<h4>用户定义的约束<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h4>
+<p>用户自定义的约束也可以指定给 PlanningScene 类。
+这是通过使用 setStateFeasibilityPredicate 函数指定回调来完成的。
+下面是一个用户自定义回调的简单示例，该回调函数检查 Panda 机器人的 “panda_joint1” 值是正的还是负的：</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="nf">stateFeasibilityTestExample</span><span class="p">(</span><span class="k">const</span> <span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span> <span class="n">kinematic_state</span><span class="p">,</span> <span class="kt">bool</span> <span class="cm">/*verbose*/</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="k">const</span> <span class="kt">double</span><span class="o">*</span> <span class="n">joint_values</span> <span class="o">=</span> <span class="n">kinematic_state</span><span class="p">.</span><span class="n">getJointPositions</span><span class="p">(</span><span class="s">&quot;panda_joint1&quot;</span><span class="p">);</span>
@@ -1034,41 +991,35 @@ the Panda robot is at a positive or negative angle:</p>
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>Now, whenever isStateFeasible is called, this user-defined callback
-will be called.</p>
+<p>现在，每当调用 isStateFeasible 时，都会调用用户定义的回调函数。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">planning_scene</span><span class="p">.</span><span class="n">setStateFeasibilityPredicate</span><span class="p">(</span><span class="n">stateFeasibilityTestExample</span><span class="p">);</span>
 <span class="kt">bool</span> <span class="n">state_feasible</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">isStateFeasible</span><span class="p">(</span><span class="n">copied_state</span><span class="p">);</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Test 11: Random state is &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">state_feasible</span> <span class="o">?</span> <span class="s">&quot;feasible&quot;</span> <span class="o">:</span> <span class="s">&quot;not feasible&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Whenever isStateValid is called, three checks are conducted: (a)
-collision checking (b) constraint checking and (c) feasibility
-checking using the user-defined callback.</p>
+<p>每当调用 isStateValid 时，都会执行三项检查：（a）碰撞检查；（b）约束检查；（c）使用用户定义的回调函数进行可行性检查。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">state_valid</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">.</span><span class="n">isStateValid</span><span class="p">(</span><span class="n">copied_state</span><span class="p">,</span> <span class="n">kinematic_constraint_set</span><span class="p">,</span> <span class="s">&quot;panda_arm&quot;</span><span class="p">);</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Test 12: Random state is &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">state_valid</span> <span class="o">?</span> <span class="s">&quot;valid&quot;</span> <span class="o">:</span> <span class="s">&quot;not valid&quot;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Note that all the planners available through MoveIt and OMPL will
-currently perform collision checking, constraint checking and
-feasibility checking using user-defined callbacks.</p>
+<p>请注意，通过 MoveIt 和 OMPL 可用的所有规划期（planner）都将执行碰撞检查、约束检查，以及使用用户定义的回调函数执行可行性检查。</p>
 </div>
 </div>
 </div>
-<div class="section" id="the-launch-file">
-<h2>The launch file<a class="headerlink" href="#the-launch-file" title="Permalink to this headline">¶</a></h2>
-<p>The entire launch file is <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene/launch/planning_scene_tutorial.launch">here</a> on GitHub. All the code in this tutorial can be compiled and run from the moveit_tutorials package.</p>
+<div class="section" id="launch">
+<h2>launch 文件<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
+<p>整个 launch 文件在 GitHub 上的 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene/launch/planning_scene_tutorial.launch">这里</a> 可见。本教程中的所有代码都可从 <strong>moveit_tutorials</strong> 包中运行，这个包是 MoveIt 安装的一部分。</p>
 </div>
-<div class="section" id="running-the-code">
-<h2>Running the code<a class="headerlink" href="#running-the-code" title="Permalink to this headline">¶</a></h2>
-<p>Roslaunch the launch file to run the code directly from moveit_tutorials:</p>
+<div class="section" id="id10">
+<h2>运行代码<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
+<p>使用 roslaunch 启动 launch 文件以直接运行 moveit_tutorials 包里的代码：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">moveit_tutorials</span> <span class="n">planning_scene_tutorial</span><span class="o">.</span><span class="n">launch</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="expected-output">
-<h2>Expected Output<a class="headerlink" href="#expected-output" title="Permalink to this headline">¶</a></h2>
-<p>The output should look something like this, though we are using random
-joint values so some things may be different.</p>
+<div class="section" id="id11">
+<h2>预期输出<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<p>预期的输出将会是以下形式。因为我们使用了随机的关节值，所以数字可能和您看到的有出入：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Test</span> <span class="mi">1</span><span class="p">:</span> <span class="n">Current</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span> <span class="n">collision</span>
 <span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Test</span> <span class="mi">2</span><span class="p">:</span> <span class="n">Current</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span> <span class="n">collision</span>
 <span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Test</span> <span class="mi">3</span><span class="p">:</span> <span class="n">Current</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span> <span class="n">collision</span>
@@ -1085,7 +1036,7 @@ joint values so some things may be different.</p>
 <span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Test</span> <span class="mi">12</span><span class="p">:</span> <span class="n">Random</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">valid</span>
 </pre></div>
 </div>
-<p><strong>Note:</strong> Don’t worry if your output has different ROS console format. You can customize your ROS console logger by following <a class="reference external" href="http://dav.ee/blog/notes/archives/898">this blog post</a>.</p>
+<p><strong>注意:</strong> 如果您的输出具有不同的 ROS 控制台日志格式，请不要担心。您可以查看 <a class="reference external" href="http://dav.ee/blog/notes/archives/898">这篇博文</a> 来自定义 ROS 控制台日志。</p>
 </div>
 </div>
 
@@ -1105,7 +1056,7 @@ joint values so some things may be different.</p>
         <a href="../planning_scene_monitor/planning_scene_monitor_tutorial.html" class="btn btn-neutral float-right" title="Planning Scene Monitor" accesskey="n">下一章 <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html" class="btn btn-neutral" title="机器人模型和机器人状态" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 上一章</a>
+        <a href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html" class="btn btn-neutral" title="机器人模型和机器人状态 (RobotModel 和 RobotState)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 上一章</a>
       
     </div>
   

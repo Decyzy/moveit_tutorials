@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>机器人模型和机器人状态 &mdash; moveit_tutorials Noetic documentation</title>
+  <title>机器人模型和机器人状态 (RobotModel 和 RobotState) &mdash; moveit_tutorials Noetic documentation</title>
   
 
   
@@ -38,7 +38,7 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="moveit_tutorials Noetic documentation" href="../../index.html"/>
-        <link rel="next" title="Planning Scene" href="../planning_scene/planning_scene_tutorial.html"/>
+        <link rel="next" title="规划场景 (PlanningScene)" href="../planning_scene/planning_scene_tutorial.html"/>
         <link rel="prev" title="MoveIt 命令行脚本" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html"/> 
 
   
@@ -185,8 +185,8 @@
 </li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">机器人模型和机器人状态</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#robotmodel-robotstate">RobotModel 类和 RobotState 类</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">机器人模型和机器人状态 (RobotModel 和 RobotState)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">RobotModel 类和 RobotState 类</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id2">开始</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id3">运行代码</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#id4">预期输出</a></li>
@@ -203,29 +203,29 @@
 <li class="toctree-l2"><a class="reference internal" href="#id12">调试机器人的状态</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html">Planning Scene</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#the-entire-code">The entire code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#setup">Setup</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#collision-checking">Collision Checking</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#self-collision-checking">Self-collision checking</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#change-the-state">Change the state</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#checking-for-a-group">Checking for a group</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#getting-contact-information">Getting Contact Information</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#modifying-the-allowed-collision-matrix">Modifying the Allowed Collision Matrix</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#full-collision-checking">Full Collision Checking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html">规划场景 (PlanningScene)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id1">开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id2">整个代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id3">设置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id4">碰撞检查</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id5">自碰撞检查</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#state">修改 state</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#planning-group">检查一个 planning group</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#contact-information">获取关联信息 (Contact Information)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#allowed-collision-matrix">修改允许碰撞矩阵 (Allowed Collision Matrix)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id6">检查所有碰撞</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#constraint-checking">Constraint Checking</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#checking-kinematic-constraints">Checking Kinematic Constraints</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#user-defined-constraints">User-defined constraints</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id7">检查约束</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id8">检查运动学约束</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id9">用户定义的约束</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#the-launch-file">The launch file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#running-the-code">Running the code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#expected-output">Expected Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#launch">launch 文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id10">运行代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id11">预期输出</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../planning_scene_monitor/planning_scene_monitor_tutorial.html">Planning Scene Monitor</a><ul>
@@ -785,14 +785,14 @@
       
     </li>
     <li><a href="http://moveit.ros.org">MoveIt</a> &raquo;</li>
-    <li><a href="../../index.html">Tutorials</a> &raquo;</li>
+    <li><a href="../../index.html">教程</a> &raquo;</li>
       
-    <li>机器人模型和机器人状态</li>
+    <li>机器人模型和机器人状态 (RobotModel 和 RobotState)</li>
   </ul>
   <br />
 <div class="admonition note">
 <p class="first admonition-title">教程版本: Noetic</p>
-<p class="last">这是正在积极开发中的最新版本（个人翻译版，<a class="reference external" href="https://ros-planning.github.io/moveit_tutorials/">Moveit 官方英文教程</a>），非常适合初学者。如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是正在积极开发中的最新版本（个人翻译版，<a class="reference external" href="https://ros-planning.github.io/moveit_tutorials/">Moveit 官方英文教程</a>），非常适合初学者。如果您仍在使用 Melodic 版本，请参考<a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">针对 Melodic 版本的官方英文教程</a>。</p>
 </div>
   <hr/>
 </div>
@@ -803,12 +803,12 @@
                <!-- <p class="last">Code can be found at <a href = "https://github.com/ros-planning/moveit_tutorials">moveit_tutorials repository</a> in doc folder. Use master branch.</p> -->
              <!-- </div>  -->
             
-  <div class="section" id="id1">
-<h1>机器人模型和机器人状态<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="robotmodel-robotstate">
+<h1>机器人模型和机器人状态 (RobotModel 和 RobotState)<a class="headerlink" href="#robotmodel-robotstate" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="../../_images/panda_tf.png"><img alt="&quot;That is a sweet robot&quot; you might say." src="../../_images/panda_tf.png" style="width: 700px;" /></a>
 <p>在本节中，我们将引导您逐步了解在 MoveIt 中运动学的 C ++ API。</p>
-<div class="section" id="robotmodel-robotstate">
-<h2>RobotModel 类和 RobotState 类<a class="headerlink" href="#robotmodel-robotstate" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h2>RobotModel 类和 RobotState 类<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> 类和 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> 类是您使用机器人运动学的两个核心类。</p>
 <p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> 类包含了所有 link 和关节之间的关系，包括从 URDF 加载的关节限位信息。RobotModel 类还将机器人的 link 和关节从 SRDF 文件里定义的 planning group 里分开。关于 URDF 和 SRDF 在 <a class="reference external" href="../urdf_srdf/urdf_srdf_tutorial.html">URDF 和 SRDF 教程</a> 里有单独介绍。</p>
 <p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> 类包含了特定时间点上和机器人有关的信息，并将关节位置以及可选的速度和加速度储存在一些 vector 里。此信息可用于获取机器人的运动学信息，其由机器人的当前状态决定，例如末端执行器的雅可比行列式。</p>
@@ -822,14 +822,14 @@
 <div class="section" id="id3">
 <h2>运行代码<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>本教程中所有的代码都可从 MoveIt 安装程序里包含的``moveit_tutorials`` 包里编译运行。</p>
-<p>使用 roslaunch 启动 launch 文件以直接运行 moveit_tutorials 里的代码：</p>
+<p>使用 roslaunch 启动 launch 文件以直接运行 moveit_tutorials 包里的代码：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">moveit_tutorials</span> <span class="n">robot_model_and_robot_state_tutorial</span><span class="o">.</span><span class="n">launch</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="id4">
 <h2>预期输出<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>预期的输出将会是以下形式。因为我们使用了随机的关节值，因此数字可能和您看到的有出入：</p>
+<p>预期的输出将会是以下形式。因为我们使用了随机的关节值，所以数字可能和您看到的有出入：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Model</span> <span class="n">frame</span><span class="p">:</span> <span class="o">/</span><span class="n">panda_link0</span>
 <span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Joint</span> <span class="n">panda_joint1</span><span class="p">:</span> <span class="mf">0.000000</span>
 <span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Joint</span> <span class="n">panda_joint2</span><span class="p">:</span> <span class="mf">0.000000</span>
@@ -1029,7 +1029,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../planning_scene/planning_scene_tutorial.html" class="btn btn-neutral float-right" title="Planning Scene" accesskey="n">下一章 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../planning_scene/planning_scene_tutorial.html" class="btn btn-neutral float-right" title="规划场景 (PlanningScene)" accesskey="n">下一章 <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html" class="btn btn-neutral" title="MoveIt 命令行脚本" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 上一章</a>

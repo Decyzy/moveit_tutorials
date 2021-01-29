@@ -1,35 +1,31 @@
-Planning Scene
-==================================
+规划场景 (PlanningScene)
+========================================
+:planning_scene:`PlanningScene` 类提供了用于干涉和约束检查的主要接口。在本教程中，我们将探索此类的 C++ 接口。
 
-The :planning_scene:`PlanningScene` class provides the main interface that you will use
-for collision checking and constraint checking. In this tutorial, we
-will explore the C++ interface to this class.
-
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保已经完成了 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
-The entire code
+整个代码
 ---------------
-The entire code can be seen :codedir:`here in the MoveIt GitHub project<planning_scene>`.
+整个代码见 :codedir:`here in the MoveIt GitHub project<planning_scene>` 。
 
 .. tutorial-formatter:: ./src/planning_scene_tutorial.cpp
 
-The launch file
+launch 文件
 ---------------
-The entire launch file is :codedir:`here <planning_scene/launch/planning_scene_tutorial.launch>` on GitHub. All the code in this tutorial can be compiled and run from the moveit_tutorials package.
+整个 launch 文件在 GitHub 上的 :codedir:`这里<planning_scene/launch/planning_scene_tutorial.launch>` 可见。本教程中的所有代码都可从 **moveit_tutorials** 包中运行，这个包是 MoveIt 安装的一部分。
 
-Running the code
+运行代码
 ----------------
-Roslaunch the launch file to run the code directly from moveit_tutorials: ::
+使用 roslaunch 启动 launch 文件以直接运行 moveit_tutorials 包里的代码： ::
 
  roslaunch moveit_tutorials planning_scene_tutorial.launch
 
-Expected Output
+预期输出
 ---------------
 
-The output should look something like this, though we are using random
-joint values so some things may be different. ::
+预期的输出将会是以下形式。因为我们使用了随机的关节值，所以数字可能和您看到的有出入： ::
 
  ros.moveit_tutorials: Test 1: Current state is not in self collision
  ros.moveit_tutorials: Test 2: Current state is not in self collision
@@ -46,4 +42,4 @@ joint values so some things may be different. ::
  ros.moveit_tutorials: Test 11: Random state is feasible
  ros.moveit_tutorials: Test 12: Random state is not valid
 
-**Note:** Don't worry if your output has different ROS console format. You can customize your ROS console logger by following `this blog post <http://dav.ee/blog/notes/archives/898>`_.
+**注意:** 如果您的输出具有不同的 ROS 控制台日志格式，请不要担心。您可以查看 `这篇博文 <http://dav.ee/blog/notes/archives/898>`__ 来自定义 ROS 控制台日志。

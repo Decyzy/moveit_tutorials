@@ -41,7 +41,6 @@
 
 整个代码
 ---------------
-
 注意: 整个代码见 :codedir:`本教程的 GitHub 仓库<move_group_python_interface/scripts/move_group_python_interface_tutorial.py>` 。
 
 .. tutorial-formatter:: ./scripts/move_group_python_interface_tutorial.py
