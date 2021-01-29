@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Robot Model and Robot State &mdash; moveit_tutorials Noetic documentation</title>
+  <title>机器人模型和机器人状态 &mdash; moveit_tutorials Noetic documentation</title>
   
 
   
@@ -185,22 +185,22 @@
 </li>
 </ul>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Robot Model and Robot State</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#the-robotmodel-and-robotstate-classes">The RobotModel and RobotState Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-code">Running the Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#expected-output">Expected Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-entire-code">The Entire Code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#start">Start</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-joint-values">Get Joint Values</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#joint-limits">Joint Limits</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#forward-kinematics">Forward Kinematics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#inverse-kinematics">Inverse Kinematics</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#get-the-jacobian">Get the Jacobian</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#the-launch-file">The Launch File</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">机器人模型和机器人状态</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#robotmodel-robotstate">RobotModel 类和 RobotState 类</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">运行代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">预期输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">整个代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">开始</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">获得关节位置</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">关节限位</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">正向运动学</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">逆向运动学</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">获得雅克比矩阵</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#launch">Launch 文件</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#debugging-the-robot-state">Debugging the Robot State</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id12">调试机器人的状态</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html">Planning Scene</a><ul>
@@ -787,12 +787,12 @@
     <li><a href="http://moveit.ros.org">MoveIt</a> &raquo;</li>
     <li><a href="../../index.html">Tutorials</a> &raquo;</li>
       
-    <li>Robot Model and Robot State</li>
+    <li>机器人模型和机器人状态</li>
   </ul>
   <br />
 <div class="admonition note">
 <p class="first admonition-title">教程版本: Noetic</p>
-<p class="last">这是正在积极开发中的最新版本的中文翻译，非常适合初学者。如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是正在积极开发中的最新版本（个人翻译版，<a class="reference external" href="https://ros-planning.github.io/moveit_tutorials/">Moveit 官方英文教程</a>），非常适合初学者。如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -803,35 +803,33 @@
                <!-- <p class="last">Code can be found at <a href = "https://github.com/ros-planning/moveit_tutorials">moveit_tutorials repository</a> in doc folder. Use master branch.</p> -->
              <!-- </div>  -->
             
-  <div class="section" id="robot-model-and-robot-state">
-<h1>Robot Model and Robot State<a class="headerlink" href="#robot-model-and-robot-state" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="id1">
+<h1>机器人模型和机器人状态<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="../../_images/panda_tf.png"><img alt="&quot;That is a sweet robot&quot; you might say." src="../../_images/panda_tf.png" style="width: 700px;" /></a>
-<p>In this section, we will walk you through the C++ API for using kinematics in MoveIt.</p>
-<div class="section" id="the-robotmodel-and-robotstate-classes">
-<h2>The RobotModel and RobotState Classes<a class="headerlink" href="#the-robotmodel-and-robotstate-classes" title="Permalink to this headline">¶</a></h2>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> and <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> classes are the core classes that give you access to a robot’s kinematics.</p>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> class contains the relationships between all links and joints including their joint limit properties as loaded from the URDF. The RobotModel also separates the robot’s links and joints into planning groups defined in the SRDF. A separate tutorial on the URDF and SRDF can be found here: <a class="reference external" href="../urdf_srdf/urdf_srdf_tutorial.html">URDF and SRDF Tutorial</a></p>
-<p>The <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> contains information about the robot at a certain point in time, storing vectors of joint positions and optionally velocities and accelerations. This information can be used to obtain kinematic information about the robot that depends on its current state, such as the Jacobian of an end effector.</p>
-<p>RobotState also contains helper functions for setting the arm location based on the end effector location (Cartesian pose) and for computing Cartesian trajectories.</p>
-<p>In this example, we will walk through the process of using these classes with the Panda.</p>
+<p>在本节中，我们将引导您逐步了解在 MoveIt 中运动学的 C ++ API。</p>
+<div class="section" id="robotmodel-robotstate">
+<h2>RobotModel 类和 RobotState 类<a class="headerlink" href="#robotmodel-robotstate" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> 类和 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> 类是您使用机器人运动学的两个核心类。</p>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> 类包含了所有 link 和关节之间的关系，包括从 URDF 加载的关节限位信息。RobotModel 类还将机器人的 link 和关节从 SRDF 文件里定义的 planning group 里分开。关于 URDF 和 SRDF 在 <a class="reference external" href="../urdf_srdf/urdf_srdf_tutorial.html">URDF 和 SRDF 教程</a> 里有单独介绍。</p>
+<p><a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> 类包含了特定时间点上和机器人有关的信息，并将关节位置以及可选的速度和加速度储存在一些 vector 里。此信息可用于获取机器人的运动学信息，其由机器人的当前状态决定，例如末端执行器的雅可比行列式。</p>
+<p>RobotState 类还包含一些辅助程序，用于根据末端执行器位置（笛卡尔姿态）设置机械臂位置并计算笛卡尔轨迹。</p>
+<p>在本示例中，我们将逐步介绍如何将这些类在 Panda 机器人上使用。</p>
 </div>
-<div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>If you haven’t already done so, make sure you’ve completed the steps in <a class="reference external" href="../getting_started/getting_started.html">Getting Started</a>.</p>
+<div class="section" id="id2">
+<h2>开始<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>请先确保已经完成了 <a class="reference external" href="../getting_started/getting_started.html">入门</a> 里的步骤。</p>
 </div>
-<div class="section" id="running-the-code">
-<h2>Running the Code<a class="headerlink" href="#running-the-code" title="Permalink to this headline">¶</a></h2>
-<p>All the code in this tutorial can be compiled and run from the
-<code class="docutils literal notranslate"><span class="pre">moveit_tutorials</span></code> package that you have as part of your MoveIt
-setup.</p>
-<p>Roslaunch the launch file to run the code directly from moveit_tutorials:</p>
+<div class="section" id="id3">
+<h2>运行代码<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>本教程中所有的代码都可从 MoveIt 安装程序里包含的``moveit_tutorials`` 包里编译运行。</p>
+<p>使用 roslaunch 启动 launch 文件以直接运行 moveit_tutorials 里的代码：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">moveit_tutorials</span> <span class="n">robot_model_and_robot_state_tutorial</span><span class="o">.</span><span class="n">launch</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="expected-output">
-<h2>Expected Output<a class="headerlink" href="#expected-output" title="Permalink to this headline">¶</a></h2>
-<p>The expected output will be in the following form. The numbers will not match since we are using random joint values:</p>
+<div class="section" id="id4">
+<h2>预期输出<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>预期的输出将会是以下形式。因为我们使用了随机的关节值，因此数字可能和您看到的有出入：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Model</span> <span class="n">frame</span><span class="p">:</span> <span class="o">/</span><span class="n">panda_link0</span>
 <span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Joint</span> <span class="n">panda_joint1</span><span class="p">:</span> <span class="mf">0.000000</span>
 <span class="n">ros</span><span class="o">.</span><span class="n">moveit_tutorials</span><span class="p">:</span> <span class="n">Joint</span> <span class="n">panda_joint2</span><span class="p">:</span> <span class="mf">0.000000</span>
@@ -868,38 +866,29 @@ setup.</p>
            <span class="mi">1</span>  <span class="mf">4.89669e-12</span>    <span class="mf">0.0154256</span>     <span class="mf">0.862009</span>     <span class="mf">0.021077</span>     <span class="mf">0.842067</span>    <span class="mf">0.0690048</span>
 </pre></div>
 </div>
-<p><strong>Note:</strong> Don’t worry if your output has different ROS console format. You can customize your ROS console logger by following <a class="reference external" href="http://dav.ee/blog/notes/archives/898">this blog post</a>.</p>
+<p><strong>注意:</strong> 如果您的输出具有不同的 ROS 控制台日志格式，请不要担心。您可以查看 <a class="reference external" href="http://dav.ee/blog/notes/archives/898">这篇博文</a> 来自定义 ROS 控制台日志。</p>
 </div>
-<div class="section" id="the-entire-code">
-<h2>The Entire Code<a class="headerlink" href="#the-entire-code" title="Permalink to this headline">¶</a></h2>
-<p>The entire code can be seen <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/robot_model_and_robot_state/src/robot_model_and_robot_state_tutorial.cpp">here in the MoveIt GitHub project</a>.</p>
-<div class="section" id="start">
-<h3>Start<a class="headerlink" href="#start" title="Permalink to this headline">¶</a></h3>
-<p>Setting up to start using the RobotModel class is very easy. In
-general, you will find that most higher-level components will
-return a shared pointer to the RobotModel. You should always use
-that when possible. In this example, we will start with such a
-shared pointer and discuss only the basic API. You can have a
-look at the actual code API for these classes to get more
-information about how to use more features provided by these
-classes.</p>
-<p>We will start by instantiating a
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classrobot__model__loader_1_1RobotModelLoader.html">RobotModelLoader</a>
-object, which will look up
-the robot description on the ROS parameter server and construct a
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> for us to use.</p>
+<div class="section" id="id5">
+<h2>整个代码<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>整个代码见 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/robot_model_and_robot_state/src/robot_model_and_robot_state_tutorial.cpp">MoveIt GitHub project</a> 。</p>
+<div class="section" id="id6">
+<h3>开始<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>设置 RobotModel 类非常容易。
+通常，您会发现大多数更高级别的组件都将返回指向 RobotModel 的共享指针。
+您应该尽可能使用共享指针。
+在此示例中，我们将从此类的共享指针开始，且仅讨论基础的 API 。
+您可以查看这些类的 API 源码，以获取更多有关如何使用这些类的所提供的更多功能的信息。</p>
+<p>我们将从实例化 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classrobot__model__loader_1_1RobotModelLoader.html">RobotModelLoader</a> 对象开始，
+该对象将在 ROS 参数服务器上查找 robot description，
+并构造一个供我们使用的 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a> 类。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">robot_model_loader</span><span class="o">::</span><span class="n">RobotModelLoader</span> <span class="n">robot_model_loader</span><span class="p">(</span><span class="s">&quot;robot_description&quot;</span><span class="p">);</span>
 <span class="k">const</span> <span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">RobotModelPtr</span><span class="o">&amp;</span> <span class="n">kinematic_model</span> <span class="o">=</span> <span class="n">robot_model_loader</span><span class="p">.</span><span class="n">getModel</span><span class="p">();</span>
 <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">&quot;Model frame: %s&quot;</span><span class="p">,</span> <span class="n">kinematic_model</span><span class="o">-&gt;</span><span class="n">getModelFrame</span><span class="p">().</span><span class="n">c_str</span><span class="p">());</span>
 </pre></div>
 </div>
-<p>Using the <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a>, we can construct a
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> that maintains the configuration
-of the robot. We will set all joints in the state to their
-default values. We can then get a
-<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1JointModelGroup.html">JointModelGroup</a>, which represents the robot
-model for a particular group, e.g. the “panda_arm” of the Panda
-robot.</p>
+<p>使用 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotModel.html">RobotModel</a>, 我们可以构建一个保存机器人配置的 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> 。
+我们将此状态下的所有关节都设置为其默认值。 然后我们可以得到一个 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1JointModelGroup.html">JointModelGroup</a>,
+它代表特定 planning group 的机器人模型，例如 Panda 机器人的 “panda_arm” 。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">RobotStatePtr</span> <span class="n">kinematic_state</span><span class="p">(</span><span class="k">new</span> <span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">RobotState</span><span class="p">(</span><span class="n">kinematic_model</span><span class="p">));</span>
 <span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">setToDefaultValues</span><span class="p">();</span>
 <span class="k">const</span> <span class="n">moveit</span><span class="o">::</span><span class="n">core</span><span class="o">::</span><span class="n">JointModelGroup</span><span class="o">*</span> <span class="n">joint_model_group</span> <span class="o">=</span> <span class="n">kinematic_model</span><span class="o">-&gt;</span><span class="n">getJointModelGroup</span><span class="p">(</span><span class="s">&quot;panda_arm&quot;</span><span class="p">);</span>
@@ -908,9 +897,9 @@ robot.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="get-joint-values">
-<h3>Get Joint Values<a class="headerlink" href="#get-joint-values" title="Permalink to this headline">¶</a></h3>
-<p>We can retreive the current set of joint values stored in the state for the Panda arm.</p>
+<div class="section" id="id7">
+<h3>获得关节位置<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>我们可以检索存储在机器人状态（kinematic_state）中的 Panda 机械臂的当前关节位置。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span> <span class="n">joint_values</span><span class="p">;</span>
 <span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">copyJointGroupPositions</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">,</span> <span class="n">joint_values</span><span class="p">);</span>
 <span class="k">for</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">joint_names</span><span class="p">.</span><span class="n">size</span><span class="p">();</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
@@ -920,10 +909,10 @@ robot.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="joint-limits">
-<h3>Joint Limits<a class="headerlink" href="#joint-limits" title="Permalink to this headline">¶</a></h3>
-<p>setJointGroupPositions() does not enforce joint limits by itself, but a call to enforceBounds() will do it.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Set one joint in the Panda arm outside its joint limit */</span>
+<div class="section" id="id8">
+<h3>关节限位<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>setJointGroupPositions() 函数本身不会限制关节位置，但是调用 enforceBounds() 函数可以做到这点。</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 设置 Panda 臂的一个关节位置为超出其限位的值 */</span>
 <span class="n">joint_values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">5.57</span><span class="p">;</span>
 <span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">setJointGroupPositions</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">,</span> <span class="n">joint_values</span><span class="p">);</span>
 
@@ -936,37 +925,35 @@ robot.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="forward-kinematics">
-<h3>Forward Kinematics<a class="headerlink" href="#forward-kinematics" title="Permalink to this headline">¶</a></h3>
-<p>Now, we can compute forward kinematics for a set of random joint
-values. Note that we would like to find the pose of the
-“panda_link8” which is the most distal link in the
-“panda_arm” group of the robot.</p>
+<div class="section" id="id9">
+<h3>正向运动学<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>现在，我们可以为一组随机关节位置进行正向运动学计算。
+请注意，我们想找到 “panda_link8” 的位姿，
+它是机器人 “panda_arm” 这个 planning group 中最远端的连杆 (link) 。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">setToRandomPositions</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">);</span>
 <span class="k">const</span> <span class="n">Eigen</span><span class="o">::</span><span class="n">Isometry3d</span><span class="o">&amp;</span> <span class="n">end_effector_state</span> <span class="o">=</span> <span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">getGlobalLinkTransform</span><span class="p">(</span><span class="s">&quot;panda_link8&quot;</span><span class="p">);</span>
 
-<span class="cm">/* Print end-effector pose. Remember that this is in the model frame */</span>
+<span class="cm">/* 打印末端执行器的位姿。请记住，这是在机器人模型坐标系中的表示 */</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Translation: </span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">end_effector_state</span><span class="p">.</span><span class="n">translation</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 <span class="n">ROS_INFO_STREAM</span><span class="p">(</span><span class="s">&quot;Rotation: </span><span class="se">\n</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">end_effector_state</span><span class="p">.</span><span class="n">rotation</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="inverse-kinematics">
-<h3>Inverse Kinematics<a class="headerlink" href="#inverse-kinematics" title="Permalink to this headline">¶</a></h3>
-<p>We can now solve inverse kinematics (IK) for the Panda robot.
-To solve IK, we will need the following:</p>
+<div class="section" id="id10">
+<h3>逆向运动学<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>现在，我们可以解决 Panda 机器人的逆运动学问题（IK）。要解决 IK ，我们将需要以下内容：</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>The desired pose of the end-effector (by default, this is the last link in the “panda_arm” chain):
-end_effector_state that we computed in the step above.</p></li>
-<li><p>The timeout: 0.1 s</p></li>
+<li><p>末端执行器的所需位姿（默认情况下，末端执行器是 “panda_arm” 连杆链中的最后一个 link），
+即我们在以上步骤中计算得到的 end_effector_state 。</p></li>
+<li><p>求解超时设置 timeout: 0.1 s</p></li>
 </ul>
 </div></blockquote>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span> <span class="n">timeout</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="n">found_ik</span> <span class="o">=</span> <span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">setFromIK</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">,</span> <span class="n">end_effector_state</span><span class="p">,</span> <span class="n">timeout</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Now, we can print out the IK solution (if found):</p>
+<p>现在，我们可以打印出找到的 IK 解 (如果找到的话):</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">found_ik</span><span class="p">)</span>
 <span class="p">{</span>
   <span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">copyJointGroupPositions</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">,</span> <span class="n">joint_values</span><span class="p">);</span>
@@ -982,9 +969,9 @@ end_effector_state that we computed in the step above.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="section" id="get-the-jacobian">
-<h3>Get the Jacobian<a class="headerlink" href="#get-the-jacobian" title="Permalink to this headline">¶</a></h3>
-<p>We can also get the Jacobian from the <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a>.</p>
+<div class="section" id="id11">
+<h3>获得雅克比矩阵<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>我们还能从 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a> 中获得雅克比。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Eigen</span><span class="o">::</span><span class="n">Vector3d</span> <span class="n">reference_point_position</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">);</span>
 <span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span> <span class="n">jacobian</span><span class="p">;</span>
 <span class="n">kinematic_state</span><span class="o">-&gt;</span><span class="n">getJacobian</span><span class="p">(</span><span class="n">joint_model_group</span><span class="p">,</span>
@@ -994,15 +981,15 @@ end_effector_state that we computed in the step above.</p></li>
 </pre></div>
 </div>
 </div>
-<div class="section" id="the-launch-file">
-<h3>The Launch File<a class="headerlink" href="#the-launch-file" title="Permalink to this headline">¶</a></h3>
-<dl class="simple">
-<dt>To run the code, you will need a launch file that does two things:</dt><dd><ul class="simple">
-<li><p>Loads the Panda URDF and SRDF onto the parameter server, and</p></li>
-<li><p>Puts the kinematics_solver configuration generated by the MoveIt Setup Assistant onto the ROS parameter server in the namespace of the node that instantiates the classes in this tutorial.</p></li>
+<div class="section" id="launch">
+<h3>Launch 文件<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h3>
+<p>要运行代码，您将需要一个包含执行以下两项操作的 launch 文件：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>将 Panda 机器人的 URDF 文件和 SRDF 文件加载到参数服务器上；</p></li>
+<li><p>将由 MoveIt 配置助手生成的 kinematics_solver 配置放到 ROS 参数服务器上，并处于本教程中的节点实例的命名空间下。</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">launch</span><span class="o">&gt;</span>
   <span class="o">&lt;</span><span class="n">include</span> <span class="n">file</span><span class="o">=</span><span class="s2">&quot;$(find panda_moveit_config)/launch/planning_context.launch&quot;</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">arg</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;load_robot_description&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;true&quot;</span><span class="o">/&gt;</span>
@@ -1020,9 +1007,9 @@ end_effector_state that we computed in the step above.</p></li>
 </div>
 </div>
 </div>
-<div class="section" id="debugging-the-robot-state">
-<h2>Debugging the Robot State<a class="headerlink" href="#debugging-the-robot-state" title="Permalink to this headline">¶</a></h2>
-<p>To aid in debugging robot state, a command-line tool will help introspect your system:</p>
+<div class="section" id="id12">
+<h2>调试机器人的状态<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
+<p>为了帮助调试机器人状态 ，以下命令行工具将帮你检查：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rosrun</span> <span class="n">moveit_ros_planning</span> <span class="n">moveit_print_planning_model_info</span>
 </pre></div>
 </div>
@@ -1045,7 +1032,7 @@ end_effector_state that we computed in the step above.</p></li>
         <a href="../planning_scene/planning_scene_tutorial.html" class="btn btn-neutral float-right" title="Planning Scene" accesskey="n">下一章 <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html" class="btn btn-neutral" title="MoveIt 命令行脚本" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 前一章</a>
+        <a href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html" class="btn btn-neutral" title="MoveIt 命令行脚本" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 上一章</a>
       
     </div>
   

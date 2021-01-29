@@ -7,7 +7,7 @@ Python 包 `moveit_commander <http://wiki.ros.org/moveit_commander>`_ 封装了 
 
 开始
 ---------------
-请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
+请先确保已经完成了 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
 启动 RViz 和命令行工具
 ---------------------------------------

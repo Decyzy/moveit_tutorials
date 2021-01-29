@@ -1,12 +1,12 @@
-MoveIt 教程
-=================
+MoveIt 中文教程（个人翻译版）
+=========================================
 
 这些教程将使用 MoveIt 运动规划快速地为您和您的机器人提供帮助。
 
 .. image:: doc/quickstart_in_rviz/rviz_plugin_head.png
    :width: 700px
 
-在本教程中，我们使用 Franka Emika 的 Panda 机器人作为快速入门的演示案例。另外，你可以轻松使用已配置为可与 MoveIt 配合使用的任何机机械臂 - 通过 `已经运行 MoveIt 机器人列表 <http://moveit.ros.org/robots/>`_ 来查看 MoveIt 是否已可用于您的机器人。否则，您可以在之后的 "与新机器人集成" 章节中设置 MoveIt ，从而用于您的自定义机器人。
+在本教程中，我们使用 Franka Emika 的 Panda 机器人作为快速入门的演示案例。另外，你可以轻松使用已配置为可与 MoveIt 配合使用的任何机机械臂 - 通过 `已经运行 MoveIt 的机器人列表 <http://moveit.ros.org/robots/>`_ 来查看 MoveIt 是否已可用于您的机器人。否则，您可以在之后的 "与新机器人集成" 章节中设置 MoveIt ，从而用于您的自定义机器人。
 
 MoveIt 和 RViz 入门
 -------------------------------------
