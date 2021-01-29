@@ -13,6 +13,7 @@
 - [移动组 (Move Group) 的 C++ 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_interface/move_group_interface_tutorial.html)
 - [移动组 (Move Group) 的 Python 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html)
 - [MoveIt 命令行脚本](https://decyzy.github.io/moveit_tutorials/doc/moveit_commander_scripting/moveit_commander_scripting_tutorial.html)
+- [机器人模型和机器人状态](https://decyzy.github.io/moveit_tutorials/doc/robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html)
 
 ## 已知问题
 
