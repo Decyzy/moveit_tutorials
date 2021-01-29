@@ -33,6 +33,7 @@
  *********************************************************************/
 
 /* Author: Sachin Chitta, Michael Lautman*/
+/* Translator: Zhiyu YANG */
 
 #include <ros/ros.h>
 

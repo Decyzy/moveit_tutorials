@@ -33,7 +33,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 # Author: Acorn Pooley, Mike Lautman
-# Translation: Zhiyu YANG
+# Translator: Zhiyu YANG
 
 ## BEGIN_SUB_TUTORIAL imports
 ##

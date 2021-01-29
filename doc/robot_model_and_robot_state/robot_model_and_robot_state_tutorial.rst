@@ -1,5 +1,5 @@
-机器人模型和机器人状态 
-===================================
+机器人模型和机器人状态 (RobotModel 和 RobotState)
+===========================================================================
 
 .. image:: panda_tf.png
    :width: 700px
@@ -27,13 +27,13 @@ RobotState 类还包含一些辅助程序，用于根据末端执行器位置（
 ----------------
 本教程中所有的代码都可从 MoveIt 安装程序里包含的``moveit_tutorials`` 包里编译运行。
 
-使用 roslaunch 启动 launch 文件以直接运行 moveit_tutorials 里的代码： ::
+使用 roslaunch 启动 launch 文件以直接运行 moveit_tutorials 包里的代码： ::
 
  roslaunch moveit_tutorials robot_model_and_robot_state_tutorial.launch
 
 预期输出
 ---------------
-预期的输出将会是以下形式。因为我们使用了随机的关节值，因此数字可能和您看到的有出入： ::
+预期的输出将会是以下形式。因为我们使用了随机的关节值，所以数字可能和您看到的有出入： ::
 
  ros.moveit_tutorials: Model frame: /panda_link0
  ros.moveit_tutorials: Joint panda_joint1: 0.000000
