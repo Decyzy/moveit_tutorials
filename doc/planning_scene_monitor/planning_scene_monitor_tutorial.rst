@@ -1,47 +1,47 @@
-Planning Scene Monitor
-==================================
+规划场景监控器 (PlanningSceneMonitor)
+====================================================================
 
-The :planning_scene_monitor:`PlanningSceneMonitor` is the recommended interface for maintaining an up-to-date planning scene. The relationship between :moveit_core:`RobotState`, :planning_scene_monitor:`CurrentStateMonitor`, :planning_scene:`PlanningScene`, :planning_scene_monitor:`PlanningSceneMonitor`, and :planning_interface:`PlanningSceneInterface` can be really confusing at first. This tutorial aims to make clear these key concepts.
+建议使用 :planning_scene_monitor:`PlanningSceneMonitor` 接口来维护最新的规划场景 (planning scene) 。:moveit_core:`RobotState`, :planning_scene_monitor:`CurrentStateMonitor`, :planning_scene:`PlanningScene`, :planning_scene_monitor:`PlanningSceneMonitor`, 和 :planning_interface:`PlanningSceneInterface` 之间的关系一开始确实令人困惑。本教程旨在阐明这些关键概念。
 
-RobotState
-----------
-The :moveit_core:`RobotState` is a snapshot of a robot. It contains the :moveit_core:`RobotModel` and a set of joint values.
+RobotState 机器人状态
+----------------------------------------
+:moveit_core:`RobotState` 是机器人的一个快照。 它包含 :moveit_core:`RobotModel` 和一组关节值。
 
-CurrentStateMonitor
--------------------
-The :planning_scene_monitor:`CurrentStateMonitor` (CSM) can be thought of as a ROS wrapper for the RobotState. It subscribes to a provided topic for :sensor_msgs:`JointState` messages that provide up-to-date sensor values for single degree of freedom actuators, such as revolute or prismatic joints, and updates its internal RobotState with those joint values. In addition to the single degree of freedom joints, a robot can have joints with multiple degrees of freedom such as floating and planar joints. To maintain up-to-date transform information for links and other frames attached with multiple-degree-of-freedom joints, the CSM stores a TF2 :tf2:`Buffer` that uses a TF2 :tf2:`TransformListener` to set their transforms in its internal data.
+CurrentStateMonitor 当前状态监视器
+---------------------------------------------------------
+:planning_scene_monitor:`CurrentStateMonitor` (CSM) 可以看作是 RobotState 的 ROS 封装。 它订阅了发布 :sensor_msgs:`JointState` 消息的 ROS 话题，此消息为单自由度执行器（例如旋转或棱柱形关节）提供了最新的传感器值，并使用这些关节值更新 CSM 内部的 RobotState 。除了单自由度关节之外，机器人还可以具有多自由度关节，比如浮动关节和平面关节。为维护 link 和其他带有多自由度关节的坐标系的最新变换信息，CSM 存储了一个 TF2 :tf2:`Buffer`，该缓冲区使用TF2 :tf2:`TransformListener` 以在其内部数据中进行坐标系变换。
 
-PlanningScene
--------------
-The :planning_scene:`PlanningScene` is a snapshot of the world that includes both the RobotState and any number of collision objects. The Planning Scene can be used for collision checking as well as getting information about the environment.
+PlanningScene 规划场景
+---------------------------------------------------
+:planning_scene:`PlanningScene` 是世界的一个快照，其中包括 RobotState 和任意数量的碰撞体。Planning Scene 可用于检查碰撞以及获取有关环境的信息。
 
-PlanningSceneMonitor
---------------------
-The :planning_scene_monitor:`PlanningSceneMonitor` wraps a PlanningScene with ROS interfaces for keeping the PlanningScene up to date. To access the PlanningSceneMonitor's underlying PlanningScene, use the provided :planning_scene_monitor:`LockedPlanningSceneRW` and :planning_scene_monitor:`LockedPlanningSceneRO` classes.
+PlanningSceneMonitor 规划场景监视器
+----------------------------------------------------------
+:planning_scene_monitor:`PlanningSceneMonitor` 使用ROS接口封装了 PlanningScene，用于保持 PlanningScene 为最新状态。要访问 PlanningSceneMonitor 底层的 PlanningScene，请使用 :planning_scene_monitor:`LockedPlanningSceneRW` 类和 :planning_scene_monitor:`LockedPlanningSceneRO` 类。
 
-The PlanningSceneMonitor has the following objects, which have their own ROS interfaces for keeping sub-components of the planning scene up to date:
+PlanningSceneMonitor 具有以下对象，它们具都有自己的 ROS 接口来保持 planning scene 的子组件为最新状态： 
 
- * A :planning_scene_monitor:`CurrentStateMonitor` for tracking updates to the RobotState via a ``robot_state_subscriber_`` and a ``tf_buffer_``, as well as a planning scene subscriber for listening to planning scene diffs from other publishers.
- * An OccupancyMapMonitor for tracking updates to an OccupancyMap via ROS topics and services.
+ * :planning_scene_monitor:`CurrentStateMonitor` 通过 ``robot_state_subscriber_`` 和 ``tf_buffer_`` 跟踪对 RobotState 的更新。同时还通过一个 planning scene 的订阅者收听来自其他发布者发布的规划场景变更 (planning scene diffs)。
+ * OccupancyMapMonitor 用于通过 ROS 话题和服务来跟踪对 OccupancyMap 的变更。
 
-The PlanningSceneMonitor has the following subscribers:
+PlanningSceneMonitor 有以下订阅者 (subscribers):
 
- * ``collision_object_subscriber_`` - Listens to a provided topic for :moveit_msgs:`CollisionObject` messages that might add, remove, or modify collision objects in the planning scene and passes them into its monitored planning scene
- * ``planning_scene_world_subscriber_`` - Listens to a provided topic for :moveit_msgs:`PlanningSceneWorld` messages that may contain collision object information and/or octomap information. This is useful for keeping planning scene monitors in sync
- * ``attached_collision_object_subscriber_`` - Listens on a provided topic for :moveit_msgs:`AttachedCollisionObject` messages that determine the attaching/detaching of objects to links in the robot state.
+ * ``collision_object_subscriber_`` - 收听话题发布的关于在规划场景中添加、删除或修改碰撞对象的 :moveit_msgs:`CollisionObject` 消息，并将其传递到自身监视的规划场景中。
+ * ``planning_scene_world_subscriber_`` - 收听话题发布的 :moveit_msgs:`PlanningSceneWorld` 消息，该消息可能包含碰撞对象信息以及 octomap 信息。这对于使规划场景监视器 (planning scene monitor) 保持同步非常有用。
+ * ``attached_collision_object_subscriber_`` - 收听话题发布的 :moveit_msgs:`AttachedCollisionObject` 消息，这些消息决定了在 robot state 里附加/分离物体到 link 。
 
-The PlanningSceneMonitor has the following services:
+PlanningSceneMonitor 有以下服务 (service):
 
- * ``get_scene_service_`` - Which is an optional service to get the full planning scene state.
+ * ``get_scene_service_`` - （可选）获取完整的规划场景状态。
 
-The PlanningSceneMonitor is initialized with:
+PlanningSceneMonitor 初始化为：
 
- * ``startSceneMonitor`` - Which starts the ``planning_scene_subscriber_``,
- * ``startWorldGeometryMonitor`` - Which starts the ``collision_object_subscriber_``, the ``planning_scene_world_subscriber_``, and the OccupancyMapMonitor,
- * ``startStateMonitor`` - Which starts the CurrentStateMonitor and the ``attached_collision_object_subscriber_``,
- * ``startPublishingPlanningScene`` - Which starts another thread for publishing the entire planning scene on a provided topic for other PlanningSceneMonitors to subscribe to, and
- * ``providePlanningSceneService`` - Which starts the ``get_scene_service_``.
+ * ``startSceneMonitor`` - 启动 ``planning_scene_subscriber_``,
+ * ``startWorldGeometryMonitor`` - 启动 ``collision_object_subscriber_``,  ``planning_scene_world_subscriber_``, 和 OccupancyMapMonitor,
+ * ``startStateMonitor`` - 启动 CurrentStateMonitor 和 ``attached_collision_object_subscriber_``,
+ * ``startPublishingPlanningScene`` - 开启一个线程以在一个被指定的话题上发布整个规划场景信息，以被其他的 PlanningSceneMonitors 订阅。
+ * ``providePlanningSceneService`` - 启动 ``get_scene_service_``.
 
-PlanningSceneInterface
-----------------------
-The :planning_interface:`PlanningSceneInterface` is a useful class for publishing updates to a MoveGroup's :planning_scene_monitor:`PlanningSceneMonitor` through a C++ API without creating your own subscribers and service clients. It may not work without MoveGroup or MoveItCpp.
+PlanningSceneInterface 规划场景接口
+------------------------------------------------------------------
+:planning_interface:`PlanningSceneInterface` 是一个有用的类，用于通过 C++ API 将更新发布到 MoveGroup 的 :planning_scene_monitor:`PlanningSceneMonitor` 中，而无需创建自己的subscriber 和 service 客户端。它可能无法在没有 MoveGroup 或 MoveItCpp 的情况下工作。
