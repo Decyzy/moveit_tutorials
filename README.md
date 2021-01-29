@@ -12,6 +12,11 @@
 - [在 RViz 中快速入门 MoveIt](https://decyzy.github.io/moveit_tutorials/doc/quickstart_in_rviz/quickstart_in_rviz_tutorial.html)
 - [移动组 (Move Group) 的 C++ 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_interface/move_group_interface_tutorial.html)
 - [移动组 (Move Group) 的 Python 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html)
+- [MoveIt 命令行脚本](https://decyzy.github.io/moveit_tutorials/doc/moveit_commander_scripting/moveit_commander_scripting_tutorial.html)
+
+## 已知问题
+
+- [ ] 中英文标点符号不统一
 
 ## 以下是原README
 

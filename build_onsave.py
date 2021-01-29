@@ -4,6 +4,7 @@ import subprocess
 import sys
 import pyinotify
 import os
+import time
 
 
 class OnWriteHandler(pyinotify.ProcessEvent):
@@ -12,6 +13,8 @@ class OnWriteHandler(pyinotify.ProcessEvent):
         self.extensions = extension.split(',')
         self.cmd = cmd
 
+        self.last_update_time = time.time()
+
     def _run_cmd(self):
         print('==> Modification detected')
         subprocess.call(self.cmd.split(' '), cwd=self.cwd)
@@ -19,7 +22,11 @@ class OnWriteHandler(pyinotify.ProcessEvent):
     def process_IN_MODIFY(self, event):
         if all(not event.pathname.endswith(ext) for ext in self.extensions):
             return
-        self._run_cmd()
+        if (time.time() - self.last_update_time) > 1:
+            print('++++++++++ rebuild +++++++++++')
+            self._run_cmd()
+            self.last_update_time = time.time()
+
 
 
 def auto_compile(path, extension, cmd):

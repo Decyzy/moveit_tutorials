@@ -1,56 +1,57 @@
-MoveIt Commander Scripting
+MoveIt 命令行脚本
 ===========================
 .. image:: moveit_commander_scripting.png
    :width: 700px
 
-The `moveit_commander <http://wiki.ros.org/moveit_commander>`_ Python package offers wrappers for the functionality provided in MoveIt. Simple interfaces are available for motion planning, computation of Cartesian paths, and pick and place. The ``moveit_commander`` package also includes a command line interface, ``moveit_commander_cmdline.py``.
+Python 包 `moveit_commander <http://wiki.ros.org/moveit_commander>`_ 封装了 MoveIt 的功能。其简单的交互接口可用于运动规划，笛卡尔路径的计算以及物体拾取和放置。 ``moveit_commander`` 同时也包含一个命令行接口，即 ``moveit_commander_cmdline.py`` 。
 
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保已经完成了这些步骤 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
-Starting RViz and the Command Line Tool
+启动 RViz 和命令行工具
 ---------------------------------------
-Open two shells. Start RViz and wait for everything to finish loading in the first shell: ::
+打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成： ::
 
   roslaunch panda_moveit_config demo.launch
 
-Now initiate the ``moveit_commander`` interface in another shell: ::
+然后在第二个 shell 里初始化 ``moveit_commander`` 接口： ::
 
  rosrun moveit_commander moveit_commander_cmdline.py
 
-Using the MoveIt Commander Command Line Tool
+使用 MoveIt 命令行工具
 ---------------------------------------------
-The first command you should type is: ::
+您输入的第一个命令应该是： ::
 
  use panda_arm
 
-where ``panda_arm`` is the group name which you want to command. This will connect you to a running instance of the move_group node. You can now execute commands on that group.
+这里的 ``panda_arm`` 是你想要操作的 planning group 名字。这将会连接到正在运行的 move_group 节点实例。 现在，您可以在该 planning group 上执行命令。
 
-This command, ``current``, will show you the current state of your group: ::
+接下来的这个 ``current`` 命令，将向您显示当前 planning group 的状态： ::
 
  current
 
-To record that state under a specific name you can simply type: ::
+要以特定名称记录该状态，您只需键入： ::
 
  rec c
 
-This will remember the current joint values of the robot group under the name ``c``. Matlab-like syntax is available for modifying joint values. The code above copies the joint values of c into a new variable named goal. We then modify the first joint of ``goal`` to ``0.2``. You may need to use a different value instead of ``0.2`` (it needs to be within your allowed bounds and not cause collisions). The ``go`` command plans a motion and executes it.
+这将把当前 planning group 里的各关节值记录在名字 ``c`` 里面。可以使用类似 Matlab 的语法来修改关节值。
 
-To get the robot to move, you could type, for example: ::
+要想使机器人移动，您可以输入： ::
 
  goal = c
  goal[0] = 0.2
  go goal
 
+上面的代码将 ``c`` 里的值复制到一个名为 ``goal`` 的新变量里。我们在 ``goal`` 里把第一个关节值修改为 ``0.2`` 。您可能需要使用其他值而不是 ``0.2`` （值必须在容许范围内，且不会引起碰撞） 。命令 ``go`` 将规划一次运动路径并执行。
 
-Instead of calling ``go`` you could also type: ::
+除了调用 ``go`` 命令，您也可以这样输入： ::
 
  goal[0] = 0.2
  goal[1] = 0.2
  plan goal
  execute
 
-This is slightly inefficient, but the advantage is that the ``plan`` command allows you to visualize the computed motion plan in RViz before you actually issue the execute command.
+这样做效率有点低，但好处是通过使用 ``plan`` 命令，可以在实际发出执行命令之前在 RViz 中可视化规划出来的运动路径。 
 
-For a list of supported commands, you can type ``help``. To exit the ``moveit_commander`` interface you can type ``quit``.
+您可以键入 ``help`` 来查看受支持的命令列表。想要退出 ``moveit_commander`` 交互接口，您可以输入 ``quit`` 。
