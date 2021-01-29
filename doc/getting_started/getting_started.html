@@ -177,10 +177,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#launch">Launch 文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html">MoveIt Commander Scripting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html#starting-rviz-and-the-command-line-tool">Starting RViz and the Command Line Tool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html#using-the-moveit-commander-command-line-tool">Using the MoveIt Commander Command Line Tool</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html">MoveIt 命令行脚本</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html#id1">开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html#rviz">启动 RViz 和命令行工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../moveit_commander_scripting/moveit_commander_scripting_tutorial.html#id2">使用 MoveIt 命令行工具</a></li>
 </ul>
 </li>
 </ul>
@@ -792,7 +792,7 @@
   <br />
 <div class="admonition note">
 <p class="first admonition-title">教程版本: Noetic</p>
-<p class="last">这是最新版本的中文翻译，正在积极开发中，且最适合初学者。 如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是正在积极开发中的最新版本的中文翻译，非常适合初学者。如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -805,12 +805,12 @@
             
   <div class="section" id="id1">
 <h1>入门<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p>本教程将安装 MoveIt，并创建一个工作区来运行本教程和示例机器人。</p>
+<p>本教程将安装 MoveIt ，并创建一个 catkin 工作空间来运行本教程和示例机器人。</p>
 <div class="section" id="ros-catkin">
 <h2>安装 ROS 和 Catkin<a class="headerlink" href="#ros-catkin" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://wiki.ros.org/noetic/Installation/Ubuntu">安装 ROS Noetic</a> 。</p>
-<p>在学习 ROS 安装指南时，很容易漏掉一些步骤。如果你在后面的几个步骤中遇到了报错，那么最好从这里重新开始，以确保你正确地安装了 ROS 。</p>
-<p>一旦你安装好了 ROS ，确保有最新的软件包：</p>
+<p>在学习 ROS 安装指南时， 非常容易漏掉一些步骤。如果您在后面的几个步骤中遇到了报错， 那么最好从这里重新开始， 以确保您正确安装了 ROS 。</p>
+<p>一旦您安装好了 ROS ，确保软件包是最新的：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rosdep</span> <span class="n">update</span>
 <span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
 <span class="n">sudo</span> <span class="n">apt</span> <span class="n">dist</span><span class="o">-</span><span class="n">upgrade</span>
@@ -827,7 +827,7 @@
 </div>
 <div class="section" id="catkin-moveit">
 <h2>创建一个 Catkin 工作空间以及下载 MoveIt 源码<a class="headerlink" href="#catkin-moveit" title="Permalink to this headline">¶</a></h2>
-<p>本教程依赖于 MoveIt 的 master 分支。我们需要从源代码构建它。你将需要设置一个 <a class="reference external" href="http://wiki.ros.org/catkin">catkin</a> 工作空间:</p>
+<p>本教程需要 MoveIt 的 master 分支。我们得从源代码构建它。您将需要设置一个 <a class="reference external" href="http://wiki.ros.org/catkin">catkin</a> 工作空间：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">~/</span><span class="n">ws_moveit</span><span class="o">/</span><span class="n">src</span>
 <span class="n">cd</span> <span class="o">~/</span><span class="n">ws_moveit</span><span class="o">/</span><span class="n">src</span>
 
@@ -839,8 +839,8 @@
 </div>
 <div class="section" id="id3">
 <h2>下载示例代码<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>为了方便学习，你需要一个类似于叫做 <strong>ROBOT_moveit_config</strong> 的包。我们默认使用的演示机器人是 Panda 机械臂（来自 Franka Emika ）。我们建议你从源代码安装 <strong>panda_moveit_config</strong> 包以获得一个 working package （译者：活动包？）。</p>
-<p>在你的 <a class="reference external" href="http://wiki.ros.org/catkin">catkin</a> 工作空间里, 下载本教程以及 <code class="docutils literal notranslate"><span class="pre">panda_moveit_config</span></code> 包:</p>
+<p>为了方便学习， 您需要一个类似于叫做 <strong>ROBOT_moveit_config</strong> 的包。我们默认使用的演示机器人是 Panda 机械臂（来自 Franka Emika ）。我们建议您从源代码安装 <strong>panda_moveit_config</strong> 包以获得一个 working package （译者:活动包？）。</p>
+<p>在您的 <a class="reference external" href="http://wiki.ros.org/catkin">catkin</a> 工作空间里， 下载本教程以及 <code class="docutils literal notranslate"><span class="pre">panda_moveit_config</span></code> 包:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ws_moveit</span><span class="o">/</span><span class="n">src</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros</span><span class="o">-</span><span class="n">planning</span><span class="o">/</span><span class="n">moveit_tutorials</span><span class="o">.</span><span class="n">git</span> <span class="o">-</span><span class="n">b</span> <span class="n">master</span>
 <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">ros</span><span class="o">-</span><span class="n">planning</span><span class="o">/</span><span class="n">panda_moveit_config</span><span class="o">.</span><span class="n">git</span> <span class="o">-</span><span class="n">b</span> <span class="n">melodic</span><span class="o">-</span><span class="n">devel</span>
@@ -848,28 +848,28 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>现在我们将使用预先生成的 <code class="docutils literal notranslate"><span class="pre">panda_moveit_config</span></code> 包，但是之后在 <a class="reference external" href="../setup_assistant/setup_assistant_tutorial.html">MoveIt 设置助手教程</a> 中，将介绍如何制作我们自己的包。</p>
+<p>现在我们将使用预先生成的 <code class="docutils literal notranslate"><span class="pre">panda_moveit_config</span></code> 包， 但是之后在 <a class="reference external" href="../setup_assistant/setup_assistant_tutorial.html">MoveIt 设置助手教程</a> 中， 将介绍如何制作我们自己的包。</p>
 </div>
 </div>
 <div class="section" id="id5">
 <h2>构建和编译 Catkin 工作空间<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p>以下代码将从 Debian 中安装你工作空间要求但尚未安装的依赖：</p>
+<p>以下代码将从 Debian 中安装您工作空间要求但尚未安装的依赖:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cd</span> <span class="o">~/</span><span class="n">ws_moveit</span><span class="o">/</span><span class="n">src</span>
 <span class="n">rosdep</span> <span class="n">install</span> <span class="o">-</span><span class="n">y</span> <span class="o">--</span><span class="n">from</span><span class="o">-</span><span class="n">paths</span> <span class="o">.</span> <span class="o">--</span><span class="n">ignore</span><span class="o">-</span><span class="n">src</span> <span class="o">--</span><span class="n">rosdistro</span> <span class="n">noetic</span>
 </pre></div>
 </div>
-<p><strong>注意</strong> 如果标准 ROS 软件源中还没有上游包，或者在这些包的安装中遇到任何构建错误，请尝试使用 <a class="reference external" href="http://wiki.ros.org/TestingRepository">ROS 测试软件源</a> ：</p>
+<p><strong>注意</strong> 如果标准 ROS 软件源中还没有上游包， 或者在这些包的安装中遇到任何构建错误， 请尝试使用 <a class="reference external" href="http://wiki.ros.org/TestingRepository">ROS 测试软件源</a> :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">sh</span> <span class="o">-</span><span class="n">c</span> <span class="s1">&#39;echo &quot;deb http://packages.ros.org/ros-testing/ubuntu $(lsb_release -sc) main&quot; &gt; /etc/apt/sources.list.d/ros-latest.list&#39;</span>
 <span class="n">sudo</span> <span class="n">apt</span> <span class="n">update</span>
 </pre></div>
 </div>
-<p>下一个命令将配置你的 catkin 工作空间：</p>
+<p>下一个命令将配置您的 catkin 工作空间:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cd ~/ws_moveit
 catkin config --extend /opt/ros/${ROS_DISTRO} --cmake-args -DCMAKE_BUILD_TYPE=Release
 catkin build
 </pre></div>
 </div>
-<p>使能（ source ） catkin 工作空间配置:</p>
+<p>source catkin 工作空间配置:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">~/</span><span class="n">ws_moveit</span><span class="o">/</span><span class="n">devel</span><span class="o">/</span><span class="n">setup</span><span class="o">.</span><span class="n">bash</span>
 </pre></div>
 </div>
@@ -879,7 +879,7 @@ catkin build
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>在 <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> 中自动使能（ source ） <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> 不是必须的，且很多老手会同时使用不止一个 catkin 工作空间。但这样做会简单许多，因此我们仍然这样建议。</p>
+<p>在 <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> 中自动 source <code class="docutils literal notranslate"><span class="pre">setup.bash</span></code> 不是必须的， 且很多老手会同时使用不止一个 catkin 工作空间。但这样做会简单许多， 因此我们仍然这样建议。</p>
 </div>
 </div>
 <div class="section" id="id6">
@@ -892,7 +892,7 @@ catkin build
             
             <div class="admonition note">
               <p class="first admonition-title">开源反馈</p>
-              <p class="last">有地方需要改进？请在 <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/getting_started/getting_started.rst" class="fa fa-github"> GitHub page</a> 开一个 pull request。</p>
+              <p class="last">有地方需要改进？请在 <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/getting_started/getting_started.rst" class="fa fa-github"> GitHub page</a> 新开一个 pull request。</p>
             </div>
             
            </div>

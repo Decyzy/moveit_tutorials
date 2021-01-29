@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>MoveIt Commander Scripting &mdash; moveit_tutorials Noetic documentation</title>
+  <title>MoveIt 命令行脚本 &mdash; moveit_tutorials Noetic documentation</title>
   
 
   
@@ -177,10 +177,10 @@
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#launch">Launch 文件</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">MoveIt Commander Scripting</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#starting-rviz-and-the-command-line-tool">Starting RViz and the Command Line Tool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#using-the-moveit-commander-command-line-tool">Using the MoveIt Commander Command Line Tool</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MoveIt 命令行脚本</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rviz">启动 RViz 和命令行工具</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">使用 MoveIt 命令行工具</a></li>
 </ul>
 </li>
 </ul>
@@ -787,12 +787,12 @@
     <li><a href="http://moveit.ros.org">MoveIt</a> &raquo;</li>
     <li><a href="../../index.html">Tutorials</a> &raquo;</li>
       
-    <li>MoveIt Commander Scripting</li>
+    <li>MoveIt 命令行脚本</li>
   </ul>
   <br />
 <div class="admonition note">
 <p class="first admonition-title">教程版本: Noetic</p>
-<p class="last">这是最新版本的中文翻译，正在积极开发中，且最适合初学者。 如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
+<p class="last">这是正在积极开发中的最新版本的中文翻译，非常适合初学者。如果您仍在使用 Melodic 版本，请参考针对 Melodic 版本的官方英文教程 <a class="reference external" href="http://docs.ros.org/melodic/api/moveit_tutorials/html/index.html">Melodic tutorials</a>.</p>
 </div>
   <hr/>
 </div>
@@ -803,56 +803,57 @@
                <!-- <p class="last">Code can be found at <a href = "https://github.com/ros-planning/moveit_tutorials">moveit_tutorials repository</a> in doc folder. Use master branch.</p> -->
              <!-- </div>  -->
             
-  <div class="section" id="moveit-commander-scripting">
-<h1>MoveIt Commander Scripting<a class="headerlink" href="#moveit-commander-scripting" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="moveit">
+<h1>MoveIt 命令行脚本<a class="headerlink" href="#moveit" title="Permalink to this headline">¶</a></h1>
 <a class="reference internal image-reference" href="../../_images/moveit_commander_scripting.png"><img alt="../../_images/moveit_commander_scripting.png" src="../../_images/moveit_commander_scripting.png" style="width: 700px;" /></a>
-<p>The <a class="reference external" href="http://wiki.ros.org/moveit_commander">moveit_commander</a> Python package offers wrappers for the functionality provided in MoveIt. Simple interfaces are available for motion planning, computation of Cartesian paths, and pick and place. The <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> package also includes a command line interface, <code class="docutils literal notranslate"><span class="pre">moveit_commander_cmdline.py</span></code>.</p>
-<div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>If you haven’t already done so, make sure you’ve completed the steps in <a class="reference external" href="../getting_started/getting_started.html">Getting Started</a>.</p>
+<p>Python 包 <a class="reference external" href="http://wiki.ros.org/moveit_commander">moveit_commander</a> 封装了 MoveIt 的功能。其简单的交互接口可用于运动规划，笛卡尔路径的计算以及物体拾取和放置。 <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> 同时也包含一个命令行接口，即 <code class="docutils literal notranslate"><span class="pre">moveit_commander_cmdline.py</span></code> 。</p>
+<div class="section" id="id1">
+<h2>开始<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>请先确保已经完成了这些步骤 <a class="reference external" href="../getting_started/getting_started.html">入门</a> 里的步骤。</p>
 </div>
-<div class="section" id="starting-rviz-and-the-command-line-tool">
-<h2>Starting RViz and the Command Line Tool<a class="headerlink" href="#starting-rviz-and-the-command-line-tool" title="Permalink to this headline">¶</a></h2>
-<p>Open two shells. Start RViz and wait for everything to finish loading in the first shell:</p>
+<div class="section" id="rviz">
+<h2>启动 RViz 和命令行工具<a class="headerlink" href="#rviz" title="Permalink to this headline">¶</a></h2>
+<p>打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">panda_moveit_config</span> <span class="n">demo</span><span class="o">.</span><span class="n">launch</span>
 </pre></div>
 </div>
-<p>Now initiate the <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> interface in another shell:</p>
+<p>然后在第二个 shell 里初始化 <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> 接口：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rosrun</span> <span class="n">moveit_commander</span> <span class="n">moveit_commander_cmdline</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="using-the-moveit-commander-command-line-tool">
-<h2>Using the MoveIt Commander Command Line Tool<a class="headerlink" href="#using-the-moveit-commander-command-line-tool" title="Permalink to this headline">¶</a></h2>
-<p>The first command you should type is:</p>
+<div class="section" id="id2">
+<h2>使用 MoveIt 命令行工具<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>您输入的第一个命令应该是：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">use</span> <span class="n">panda_arm</span>
 </pre></div>
 </div>
-<p>where <code class="docutils literal notranslate"><span class="pre">panda_arm</span></code> is the group name which you want to command. This will connect you to a running instance of the move_group node. You can now execute commands on that group.</p>
-<p>This command, <code class="docutils literal notranslate"><span class="pre">current</span></code>, will show you the current state of your group:</p>
+<p>这里的 <code class="docutils literal notranslate"><span class="pre">panda_arm</span></code> 是你想要操作的 planning group 名字。这将会连接到正在运行的 move_group 节点实例。 现在，您可以在该 planning group 上执行命令。</p>
+<p>接下来的这个 <code class="docutils literal notranslate"><span class="pre">current</span></code> 命令，将向您显示当前 planning group 的状态：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">current</span>
 </pre></div>
 </div>
-<p>To record that state under a specific name you can simply type:</p>
+<p>要以特定名称记录该状态，您只需键入：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rec</span> <span class="n">c</span>
 </pre></div>
 </div>
-<p>This will remember the current joint values of the robot group under the name <code class="docutils literal notranslate"><span class="pre">c</span></code>. Matlab-like syntax is available for modifying joint values. The code above copies the joint values of c into a new variable named goal. We then modify the first joint of <code class="docutils literal notranslate"><span class="pre">goal</span></code> to <code class="docutils literal notranslate"><span class="pre">0.2</span></code>. You may need to use a different value instead of <code class="docutils literal notranslate"><span class="pre">0.2</span></code> (it needs to be within your allowed bounds and not cause collisions). The <code class="docutils literal notranslate"><span class="pre">go</span></code> command plans a motion and executes it.</p>
-<p>To get the robot to move, you could type, for example:</p>
+<p>这将把当前 planning group 里的各关节值记录在名字 <code class="docutils literal notranslate"><span class="pre">c</span></code> 里面。可以使用类似 Matlab 的语法来修改关节值。</p>
+<p>要想使机器人移动，您可以输入：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">goal</span> <span class="o">=</span> <span class="n">c</span>
 <span class="n">goal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">go</span> <span class="n">goal</span>
 </pre></div>
 </div>
-<p>Instead of calling <code class="docutils literal notranslate"><span class="pre">go</span></code> you could also type:</p>
+<p>上面的代码将 <code class="docutils literal notranslate"><span class="pre">c</span></code> 里的值复制到一个名为 <code class="docutils literal notranslate"><span class="pre">goal</span></code> 的新变量里。我们在 <code class="docutils literal notranslate"><span class="pre">goal</span></code> 里把第一个关节值修改为 <code class="docutils literal notranslate"><span class="pre">0.2</span></code> 。您可能需要使用其他值而不是 <code class="docutils literal notranslate"><span class="pre">0.2</span></code> （值必须在容许范围内，且不会引起碰撞） 。命令 <code class="docutils literal notranslate"><span class="pre">go</span></code> 将规划一次运动路径并执行。</p>
+<p>除了调用 <code class="docutils literal notranslate"><span class="pre">go</span></code> 命令，您也可以这样输入：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">goal</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">goal</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">plan</span> <span class="n">goal</span>
 <span class="n">execute</span>
 </pre></div>
 </div>
-<p>This is slightly inefficient, but the advantage is that the <code class="docutils literal notranslate"><span class="pre">plan</span></code> command allows you to visualize the computed motion plan in RViz before you actually issue the execute command.</p>
-<p>For a list of supported commands, you can type <code class="docutils literal notranslate"><span class="pre">help</span></code>. To exit the <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> interface you can type <code class="docutils literal notranslate"><span class="pre">quit</span></code>.</p>
+<p>这样做效率有点低，但好处是通过使用 <code class="docutils literal notranslate"><span class="pre">plan</span></code> 命令，可以在实际发出执行命令之前在 RViz 中可视化规划出来的运动路径。</p>
+<p>您可以键入 <code class="docutils literal notranslate"><span class="pre">help</span></code> 来查看受支持的命令列表。想要退出 <code class="docutils literal notranslate"><span class="pre">moveit_commander</span></code> 交互接口，您可以输入 <code class="docutils literal notranslate"><span class="pre">quit</span></code> 。</p>
 </div>
 </div>
 
@@ -860,7 +861,7 @@
             
             <div class="admonition note">
               <p class="first admonition-title">开源反馈</p>
-              <p class="last">有地方需要改进？请在 <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/moveit_commander_scripting/moveit_commander_scripting_tutorial.rst" class="fa fa-github"> GitHub page</a> 开一个 pull request。</p>
+              <p class="last">有地方需要改进？请在 <a href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/moveit_commander_scripting/moveit_commander_scripting_tutorial.rst" class="fa fa-github"> GitHub page</a> 新开一个 pull request。</p>
             </div>
             
            </div>
