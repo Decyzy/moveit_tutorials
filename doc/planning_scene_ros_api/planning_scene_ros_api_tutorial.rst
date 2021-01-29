@@ -1,54 +1,54 @@
-Planning Scene ROS API
-==================================
+规划场景 (Planning Scene) ROS API
+========================================================
 
-In this tutorial, we will examine the use of planning scene diffs to perform
-two operations:
+在本教程中，我们将研究如何执行两个操作来变更 Planning Scene：
 
- * Adding and removing objects into the world
- * Attaching and detaching objects to the robot
+ * 向 world 添加或移除对象；
+ * 将物体附加到 world 里或从 world 里分离。
 
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保已经完成了 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
-Running the code
+运行代码
 ----------------
-Open two shells. In the first shell start RViz and wait for everything to finish loading: ::
+打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成： ::
 
   roslaunch panda_moveit_config demo.launch
 
-In the second shell, run the launch file for this demo: ::
+在另一个 shell 里使用为本示例启动 launch 文件： ::
 
   roslaunch moveit_tutorials planning_scene_ros_api_tutorial.launch
 
-**Note:** This tutorial uses the **RvizVisualToolsGui** panel to step through the demo. To add this panel to RViz, follow the instructions in the `Visualization Tutorial <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_.
+**注意:** 本教程使用 **RvizVisualToolsGui** 面板来逐步运行此 demo。想要在 RViz里添加这个面板，请按照 `可视化指南 <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_ 中的说明。
 
-After a short moment, the RViz window should appear and look similar to the one at the top of this page. To progress through each demo step either press the **Next** button in the **RvizVisualToolsGui** panel at the bottom of the screen or select **Key Tool** in the **Tools** panel at the top of the screen and then press **N** on your keyboard while RViz is focused.
+RViz 窗口过一会儿就会出现，看起来和本页面顶部的窗口差不多。想要依次查看每个演示步骤，要么按下窗口底部 **RvizVisualToolsGui** 面板里的 **Next** 按钮，或者在 RViz 窗口聚焦状态下，选择窗口顶部 **Tools** 面板下的 **Key Tool** ，然后按下键盘上的 **N** 。
 
-Expected Output
+预期输出
 ---------------
-In RViz, you should be able to see the following:
- * Object appears in the planning scene.
- * Object gets attached to the robot.
- * Object gets detached from the robot.
- * Object is removed from the planning scene.
+在 RViz 里，我们应该能看到以下效果：
+
+ * 物体出现在了规划场景里； 
+ * 物体固连到了机器人上；
+ * 物体从机器人上脱离；
+ * 物体被从规划场景里移除。
 
 .. role:: red
 
 **Note:** You may see an error message reading :red:`Found empty JointState message`. This is a known bug and will be fixed soon.
 
-The entire code
+整个代码
 ---------------
-The entire code can be seen :codedir:`here in the MoveIt GitHub project<planning_scene_ros_api>`.
+全部代码可以在 :codedir:`MoveIt GitHub project<planning_scene_ros_api>` 里找到。
 
 .. tutorial-formatter:: ./src/planning_scene_ros_api_tutorial.cpp
 
-The launch file
+launch 文件
 ---------------
-The entire launch file is :codedir:`here <planning_scene_ros_api/launch/planning_scene_ros_api_tutorial.launch>` on GitHub. All the code in this tutorial can be compiled and run from the moveit_tutorials package.
+整个 launch 文件在 GitHub 上的 :codedir:`这里 <planning_scene_ros_api/launch/planning_scene_ros_api_tutorial.launch>` 可见。本教程中的所有代码都可从 **moveit_tutorials** 包中运行，这个包是 MoveIt 安装的一部分。
 
-Debugging the Planning Scene Monitor
+调试和规划场景监视器
 ------------------------------------
-To aid in debugging detached and attached collision objects, a command-line tool will help introspect your system: ::
+为了帮助调试物体分离和固连，以下命令行工具可以帮助你检查： ::
 
   rosrun moveit_ros_planning moveit_print_planning_scene_info

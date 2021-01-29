@@ -59,24 +59,20 @@ int main(int argc, char** argv)
   ros::NodeHandle node_handle;
   // BEGIN_TUTORIAL
   //
-  // Visualization
+  // 可视化
   // ^^^^^^^^^^^^^
-  // The package MoveItVisualTools provides many capabilities for visualizing objects, robots,
-  // and trajectories in RViz as well as debugging tools such as step-by-step introspection of a script.
+  // 软件包 MoveItVisualTools 提供了许多用于可视化 RViz 中的对象、机械手和轨迹的功能。其还提供了一些调试工具，例如脚本的逐步自检。
   moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
   visual_tools.deleteAllMarkers();
 
   // ROS API
   // ^^^^^^^
-  // The ROS API to the planning scene publisher is through a topic interface
-  // using "diffs". A planning scene diff is the difference between the current
-  // planning scene (maintained by the move_group node) and the new planning
-  // scene desired by the user.
+  // planning scene 发布者的 ROS API 是通过使用 "diffs" 的话题接口实现的。
+  // planning scene diff 是当前规划场景（由 move_group 节点维护）与用户所需的新规划场景之间的差异。
   //
-  // Advertise the required topic
+  // 发布所需的话题
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // We create a publisher and wait for subscribers.
-  // Note that this topic may need to be remapped in the launch file.
+  // 我们创建一个发布者并等待订阅者。请注意，可能需要在 launch 文件中重映射此话题。
   ros::Publisher planning_scene_diff_publisher = node_handle.advertise<moveit_msgs::PlanningScene>("planning_scene", 1);
   ros::WallDuration sleep_t(0.5);
   while (planning_scene_diff_publisher.getNumSubscribers() < 1)
@@ -85,24 +81,22 @@ int main(int argc, char** argv)
   }
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to start the demo");
 
-  // Define the attached object message
+  // 定义固连物体的消息
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // We will use this message to add or
-  // subtract the object from the world
-  // and to attach the object to the robot.
+  // 我们将使用此消息从世界中添加或移除对象，并将该对象固连到机器人上。 
   moveit_msgs::AttachedCollisionObject attached_object;
   attached_object.link_name = "panda_hand";
-  /* The header must contain a valid TF frame*/
+  /* 头必须包含有效的 TF 坐标系 */
   attached_object.object.header.frame_id = "panda_hand";
-  /* The id of the object */
+  /* 对象的id */
   attached_object.object.id = "box";
 
-  /* A default pose */
+  /* 一个默认位姿 */
   geometry_msgs::Pose pose;
   pose.position.z = 0.11;
   pose.orientation.w = 1.0;
 
-  /* Define a box to be attached */
+  /* 定义一个要附加的 box */
   shape_msgs::SolidPrimitive primitive;
   primitive.type = primitive.BOX;
   primitive.dimensions.resize(3);
@@ -113,20 +107,16 @@ int main(int argc, char** argv)
   attached_object.object.primitives.push_back(primitive);
   attached_object.object.primitive_poses.push_back(pose);
 
-  // Note that attaching an object to the robot requires
-  // the corresponding operation to be specified as an ADD operation.
+  // 请注意，将对象固连到机器人上需要将相应的操作指定为 ADD 操作。
   attached_object.object.operation = attached_object.object.ADD;
 
-  // Since we are attaching the object to the robot hand to simulate picking up the object,
-  // we want the collision checker to ignore collisions between the object and the robot hand.
+  // 由于我们将对象固连到机械手上来模拟拾取对象，因此我们希望碰撞检查器忽略对象和机械手之间的碰撞。
   attached_object.touch_links = std::vector<std::string>{ "panda_hand", "panda_leftfinger", "panda_rightfinger" };
 
-  // Add an object into the environment
+  // 将一个对象添加到环境里
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Add the object into the environment by adding it to
-  // the set of collision objects in the "world" part of the
-  // planning scene. Note that we are using only the "object"
-  // field of the attached_object message here.
+  // 将对象添加到环境中的方法是将其添加到规划场景的 "world" 部分中的一组碰撞对象中。
+  // 注意，这里我们仅使用 attached_object 消息的 "object" 字段。
   ROS_INFO("Adding the object into the world at the location of the hand.");
   moveit_msgs::PlanningScene planning_scene;
   planning_scene.world.collision_objects.push_back(attached_object.object);
@@ -134,50 +124,43 @@ int main(int argc, char** argv)
   planning_scene_diff_publisher.publish(planning_scene);
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
-  // Interlude: Synchronous vs Asynchronous updates
+  // 插曲：同步与异步更新
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // There are two separate mechanisms available to interact
-  // with the move_group node using diffs:
+  // 有两种单独的机制可使用变更信息与 move_group 节点进行交互：
   //
-  // * Send a diff via a rosservice call and block until
-  //   the diff is applied (synchronous update)
-  // * Send a diff via a topic, continue even though the diff
-  //   might not be applied yet (asynchronous update)
+  // * 通过 rosservice 调用发送变更信息并阻塞，直到变更信息被接受并应用（同步更新）
+  // * 通过话题发送变更信息，即使变更信息可能尚未生效也继续（异步更新） 
   //
-  // While most of this tutorial uses the latter mechanism (given the long sleeps
-  // inserted for visualization purposes asynchronous updates do not pose a problem),
-  // it would is perfectly justified to replace the planning_scene_diff_publisher
-  // by the following service client:
+  // 尽管本教程的大部分内容都使用后一种机制（考虑到为可视化而插入了长时间的睡眠，异步更新不会有问题），
+  // 但完全可以用以下 service 客户端替换 planning_scene_diff_publisher：
   ros::ServiceClient planning_scene_diff_client =
       node_handle.serviceClient<moveit_msgs::ApplyPlanningScene>("apply_planning_scene");
   planning_scene_diff_client.waitForExistence();
-  // and send the diffs to the planning scene via a service call:
+  // 并通过 service 调用 call() 方法来将变更信息发送到规划场景：
   moveit_msgs::ApplyPlanningScene srv;
   srv.request.scene = planning_scene;
   planning_scene_diff_client.call(srv);
-  // Note that this does not continue until we are sure the diff has been applied.
+  // 请注意，直到我们确定变更信息已被接受并应用后，此操作才会继续。
   //
-  // Attach an object to the robot
+  // 将对象固连到机器人
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // When the robot picks up an object from the environment, we need to
-  // "attach" the object to the robot so that any component dealing with
-  // the robot model knows to account for the attached object, e.g. for
-  // collision checking.
+  // 当机器人从环境中拾取物体时，我们需要将物体 "attach" 到机器人，
+  // 以便任何处理机器人模型的组件都知道要考虑新附加的物体，例如碰撞检查。
   //
-  // Attaching an object requires two operations
-  //  * Removing the original object from the environment
-  //  * Attaching the object to the robot
+  // 添加对象需要两项操作
+  // 
+  //  * 从环境中删除原始对象；
+  //  * 将对象固连到机器人。
 
-  /* First, define the REMOVE object message*/
+  /* 首先, 定义 REMOVE 物体的信息 */
   moveit_msgs::CollisionObject remove_object;
   remove_object.id = "box";
   remove_object.header.frame_id = "panda_hand";
   remove_object.operation = remove_object.REMOVE;
 
-  // Note how we make sure that the diff message contains no other
-  // attached objects or collisions objects by clearing those fields
-  // first.
-  /* Carry out the REMOVE + ATTACH operation */
+  // 请注意我们是如何通过首先清除 collision_objects 来确保变更消息不包含其他附加对象或碰撞对象的。
+
+  /* 执行 REMOVE + ATTACH 操作 */
   ROS_INFO("Attaching the object to the hand and removing it from the world.");
   planning_scene.world.collision_objects.clear();
   planning_scene.world.collision_objects.push_back(remove_object);
@@ -187,22 +170,22 @@ int main(int argc, char** argv)
 
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
-  // Detach an object from the robot
+  // 从机器人上取走物体
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Detaching an object from the robot requires two operations
-  //  * Detaching the object from the robot
-  //  * Re-introducing the object into the environment
+  // 从机器人上取走物体需要两项操作：
+  // 
+  //  * 从机器人上取走物体
+  //  * 将该物体重新引入环境
 
-  /* First, define the DETACH object message*/
+  /* 首先, 定义 DETACH 物体的信息 */
   moveit_msgs::AttachedCollisionObject detach_object;
   detach_object.object.id = "box";
   detach_object.link_name = "panda_hand";
   detach_object.object.operation = attached_object.object.REMOVE;
 
-  // Note how we make sure that the diff message contains no other
-  // attached objects or collisions objects by clearing those fields
-  // first.
-  /* Carry out the DETACH + ADD operation */
+  // 请注意我们是如何通过首先清除 collision_objects 来确保变更消息不包含其他附加对象或碰撞对象的。
+
+  /* 执行 DETACH + ADD 操作 */
   ROS_INFO("Detaching the object from the robot and returning it to the world.");
   planning_scene.robot_state.attached_collision_objects.clear();
   planning_scene.robot_state.attached_collision_objects.push_back(detach_object);
@@ -214,13 +197,10 @@ int main(int argc, char** argv)
 
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
-  // Remove the object from the collision world
+  // 从碰撞体世界中移除物体
   // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // Removing the object from the collision world just requires
-  // using the remove object message defined earlier.
-  // Note, also how we make sure that the diff message contains no other
-  // attached objects or collisions objects by clearing those fields
-  // first.
+  // 从碰撞体世界中删除对象仅需要使用前面定义的删除对象消息。
+  // 请注意我们是如何通过首先清除 collision_objects 来确保变更消息不包含其他附加对象或碰撞对象的。
   ROS_INFO("Removing the object from the world.");
   planning_scene.robot_state.attached_collision_objects.clear();
   planning_scene.world.collision_objects.clear();
