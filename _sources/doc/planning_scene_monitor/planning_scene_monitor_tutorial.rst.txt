@@ -44,4 +44,4 @@ PlanningSceneMonitor 初始化为：
 
 PlanningSceneInterface 规划场景接口
 ------------------------------------------------------------------
-:planning_interface:`PlanningSceneInterface` 是一个有用的类，用于通过 C++ API 将更新发布到 MoveGroup 的 :planning_scene_monitor:`PlanningSceneMonitor` 中，而无需创建自己的subscriber 和 service 客户端。它可能无法在没有 MoveGroup 或 MoveItCpp 的情况下工作。
+:planning_interface:`PlanningSceneInterface` 是一个有用的类，通过 C++ API 将更新发布到 MoveGroup 的 :planning_scene_monitor:`PlanningSceneMonitor` 中，而无需创建自己的 subscriber 和 service 客户端。它可能无法在没有 MoveGroup 或 MoveItCpp 的情况下工作。

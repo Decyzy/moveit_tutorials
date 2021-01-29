@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Planning Scene ROS API &mdash; moveit_tutorials Noetic documentation</title>
+  <title>规划场景 (Planning Scene) ROS API &mdash; moveit_tutorials Noetic documentation</title>
   
 
   
@@ -236,24 +236,24 @@
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene_monitor/planning_scene_monitor_tutorial.html#planningsceneinterface">PlanningSceneInterface 规划场景接口</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Planning Scene ROS API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#running-the-code">Running the code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#expected-output">Expected Output</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#the-entire-code">The entire code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#visualization">Visualization</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">规划场景 (Planning Scene) ROS API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">开始</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">运行代码</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">预期输出</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">整个代码</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">可视化</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ros-api">ROS API</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#advertise-the-required-topic">Advertise the required topic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#define-the-attached-object-message">Define the attached object message</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#add-an-object-into-the-environment">Add an object into the environment</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#interlude-synchronous-vs-asynchronous-updates">Interlude: Synchronous vs Asynchronous updates</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#attach-an-object-to-the-robot">Attach an object to the robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#detach-an-object-from-the-robot">Detach an object from the robot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#remove-the-object-from-the-collision-world">Remove the object from the collision world</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">发布所需的话题</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">定义固连物体的消息</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">将一个对象添加到环境里</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">插曲：同步与异步更新</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">将对象固连到机器人</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">从机器人上取走物体</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id13">从碰撞体世界中移除物体</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#the-launch-file">The launch file</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#debugging-the-planning-scene-monitor">Debugging the Planning Scene Monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#launch">launch 文件</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id14">调试和规划场景监视器</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../motion_planning_api/motion_planning_api_tutorial.html">Motion Planning API</a><ul>
@@ -787,7 +787,7 @@
     <li><a href="http://moveit.ros.org">MoveIt</a> &raquo;</li>
     <li><a href="../../index.html">教程</a> &raquo;</li>
       
-    <li>Planning Scene ROS API</li>
+    <li>规划场景 (Planning Scene) ROS API</li>
   </ul>
   <br />
 <div class="admonition note">
@@ -804,52 +804,50 @@
              <!-- </div>  -->
             
   <div class="section" id="planning-scene-ros-api">
-<h1>Planning Scene ROS API<a class="headerlink" href="#planning-scene-ros-api" title="Permalink to this headline">¶</a></h1>
-<p>In this tutorial, we will examine the use of planning scene diffs to perform
-two operations:</p>
+<h1>规划场景 (Planning Scene) ROS API<a class="headerlink" href="#planning-scene-ros-api" title="Permalink to this headline">¶</a></h1>
+<p>在本教程中，我们将研究如何执行两个操作来变更 Planning Scene：</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>Adding and removing objects into the world</p></li>
-<li><p>Attaching and detaching objects to the robot</p></li>
+<li><p>向 world 添加或移除对象；</p></li>
+<li><p>将物体附加到 world 里或从 world 里分离。</p></li>
 </ul>
 </div></blockquote>
-<div class="section" id="getting-started">
-<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
-<p>If you haven’t already done so, make sure you’ve completed the steps in <a class="reference external" href="../getting_started/getting_started.html">Getting Started</a>.</p>
+<div class="section" id="id1">
+<h2>开始<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>请先确保已经完成了 <a class="reference external" href="../getting_started/getting_started.html">入门</a> 里的步骤。</p>
 </div>
-<div class="section" id="running-the-code">
-<h2>Running the code<a class="headerlink" href="#running-the-code" title="Permalink to this headline">¶</a></h2>
-<p>Open two shells. In the first shell start RViz and wait for everything to finish loading:</p>
+<div class="section" id="id2">
+<h2>运行代码<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">panda_moveit_config</span> <span class="n">demo</span><span class="o">.</span><span class="n">launch</span>
 </pre></div>
 </div>
-<p>In the second shell, run the launch file for this demo:</p>
+<p>在另一个 shell 里使用为本示例启动 launch 文件：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">roslaunch</span> <span class="n">moveit_tutorials</span> <span class="n">planning_scene_ros_api_tutorial</span><span class="o">.</span><span class="n">launch</span>
 </pre></div>
 </div>
-<p><strong>Note:</strong> This tutorial uses the <strong>RvizVisualToolsGui</strong> panel to step through the demo. To add this panel to RViz, follow the instructions in the <a class="reference external" href="../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools">Visualization Tutorial</a>.</p>
-<p>After a short moment, the RViz window should appear and look similar to the one at the top of this page. To progress through each demo step either press the <strong>Next</strong> button in the <strong>RvizVisualToolsGui</strong> panel at the bottom of the screen or select <strong>Key Tool</strong> in the <strong>Tools</strong> panel at the top of the screen and then press <strong>N</strong> on your keyboard while RViz is focused.</p>
+<p><strong>注意:</strong> 本教程使用 <strong>RvizVisualToolsGui</strong> 面板来逐步运行此 demo。想要在 RViz里添加这个面板，请按照 <a class="reference external" href="../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools">可视化指南</a> 中的说明。</p>
+<p>RViz 窗口过一会儿就会出现，看起来和本页面顶部的窗口差不多。想要依次查看每个演示步骤，要么按下窗口底部 <strong>RvizVisualToolsGui</strong> 面板里的 <strong>Next</strong> 按钮，或者在 RViz 窗口聚焦状态下，选择窗口顶部 <strong>Tools</strong> 面板下的 <strong>Key Tool</strong> ，然后按下键盘上的 <strong>N</strong> 。</p>
 </div>
-<div class="section" id="expected-output">
-<h2>Expected Output<a class="headerlink" href="#expected-output" title="Permalink to this headline">¶</a></h2>
-<dl class="simple">
-<dt>In RViz, you should be able to see the following:</dt><dd><ul class="simple">
-<li><p>Object appears in the planning scene.</p></li>
-<li><p>Object gets attached to the robot.</p></li>
-<li><p>Object gets detached from the robot.</p></li>
-<li><p>Object is removed from the planning scene.</p></li>
+<div class="section" id="id4">
+<h2>预期输出<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>在 RViz 里，我们应该能看到以下效果：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>物体出现在了规划场景里；</p></li>
+<li><p>物体固连到了机器人上；</p></li>
+<li><p>物体从机器人上脱离；</p></li>
+<li><p>物体被从规划场景里移除。</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 <p><strong>Note:</strong> You may see an error message reading <span class="red">Found empty JointState message</span>. This is a known bug and will be fixed soon.</p>
 </div>
-<div class="section" id="the-entire-code">
-<h2>The entire code<a class="headerlink" href="#the-entire-code" title="Permalink to this headline">¶</a></h2>
-<p>The entire code can be seen <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene_ros_api">here in the MoveIt GitHub project</a>.</p>
-<div class="section" id="visualization">
-<h3>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">¶</a></h3>
-<p>The package MoveItVisualTools provides many capabilities for visualizing objects, robots,
-and trajectories in RViz as well as debugging tools such as step-by-step introspection of a script.</p>
+<div class="section" id="id5">
+<h2>整个代码<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>全部代码可以在 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene_ros_api">MoveIt GitHub project</a> 里找到。</p>
+<div class="section" id="id6">
+<h3>可视化<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>软件包 MoveItVisualTools 提供了许多用于可视化 RViz 中的对象、机械手和轨迹的功能。其还提供了一些调试工具，例如脚本的逐步自检。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">moveit_visual_tools</span><span class="o">::</span><span class="n">MoveItVisualTools</span> <span class="n">visual_tools</span><span class="p">(</span><span class="s">&quot;panda_link0&quot;</span><span class="p">);</span>
 <span class="n">visual_tools</span><span class="p">.</span><span class="n">deleteAllMarkers</span><span class="p">();</span>
 </pre></div>
@@ -857,15 +855,12 @@ and trajectories in RViz as well as debugging tools such as step-by-step introsp
 </div>
 <div class="section" id="ros-api">
 <h3>ROS API<a class="headerlink" href="#ros-api" title="Permalink to this headline">¶</a></h3>
-<p>The ROS API to the planning scene publisher is through a topic interface
-using “diffs”. A planning scene diff is the difference between the current
-planning scene (maintained by the move_group node) and the new planning
-scene desired by the user.</p>
+<p>planning scene 发布者的 ROS API 是通过使用 “diffs” 的话题接口实现的。
+planning scene diff 是当前规划场景（由 move_group 节点维护）与用户所需的新规划场景之间的差异。</p>
 </div>
-<div class="section" id="advertise-the-required-topic">
-<h3>Advertise the required topic<a class="headerlink" href="#advertise-the-required-topic" title="Permalink to this headline">¶</a></h3>
-<p>We create a publisher and wait for subscribers.
-Note that this topic may need to be remapped in the launch file.</p>
+<div class="section" id="id7">
+<h3>发布所需的话题<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>我们创建一个发布者并等待订阅者。请注意，可能需要在 launch 文件中重映射此话题。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ros</span><span class="o">::</span><span class="n">Publisher</span> <span class="n">planning_scene_diff_publisher</span> <span class="o">=</span> <span class="n">node_handle</span><span class="p">.</span><span class="n">advertise</span><span class="o">&lt;</span><span class="n">moveit_msgs</span><span class="o">::</span><span class="n">PlanningScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;planning_scene&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 <span class="n">ros</span><span class="o">::</span><span class="n">WallDuration</span> <span class="n">sleep_t</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
 <span class="k">while</span> <span class="p">(</span><span class="n">planning_scene_diff_publisher</span><span class="p">.</span><span class="n">getNumSubscribers</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span>
@@ -876,24 +871,22 @@ Note that this topic may need to be remapped in the launch file.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="define-the-attached-object-message">
-<h3>Define the attached object message<a class="headerlink" href="#define-the-attached-object-message" title="Permalink to this headline">¶</a></h3>
-<p>We will use this message to add or
-subtract the object from the world
-and to attach the object to the robot.</p>
+<div class="section" id="id8">
+<h3>定义固连物体的消息<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<p>我们将使用此消息从世界中添加或移除对象，并将该对象固连到机器人上。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">moveit_msgs</span><span class="o">::</span><span class="n">AttachedCollisionObject</span> <span class="n">attached_object</span><span class="p">;</span>
 <span class="n">attached_object</span><span class="p">.</span><span class="n">link_name</span> <span class="o">=</span> <span class="s">&quot;panda_hand&quot;</span><span class="p">;</span>
-<span class="cm">/* The header must contain a valid TF frame*/</span>
+<span class="cm">/* 头必须包含有效的 TF 坐标系 */</span>
 <span class="n">attached_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="s">&quot;panda_hand&quot;</span><span class="p">;</span>
-<span class="cm">/* The id of the object */</span>
+<span class="cm">/* 对象的id */</span>
 <span class="n">attached_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="s">&quot;box&quot;</span><span class="p">;</span>
 
-<span class="cm">/* A default pose */</span>
+<span class="cm">/* 一个默认位姿 */</span>
 <span class="n">geometry_msgs</span><span class="o">::</span><span class="n">Pose</span> <span class="n">pose</span><span class="p">;</span>
 <span class="n">pose</span><span class="p">.</span><span class="n">position</span><span class="p">.</span><span class="n">z</span> <span class="o">=</span> <span class="mf">0.11</span><span class="p">;</span>
 <span class="n">pose</span><span class="p">.</span><span class="n">orientation</span><span class="p">.</span><span class="n">w</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
 
-<span class="cm">/* Define a box to be attached */</span>
+<span class="cm">/* 定义一个要附加的 box */</span>
 <span class="n">shape_msgs</span><span class="o">::</span><span class="n">SolidPrimitive</span> <span class="n">primitive</span><span class="p">;</span>
 <span class="n">primitive</span><span class="p">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">primitive</span><span class="p">.</span><span class="n">BOX</span><span class="p">;</span>
 <span class="n">primitive</span><span class="p">.</span><span class="n">dimensions</span><span class="p">.</span><span class="n">resize</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
@@ -905,23 +898,19 @@ and to attach the object to the robot.</p>
 <span class="n">attached_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">primitive_poses</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">pose</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Note that attaching an object to the robot requires
-the corresponding operation to be specified as an ADD operation.</p>
+<p>请注意，将对象固连到机器人上需要将相应的操作指定为 ADD 操作。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">attached_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">attached_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">ADD</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Since we are attaching the object to the robot hand to simulate picking up the object,
-we want the collision checker to ignore collisions between the object and the robot hand.</p>
+<p>由于我们将对象固连到机械手上来模拟拾取对象，因此我们希望碰撞检查器忽略对象和机械手之间的碰撞。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">attached_object</span><span class="p">.</span><span class="n">touch_links</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span><span class="p">{</span> <span class="s">&quot;panda_hand&quot;</span><span class="p">,</span> <span class="s">&quot;panda_leftfinger&quot;</span><span class="p">,</span> <span class="s">&quot;panda_rightfinger&quot;</span> <span class="p">};</span>
 </pre></div>
 </div>
 </div>
-<div class="section" id="add-an-object-into-the-environment">
-<h3>Add an object into the environment<a class="headerlink" href="#add-an-object-into-the-environment" title="Permalink to this headline">¶</a></h3>
-<p>Add the object into the environment by adding it to
-the set of collision objects in the “world” part of the
-planning scene. Note that we are using only the “object”
-field of the attached_object message here.</p>
+<div class="section" id="id9">
+<h3>将一个对象添加到环境里<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<p>将对象添加到环境中的方法是将其添加到规划场景的 “world” 部分中的一组碰撞对象中。
+注意，这里我们仅使用 attached_object 消息的 “object” 字段。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ROS_INFO</span><span class="p">(</span><span class="s">&quot;Adding the object into the world at the location of the hand.&quot;</span><span class="p">);</span>
 <span class="n">moveit_msgs</span><span class="o">::</span><span class="n">PlanningScene</span> <span class="n">planning_scene</span><span class="p">;</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">world</span><span class="p">.</span><span class="n">collision_objects</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">attached_object</span><span class="p">.</span><span class="n">object</span><span class="p">);</span>
@@ -931,57 +920,48 @@ field of the attached_object message here.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="interlude-synchronous-vs-asynchronous-updates">
-<h3>Interlude: Synchronous vs Asynchronous updates<a class="headerlink" href="#interlude-synchronous-vs-asynchronous-updates" title="Permalink to this headline">¶</a></h3>
-<p>There are two separate mechanisms available to interact
-with the move_group node using diffs:</p>
+<div class="section" id="id10">
+<h3>插曲：同步与异步更新<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>有两种单独的机制可使用变更信息与 move_group 节点进行交互：</p>
 <ul class="simple">
-<li><p>Send a diff via a rosservice call and block until
-the diff is applied (synchronous update)</p></li>
-<li><p>Send a diff via a topic, continue even though the diff
-might not be applied yet (asynchronous update)</p></li>
+<li><p>通过 rosservice 调用发送变更信息并阻塞，直到变更信息被接受并应用（同步更新）</p></li>
+<li><p>通过话题发送变更信息，即使变更信息可能尚未生效也继续（异步更新）</p></li>
 </ul>
-<p>While most of this tutorial uses the latter mechanism (given the long sleeps
-inserted for visualization purposes asynchronous updates do not pose a problem),
-it would is perfectly justified to replace the planning_scene_diff_publisher
-by the following service client:</p>
+<p>尽管本教程的大部分内容都使用后一种机制（考虑到为可视化而插入了长时间的睡眠，异步更新不会有问题），
+但完全可以用以下 service 客户端替换 planning_scene_diff_publisher：</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ros</span><span class="o">::</span><span class="n">ServiceClient</span> <span class="n">planning_scene_diff_client</span> <span class="o">=</span>
     <span class="n">node_handle</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">moveit_msgs</span><span class="o">::</span><span class="n">ApplyPlanningScene</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;apply_planning_scene&quot;</span><span class="p">);</span>
 <span class="n">planning_scene_diff_client</span><span class="p">.</span><span class="n">waitForExistence</span><span class="p">();</span>
 </pre></div>
 </div>
-<p>and send the diffs to the planning scene via a service call:</p>
+<p>并通过 service 调用 call() 方法来将变更信息发送到规划场景：</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">moveit_msgs</span><span class="o">::</span><span class="n">ApplyPlanningScene</span> <span class="n">srv</span><span class="p">;</span>
 <span class="n">srv</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">scene</span> <span class="o">=</span> <span class="n">planning_scene</span><span class="p">;</span>
 <span class="n">planning_scene_diff_client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">);</span>
 </pre></div>
 </div>
-<p>Note that this does not continue until we are sure the diff has been applied.</p>
+<p>请注意，直到我们确定变更信息已被接受并应用后，此操作才会继续。</p>
 </div>
-<div class="section" id="attach-an-object-to-the-robot">
-<h3>Attach an object to the robot<a class="headerlink" href="#attach-an-object-to-the-robot" title="Permalink to this headline">¶</a></h3>
-<p>When the robot picks up an object from the environment, we need to
-“attach” the object to the robot so that any component dealing with
-the robot model knows to account for the attached object, e.g. for
-collision checking.</p>
-<dl class="simple">
-<dt>Attaching an object requires two operations</dt><dd><ul class="simple">
-<li><p>Removing the original object from the environment</p></li>
-<li><p>Attaching the object to the robot</p></li>
+<div class="section" id="id11">
+<h3>将对象固连到机器人<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<p>当机器人从环境中拾取物体时，我们需要将物体 “attach” 到机器人，
+以便任何处理机器人模型的组件都知道要考虑新附加的物体，例如碰撞检查。</p>
+<p>添加对象需要两项操作</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>从环境中删除原始对象；</p></li>
+<li><p>将对象固连到机器人。</p></li>
 </ul>
-</dd>
-</dl>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* First, define the REMOVE object message*/</span>
+</div></blockquote>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 首先, 定义 REMOVE 物体的信息 */</span>
 <span class="n">moveit_msgs</span><span class="o">::</span><span class="n">CollisionObject</span> <span class="n">remove_object</span><span class="p">;</span>
 <span class="n">remove_object</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="s">&quot;box&quot;</span><span class="p">;</span>
 <span class="n">remove_object</span><span class="p">.</span><span class="n">header</span><span class="p">.</span><span class="n">frame_id</span> <span class="o">=</span> <span class="s">&quot;panda_hand&quot;</span><span class="p">;</span>
 <span class="n">remove_object</span><span class="p">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">remove_object</span><span class="p">.</span><span class="n">REMOVE</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Note how we make sure that the diff message contains no other
-attached objects or collisions objects by clearing those fields
-first.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Carry out the REMOVE + ATTACH operation */</span>
+<p>请注意我们是如何通过首先清除 collision_objects 来确保变更消息不包含其他附加对象或碰撞对象的。</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 执行 REMOVE + ATTACH 操作 */</span>
 <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">&quot;Attaching the object to the hand and removing it from the world.&quot;</span><span class="p">);</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">world</span><span class="p">.</span><span class="n">collision_objects</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">world</span><span class="p">.</span><span class="n">collision_objects</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">remove_object</span><span class="p">);</span>
@@ -993,26 +973,24 @@ first.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="detach-an-object-from-the-robot">
-<h3>Detach an object from the robot<a class="headerlink" href="#detach-an-object-from-the-robot" title="Permalink to this headline">¶</a></h3>
-<dl class="simple">
-<dt>Detaching an object from the robot requires two operations</dt><dd><ul class="simple">
-<li><p>Detaching the object from the robot</p></li>
-<li><p>Re-introducing the object into the environment</p></li>
+<div class="section" id="id12">
+<h3>从机器人上取走物体<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
+<p>从机器人上取走物体需要两项操作：</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>从机器人上取走物体</p></li>
+<li><p>将该物体重新引入环境</p></li>
 </ul>
-</dd>
-</dl>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* First, define the DETACH object message*/</span>
+</div></blockquote>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 首先, 定义 DETACH 物体的信息 */</span>
 <span class="n">moveit_msgs</span><span class="o">::</span><span class="n">AttachedCollisionObject</span> <span class="n">detach_object</span><span class="p">;</span>
 <span class="n">detach_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="s">&quot;box&quot;</span><span class="p">;</span>
 <span class="n">detach_object</span><span class="p">.</span><span class="n">link_name</span> <span class="o">=</span> <span class="s">&quot;panda_hand&quot;</span><span class="p">;</span>
 <span class="n">detach_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">operation</span> <span class="o">=</span> <span class="n">attached_object</span><span class="p">.</span><span class="n">object</span><span class="p">.</span><span class="n">REMOVE</span><span class="p">;</span>
 </pre></div>
 </div>
-<p>Note how we make sure that the diff message contains no other
-attached objects or collisions objects by clearing those fields
-first.</p>
-<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Carry out the DETACH + ADD operation */</span>
+<p>请注意我们是如何通过首先清除 collision_objects 来确保变更消息不包含其他附加对象或碰撞对象的。</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cm">/* 执行 DETACH + ADD 操作 */</span>
 <span class="n">ROS_INFO</span><span class="p">(</span><span class="s">&quot;Detaching the object from the robot and returning it to the world.&quot;</span><span class="p">);</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">robot_state</span><span class="p">.</span><span class="n">attached_collision_objects</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">robot_state</span><span class="p">.</span><span class="n">attached_collision_objects</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">detach_object</span><span class="p">);</span>
@@ -1026,13 +1004,10 @@ first.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="remove-the-object-from-the-collision-world">
-<h3>Remove the object from the collision world<a class="headerlink" href="#remove-the-object-from-the-collision-world" title="Permalink to this headline">¶</a></h3>
-<p>Removing the object from the collision world just requires
-using the remove object message defined earlier.
-Note, also how we make sure that the diff message contains no other
-attached objects or collisions objects by clearing those fields
-first.</p>
+<div class="section" id="id13">
+<h3>从碰撞体世界中移除物体<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p>从碰撞体世界中删除对象仅需要使用前面定义的删除对象消息。
+请注意我们是如何通过首先清除 collision_objects 来确保变更消息不包含其他附加对象或碰撞对象的。</p>
 <div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">ROS_INFO</span><span class="p">(</span><span class="s">&quot;Removing the object from the world.&quot;</span><span class="p">);</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">robot_state</span><span class="p">.</span><span class="n">attached_collision_objects</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
 <span class="n">planning_scene</span><span class="p">.</span><span class="n">world</span><span class="p">.</span><span class="n">collision_objects</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
@@ -1042,13 +1017,13 @@ first.</p>
 </div>
 </div>
 </div>
-<div class="section" id="the-launch-file">
-<h2>The launch file<a class="headerlink" href="#the-launch-file" title="Permalink to this headline">¶</a></h2>
-<p>The entire launch file is <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene_ros_api/launch/planning_scene_ros_api_tutorial.launch">here</a> on GitHub. All the code in this tutorial can be compiled and run from the moveit_tutorials package.</p>
+<div class="section" id="launch">
+<h2>launch 文件<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
+<p>整个 launch 文件在 GitHub 上的 <a class="reference external" href="https://github.com/Decyzy/moveit_tutorials/blob/Noetic_CN_zh-dev/doc/planning_scene_ros_api/launch/planning_scene_ros_api_tutorial.launch">这里</a> 可见。本教程中的所有代码都可从 <strong>moveit_tutorials</strong> 包中运行，这个包是 MoveIt 安装的一部分。</p>
 </div>
-<div class="section" id="debugging-the-planning-scene-monitor">
-<h2>Debugging the Planning Scene Monitor<a class="headerlink" href="#debugging-the-planning-scene-monitor" title="Permalink to this headline">¶</a></h2>
-<p>To aid in debugging detached and attached collision objects, a command-line tool will help introspect your system:</p>
+<div class="section" id="id14">
+<h2>调试和规划场景监视器<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+<p>为了帮助调试物体分离和固连，以下命令行工具可以帮助你检查：</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rosrun</span> <span class="n">moveit_ros_planning</span> <span class="n">moveit_print_planning_scene_info</span>
 </pre></div>
 </div>
