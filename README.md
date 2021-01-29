@@ -16,7 +16,7 @@
 - [机器人模型和机器人状态 (RobotModel 和 RobotState)](https://decyzy.github.io/moveit_tutorials/doc/robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html)
 - [规划场景 (PlanningScene)](https://decyzy.github.io/moveit_tutorials/doc/planning_scene/planning_scene_tutorial.html)
 - [规划场景监控器 (PlanningSceneMonitor)](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_monitor/planning_scene_monitor_tutorial.html)
-- [规划场景 (Planning Scene) ROS API](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_ros_api/planning_scene_ros_api_tutorial.html)
+- [规划场景 (Planning Scene) 的 ROS API](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_ros_api/planning_scene_ros_api_tutorial.html)
 
 ## 已知问题
 
