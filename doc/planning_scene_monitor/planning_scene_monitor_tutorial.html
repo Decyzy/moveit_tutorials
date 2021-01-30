@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>规划场景监控器 (PlanningSceneMonitor) &mdash; moveit_tutorials Noetic documentation</title>
+  <title>规划场景监控器 PlanningSceneMonitor &mdash; moveit_tutorials Noetic documentation</title>
   
 
   
@@ -38,8 +38,8 @@
               href="../../genindex.html"/>
         <link rel="search" title="Search" href="../../search.html"/>
     <link rel="top" title="moveit_tutorials Noetic documentation" href="../../index.html"/>
-        <link rel="next" title="规划场景 (Planning Scene) ROS API" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html"/>
-        <link rel="prev" title="规划场景 (PlanningScene)" href="../planning_scene/planning_scene_tutorial.html"/> 
+        <link rel="next" title="规划场景 PlanningScene 的 ROS API" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html"/>
+        <link rel="prev" title="规划场景 PlanningScene" href="../planning_scene/planning_scene_tutorial.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -131,7 +131,7 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html">移动组 (Move Group) 的 C++ 接口</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html">移动群 Move Group 的 C++ 接口</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id1">开始</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id2">运行代码</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id4">预期效果</a></li>
@@ -156,7 +156,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../move_group_interface/move_group_interface_tutorial.html#id19">关于精度设置的说明</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html">移动组 (Move Group) 的 Python 接口</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html">移动群 Move Group 的 Python 接口</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id1">开始</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#rviz-movegroup">打开 RViz 和 MoveGroup 节点</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../move_group_python_interface/move_group_python_interface_tutorial.html#id2">预期效果</a></li>
@@ -185,7 +185,7 @@
 </li>
 </ul>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html">机器人模型和机器人状态 (RobotModel 和 RobotState)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html">机器人模型 RobotModel 和机器人状态 RobotState</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id1">RobotModel 类和 RobotState 类</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id2">开始</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id3">运行代码</a></li>
@@ -203,7 +203,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html#id12">调试机器人的状态</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html">规划场景 (PlanningScene)</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html">规划场景 PlanningScene</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id1">开始</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id2">整个代码</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id3">设置</a></li>
@@ -228,7 +228,7 @@
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene/planning_scene_tutorial.html#id11">预期输出</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">规划场景监控器 (PlanningSceneMonitor)</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">规划场景监控器 PlanningSceneMonitor</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#robotstate">RobotState 机器人状态</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#currentstatemonitor">CurrentStateMonitor 当前状态监视器</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#planningscene">PlanningScene 规划场景</a></li>
@@ -236,7 +236,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#planningsceneinterface">PlanningSceneInterface 规划场景接口</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html">规划场景 (Planning Scene) ROS API</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html">规划场景 PlanningScene 的 ROS API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html#id1">开始</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html#id2">运行代码</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html#id4">预期输出</a></li>
@@ -787,7 +787,7 @@
     <li><a href="http://moveit.ros.org">MoveIt</a> &raquo;</li>
     <li><a href="../../index.html">教程</a> &raquo;</li>
       
-    <li>规划场景监控器 (PlanningSceneMonitor)</li>
+    <li>规划场景监控器 PlanningSceneMonitor</li>
   </ul>
   <br />
 <div class="admonition note">
@@ -804,7 +804,7 @@
              <!-- </div>  -->
             
   <div class="section" id="planningscenemonitor">
-<h1>规划场景监控器 (PlanningSceneMonitor)<a class="headerlink" href="#planningscenemonitor" title="Permalink to this headline">¶</a></h1>
+<h1>规划场景监控器 PlanningSceneMonitor<a class="headerlink" href="#planningscenemonitor" title="Permalink to this headline">¶</a></h1>
 <p>建议使用 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a> 接口来维护最新的规划场景 (planning scene) 。<a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classmoveit_1_1core_1_1RobotState.html">RobotState</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1CurrentStateMonitor.html">CurrentStateMonitor</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_core/html/classplanning__scene_1_1PlanningScene.html">PlanningScene</a>, <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning/html/classplanning__scene__monitor_1_1PlanningSceneMonitor.html">PlanningSceneMonitor</a>, 和 <a class="reference external" href="http://docs.ros.org/noetic/api/moveit_ros_planning_interface/html/classmoveit_1_1planning__interface_1_1PlanningSceneInterface.html">PlanningSceneInterface</a> 之间的关系一开始确实令人困惑。本教程旨在阐明这些关键概念。</p>
 <div class="section" id="robotstate">
 <h2>RobotState 机器人状态<a class="headerlink" href="#robotstate" title="Permalink to this headline">¶</a></h2>
@@ -872,10 +872,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html" class="btn btn-neutral float-right" title="规划场景 (Planning Scene) ROS API" accesskey="n">下一章 <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../planning_scene_ros_api/planning_scene_ros_api_tutorial.html" class="btn btn-neutral float-right" title="规划场景 PlanningScene 的 ROS API" accesskey="n">下一章 <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../planning_scene/planning_scene_tutorial.html" class="btn btn-neutral" title="规划场景 (PlanningScene)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 上一章</a>
+        <a href="../planning_scene/planning_scene_tutorial.html" class="btn btn-neutral" title="规划场景 PlanningScene" accesskey="p"><span class="fa fa-arrow-circle-left"></span> 上一章</a>
       
     </div>
   

@@ -1,11 +1,11 @@
-机器人模型和机器人状态 (RobotModel 和 RobotState)
+机器人模型 RobotModel 和机器人状态 RobotState
 ===========================================================================
 
 .. image:: panda_tf.png
    :width: 700px
    :alt: "That is a sweet robot" you might say.
 
-在本节中，我们将引导您逐步了解在 MoveIt 中运动学的 C ++ API。
+在本节中，我们将引导您逐步了解在 MoveIt 中运动学的 C++ API。
 
 RobotModel 类和 RobotState 类
 ----------------------------------------------------

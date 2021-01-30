@@ -1,4 +1,4 @@
-规划场景 (Planning Scene) ROS API
+规划场景 PlanningScene 的 ROS API
 ========================================================
 
 在本教程中，我们将研究如何执行两个操作来变更 Planning Scene：
@@ -35,7 +35,7 @@ RViz 窗口过一会儿就会出现，看起来和本页面顶部的窗口差不
 
 .. role:: red
 
-**Note:** You may see an error message reading :red:`Found empty JointState message`. This is a known bug and will be fixed soon.
+**注意:** 您可能会看到一条显示 :red:`Found empty JointState message` 的错误信息，这是一个已知的错误，将尽快修复。
 
 整个代码
 ---------------

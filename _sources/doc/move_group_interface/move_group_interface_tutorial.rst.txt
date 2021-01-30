@@ -1,4 +1,4 @@
-移动组 (Move Group) 的 C++ 接口
+移动群 Move Group 的 C++ 接口
 ==================================
 .. image:: move_group_interface_tutorial_start_screen.png
    :width: 700px

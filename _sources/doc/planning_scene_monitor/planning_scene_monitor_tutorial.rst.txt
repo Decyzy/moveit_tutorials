@@ -1,4 +1,4 @@
-规划场景监控器 (PlanningSceneMonitor)
+规划场景监控器 PlanningSceneMonitor
 ====================================================================
 
 建议使用 :planning_scene_monitor:`PlanningSceneMonitor` 接口来维护最新的规划场景 (planning scene) 。:moveit_core:`RobotState`, :planning_scene_monitor:`CurrentStateMonitor`, :planning_scene:`PlanningScene`, :planning_scene_monitor:`PlanningSceneMonitor`, 和 :planning_interface:`PlanningSceneInterface` 之间的关系一开始确实令人困惑。本教程旨在阐明这些关键概念。
