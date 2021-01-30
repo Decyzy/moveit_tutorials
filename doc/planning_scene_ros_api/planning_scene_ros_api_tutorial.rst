@@ -1,4 +1,4 @@
-规划场景 (Planning Scene) 的 ROS API
+规划场景 PlanningScene 的 ROS API
 ========================================================
 
 在本教程中，我们将研究如何执行两个操作来变更 Planning Scene：

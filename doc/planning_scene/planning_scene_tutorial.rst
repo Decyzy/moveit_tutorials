@@ -1,4 +1,4 @@
-规划场景 (PlanningScene)
+规划场景 PlanningScene
 ========================================
 :planning_scene:`PlanningScene` 类提供了用于干涉和约束检查的主要接口。在本教程中，我们将探索此类的 C++ 接口。
 

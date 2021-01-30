@@ -1,9 +1,9 @@
-移动组 (Move Group) 的 Python 接口
+移动群 Move Group 的 Python 接口
 ================================================
 .. image:: move_group_python_interface.png
    :width: 700px
 
-最简单的 MoveIt 用户接口之一是基于 python 的移动组 (Move Group) 接口。这些 python 包装 (wrappers) 为用户想要执行的大多数操作提供了简便的功能，特别是设置关节或目标姿态，创建运动规划，移动机器人，添加对象到环境里和附加/分离对象到机器人上。
+最简单的 MoveIt 用户接口之一是基于 python 的移动群 Move Group 接口。这一 python 封装为用户想要执行的大多数操作提供了简便的功能，特别是设置关节或目标姿态，创建运动规划，移动机器人，添加对象到环境里和附加/分离对象到机器人上。
 
 观看这个简短的 `YouTube 演示视频 <https://youtu.be/3MA5ebXPLsc>`__ 看看 Move Group 的 python 接口的能力吧!
 

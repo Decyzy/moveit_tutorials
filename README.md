@@ -10,13 +10,13 @@
 
 - [入门](https://decyzy.github.io/moveit_tutorials/doc/getting_started/getting_started.html)
 - [在 RViz 中快速入门 MoveIt](https://decyzy.github.io/moveit_tutorials/doc/quickstart_in_rviz/quickstart_in_rviz_tutorial.html)
-- [移动组 (Move Group) 的 C++ 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_interface/move_group_interface_tutorial.html)
-- [移动组 (Move Group) 的 Python 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html)
+- [移动群 Move Group 的 C++ 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_interface/move_group_interface_tutorial.html)
+- [移动群 Move Group 的 Python 接口](https://decyzy.github.io/moveit_tutorials/doc/move_group_python_interface/move_group_python_interface_tutorial.html)
 - [MoveIt 命令行脚本](https://decyzy.github.io/moveit_tutorials/doc/moveit_commander_scripting/moveit_commander_scripting_tutorial.html)
-- [机器人模型和机器人状态 (RobotModel 和 RobotState)](https://decyzy.github.io/moveit_tutorials/doc/robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html)
-- [规划场景 (PlanningScene)](https://decyzy.github.io/moveit_tutorials/doc/planning_scene/planning_scene_tutorial.html)
-- [规划场景监控器 (PlanningSceneMonitor)](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_monitor/planning_scene_monitor_tutorial.html)
-- [规划场景 (Planning Scene) 的 ROS API](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_ros_api/planning_scene_ros_api_tutorial.html)
+- [机器人模型 RobotModel 和机器人状态 RobotState](https://decyzy.github.io/moveit_tutorials/doc/robot_model_and_robot_state/robot_model_and_robot_state_tutorial.html)
+- [规划场景 PlanningScene](https://decyzy.github.io/moveit_tutorials/doc/planning_scene/planning_scene_tutorial.html)
+- [规划场景监控器 PlanningSceneMonitor)](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_monitor/planning_scene_monitor_tutorial.html)
+- [规划场景 PlanningScene 的 ROS API](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_ros_api/planning_scene_ros_api_tutorial.html)
 
 ## 已知问题
 

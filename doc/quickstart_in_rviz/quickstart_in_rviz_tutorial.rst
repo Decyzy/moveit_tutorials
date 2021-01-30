@@ -220,8 +220,8 @@ RViz 提供了 ``File->Save Config`` 来保存界面布局等配置。在继续�
 
 接下来的教程
 ++++++++++++++
-* 要使用 c++ 来轻松地控制机器人，请查看 `移动组 (Move Group) 的 C++ 接口 <../move_group_interface/move_group_interface_tutorial.html>`_
+* 要使用 c++ 来轻松地控制机器人，请查看 `移动群 Move Group 的 C++ 接口 <../move_group_interface/move_group_interface_tutorial.html>`_
 
-* 要使用 Python 来轻松地控制机器人，请查看 `移动组 (Move Group) 的 Python 接口 <../move_group_python_interface/move_group_python_interface_tutorial.html>`_
+* 要使用 Python 来轻松地控制机器人，请查看 `移动群 Move Group 的 Python 接口 <../move_group_python_interface/move_group_python_interface_tutorial.html>`_
 
 * 要创建你自己的 ``*_moveit_config`` 包，请查看 `设置助手 <../setup_assistant/setup_assistant_tutorial.html>`_
