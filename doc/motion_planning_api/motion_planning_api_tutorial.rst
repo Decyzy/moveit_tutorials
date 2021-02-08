@@ -1,45 +1,43 @@
-Motion Planning API
+运动规划 Motion Planning 的 API
 ==================================
 .. image:: motion_planning_api_tutorial_robot_move_arm_1st.png
    :width: 700px
 
-In MoveIt, the motion planners are loaded using a plugin infrastructure. This
-allows MoveIt to load motion planners at runtime. In this example, we will
-run through the C++ code required to do this.
+MoveIt 以插件的形式来加载运动规划器 motion planner 。 这使 MoveIt 可以在运行时加载运动规划器。 在此示例中，我们将通过 C++ 代码来执行此操作。
 
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保已经完成了 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
-Running the Demo
+运行 Demo
 ----------------
-Open two shells. In the first shell start RViz and wait for everything to finish loading: ::
+打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成： ::
 
   roslaunch panda_moveit_config demo.launch
 
-In the second shell, run the launch file: ::
+在第二个 shell 里启动 launch 文件： ::
 
   roslaunch moveit_tutorials motion_planning_api_tutorial.launch
 
-**Note:** This tutorial uses the **RvizVisualToolsGui** panel to step through the demo. To add this panel to RViz, follow the instructions in the `Visualization Tutorial <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_.
+**注意:** 本教程使用 **RvizVisualToolsGui** 面板来逐步完成演示。 要将此面板添加到 RViz ，请参考 `可视化教程 <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_ 。
 
-After a short moment, the RViz window should appear and look similar to the one at the top of this page. To progress through each demo step either press the **Next** button in the **RvizVisualToolsGui** panel at the bottom of the screen or select **Key Tool** in the **Tools** panel at the top of the screen and then press **N** on your keyboard while RViz is focused.
+RViz 窗口过一会儿就会出现，看起来和本页面顶部那张截图差不多。想要依次查看每个演示步骤，要么按下窗口底部 **RvizVisualToolsGui** 面板里的 **Next** 按钮，或者在 RViz 窗口聚焦状态下，选择窗口顶部 **Tools** 面板下的 **Key Tool** ，然后按下键盘上的 **N** 。
 
-
-Expected Output
+预期效果
 ---------------
-In RViz, we should be able to see four trajectories being replayed eventually:
+在 RViz 中，我们最终应该能够看到四个重复播放的轨迹：
 
- 1. The robot moves its arm to the first pose goal,
+
+ 1. 机器人将手臂移动到第一个目标位姿，
 
     |A|
 
- 2. The robot moves its arm to the joint goal,
+ 2. 机器人将手臂移动到目标关节位置，
 
     |B|
 
- 3. The robot moves its arm back to the original pose goal,
- 4. The robot moves its arm to a new pose goal while maintaining the end-effector level.
+ 3. 机器人将手臂移动最初的位姿，
+ 4. 机器人在保持末端执行器水平的情况下，将手臂移动到新的目标位姿。
 
     |C|
 
@@ -50,12 +48,12 @@ In RViz, we should be able to see four trajectories being replayed eventually:
 .. |C| image:: motion_planning_api_tutorial_robot_move_arm_3rd.png
                :width: 200px
 
-The Entire Code
+整个代码
 ---------------
-The entire code can be seen :codedir:`here in the moveit_tutorials GitHub project<motion_planning_api>`.
+全部代码可以在 :codedir:`moveit_tutorials GitHub project<motion_planning_api>` 里找到。接下来，我们逐步分析代码来解释其功能。
 
 .. tutorial-formatter:: ./src/motion_planning_api_tutorial.cpp
 
-The Launch File
+Launch 文件
 ---------------
-The entire launch file is :codedir:`here <motion_planning_api/launch/motion_planning_api_tutorial.launch>` on GitHub. All the code in this tutorial can be compiled and run from the moveit_tutorials package.
+整个 launch 文件在 GitHub 上的 :codedir:`here <motion_planning_api/launch/motion_planning_api_tutorial.launch>` 可见。本教程中的所有代码都可从 **moveit_tutorials** 包中运行，这个包是 MoveIt 安装的一部分。
