@@ -17,6 +17,7 @@
 - [规划场景 PlanningScene](https://decyzy.github.io/moveit_tutorials/doc/planning_scene/planning_scene_tutorial.html)
 - [规划场景监控器 PlanningSceneMonitor](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_monitor/planning_scene_monitor_tutorial.html)
 - [规划场景 PlanningScene 的 ROS API](https://decyzy.github.io/moveit_tutorials/doc/planning_scene_ros_api/planning_scene_ros_api_tutorial.html)
+- [运动规划 Motion Planning 的 API](https://decyzy.github.io/moveit_tutorials/doc/motion_planning_api/motion_planning_api_tutorial.html)
 
 ## 已知问题
 
