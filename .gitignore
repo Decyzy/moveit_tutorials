@@ -4,3 +4,4 @@ build
 _scripts
 .vscode
 _build
+.DS_Store
