@@ -23,7 +23,7 @@
 
 **注意:** 本教程使用 **RvizVisualToolsGui** 面板来逐步完成演示。 要将此面板添加到 RViz ，请参考 `可视化教程 <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_ 。
 
-RViz 窗口过一会儿就会出现，看起来和本页面顶部的窗口差不多。想要依次查看每个演示步骤，要么按下窗口底部 **RvizVisualToolsGui** 面板里的 **Next** 按钮，或者在 RViz 窗口聚焦状态下，选择窗口顶部 **Tools** 面板下的 **Key Tool** ，然后按下键盘上的 **N** 。
+RViz 窗口过一会儿就会出现，看起来和本页面顶部那张截图差不多。想要依次查看每个演示步骤，要么按下窗口底部 **RvizVisualToolsGui** 面板里的 **Next** 按钮，或者在 RViz 窗口聚焦状态下，选择窗口顶部 **Tools** 面板下的 **Key Tool** ，然后按下键盘上的 **N** 。
 
 预期效果
 ---------------
