@@ -1,5 +1,5 @@
 TrajOpt Planner
-===============
+============================
 
 .. note:: The TrajOpt planner is still an alpha feature of MoveIt from a summer 2019 intern project, and needs further hardening. Please contact hello@picknik.ai if you are interested in further development.
 

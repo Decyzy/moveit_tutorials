@@ -56,81 +56,71 @@ int main(int argc, char** argv)
   ros::NodeHandle node_handle("~");
 
   // BEGIN_TUTORIAL
-  // Start
+  // 开始
   // ^^^^^
-  // Setting up to start using a planning pipeline is pretty easy. Before we can load the planner, we need two objects,
-  // a RobotModel and a PlanningScene.
+  // 设置并开始使用规划管道非常容易。
+  // 在加载计划器之前，我们需要两个对象，即 RobotModel 和 PlanningScene 。
   //
-  // We will start by instantiating a `RobotModelLoader`_ object, which will look up the robot description on the ROS
-  // parameter server and construct a :moveit_core:`RobotModel` for us to use.
+  // 我们将从实例化一个 `RobotModelLoader`_ 对象开始，该对象将在 ROS 参数服务器上查找 robot description ，并构建一个供我们使用的 :moveit_core:`RobotModel` 。
   //
   // .. _RobotModelLoader:
   //     http://docs.ros.org/noetic/api/moveit_ros_planning/html/classrobot__model__loader_1_1RobotModelLoader.html
   robot_model_loader::RobotModelLoaderPtr robot_model_loader(
       new robot_model_loader::RobotModelLoader("robot_description"));
 
-  // Using the RobotModelLoader, we can construct a planing scene monitor that
-  // will create a planning scene, monitors planning scene diffs, and apply the diffs to it's
-  // internal planning scene. We then call startSceneMonitor, startWorldGeometryMonitor and
-  // startStateMonitor to fully initialize the planning scene monitor
+  // 通过使用 RobotModelLoader ，我们可以构造一个规划场景监视器（planing scene monitor），该监视器将创建一个规划场景，监视规划场景变更，并将变更应用于其内部的规划场景对象（planning scene）。 然后，我们调用 startSceneMonitor ，startWorldGeometryMonitor 和 startStateMonitor 以完全初始化规划场景监视器。
   planning_scene_monitor::PlanningSceneMonitorPtr psm(
       new planning_scene_monitor::PlanningSceneMonitor(robot_model_loader));
 
-  /* listen for planning scene messages on topic /XXX and apply them to the internal planning scene
-                       the internal planning scene accordingly */
+  /* 监听主题 /XXX 上的规划场景消息，并将其应用于对应的内部规划场景对象 */
   psm->startSceneMonitor();
-  /* listens to changes of world geometry, collision objects, and (optionally) octomaps
-                                world geometry, collision objects and optionally octomaps */
+  /* 监听世界几何体，碰撞对象和 octomaps（可选）*/
   psm->startWorldGeometryMonitor();
-  /* listen to joint state updates as well as changes in attached collision objects
-                        and update the internal planning scene accordingly*/
+  /* 监听关节状态更新以及附加的碰撞对象的更改，并相应地更新内部规划场景对象 */
   psm->startStateMonitor();
 
-  /* We can also use the RobotModelLoader to get a robot model which contains the robot's kinematic information */
+  /* 我们还可以使用 RobotModelLoader 获得包含机器人运动学信息的机器人模型 ，即 RobotModel 对象 */
   moveit::core::RobotModelPtr robot_model = robot_model_loader->getModel();
 
-  /* We can get the most up to date robot state from the PlanningSceneMonitor by locking the internal planning scene
-     for reading. This lock ensures that the underlying scene isn't updated while we are reading it's state.
-     RobotState's are useful for computing the forward and inverse kinematics of the robot among many other uses */
+  /* 我们可以通过锁定内部规划场景并读取来从 PlanningSceneMonitor 中获取最新的机器人状态。
+  这个锁定可确保在我们读取基础场景时，该对象不会被更新。
+  在许多其他用途中，RobotState 可用于计算机器人的正向和反向运动学。 */
   moveit::core::RobotStatePtr robot_state(
       new moveit::core::RobotState(planning_scene_monitor::LockedPlanningSceneRO(psm)->getCurrentState()));
 
-  /* Create a JointModelGroup to keep track of the current robot pose and planning group. The Joint Model
-     group is useful for dealing with one set of joints at a time such as a left arm or a end effector */
+  /* 创建一个 JointModelGroup 来跟踪当前的机器人位姿和 planning group。 Joint Model
+     group 可用于一次处理一组关节，例如处理左臂或末端执行器 */
   const moveit::core::JointModelGroup* joint_model_group = robot_state->getJointModelGroup("panda_arm");
 
-  // We can now setup the PlanningPipeline object, which will use the ROS parameter server
-  // to determine the set of request adapters and the planning plugin to use
+  // 现在，我们可以设置 PlanningPipeline 对象，该对象将使用 ROS 参数服务器来确定请求适配器集 request adapter 和要使用的规划插件。
   planning_pipeline::PlanningPipelinePtr planning_pipeline(
       new planning_pipeline::PlanningPipeline(robot_model, node_handle, "planning_plugin", "request_adapters"));
 
-  // Visualization
+  // 可视化
   // ^^^^^^^^^^^^^
-  // The package MoveItVisualTools provides many capabilities for visualizing objects, robots,
-  // and trajectories in RViz as well as debugging tools such as step-by-step introspection of a script.
+  // MoveItVisualTools 包提供了 RViz 里许多将物体、机器人
+  // 和轨迹可视化的功能，还提供了一些调试工具，如脚本的逐步运行。
   namespace rvt = rviz_visual_tools;
   moveit_visual_tools::MoveItVisualTools visual_tools("panda_link0");
   visual_tools.deleteAllMarkers();
 
-  /* Remote control is an introspection tool that allows users to step through a high level script
-     via buttons and keyboard shortcuts in RViz */
+  /* 远程控制是一种自我审查工具，允许用户通过 RViz 中的按钮和快捷键来逐步地执行高级脚本。 */
   visual_tools.loadRemoteControl();
 
-  /* RViz provides many types of markers, in this demo we will use text, cylinders, and spheres*/
+  /* RViz 提供了许多类型的 markers，在本 demo 中，我们将使用文本，圆柱体和球体 */
   Eigen::Isometry3d text_pose = Eigen::Isometry3d::Identity();
   text_pose.translation().z() = 1.75;
   visual_tools.publishText(text_pose, "Motion Planning Pipeline Demo", rvt::WHITE, rvt::XLARGE);
 
-  /* Batch publishing is used to reduce the number of messages being sent to RViz for large visualizations */
+  /* 批量发布上述数据，用于减少发送给 RViz 进行大型可视化的消息数量 */
   visual_tools.trigger();
 
-  /* We can also use visual_tools to wait for user input */
+  /* 我们还可以使用 visual_tools 来待用户输入 */
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to start the demo");
 
-  // Pose Goal
+  // 目标位姿
   // ^^^^^^^^^
-  // We will now create a motion plan request for the right arm of the Panda
-  // specifying the desired pose of the end-effector as input.
+  // 现在，我们将为 Panda 的右臂创建一个运动规划的请求，并将末端执行器的所需位姿指定为输入。 
   planning_interface::MotionPlanRequest req;
   planning_interface::MotionPlanResponse res;
   geometry_msgs::PoseStamped pose;
@@ -140,15 +130,11 @@ int main(int argc, char** argv)
   pose.pose.position.z = 0.75;
   pose.pose.orientation.w = 1.0;
 
-  // A tolerance of 0.01 m is specified in position
-  // and 0.01 radians in orientation
+  // 位置容许误差为 0.01 m，姿态容许误差为 0.01 弧度。
   std::vector<double> tolerance_pose(3, 0.01);
   std::vector<double> tolerance_angle(3, 0.01);
 
-  // We will create the request as a constraint using a helper function available
-  // from the
-  // `kinematic_constraints`_
-  // package.
+  //  我们使用 `kinematic_constraints`_ 包中提供的一个辅助函数来创建带约束的规划请求。
   //
   // .. _kinematic_constraints:
   //     http://docs.ros.org/noetic/api/moveit_core/html/namespacekinematic__constraints.html#a88becba14be9ced36fefc7980271e132
@@ -157,28 +143,27 @@ int main(int argc, char** argv)
       kinematic_constraints::constructGoalConstraints("panda_link8", pose, tolerance_pose, tolerance_angle);
   req.goal_constraints.push_back(pose_goal);
 
-  // Before planning, we will need a Read Only lock on the planning scene so that it does not modify the world
-  // representation while planning
+  // 在执行规划之前，我们需要在规划场景上加只读锁，以便在规划时不会被修改 world representation 。
   {
     planning_scene_monitor::LockedPlanningSceneRO lscene(psm);
-    /* Now, call the pipeline and check whether planning was successful. */
+    /* 现在，调用规划管道并检查规划是否成功。 */
     planning_pipeline->generatePlan(lscene, req, res);
   }
-  /* Now, call the pipeline and check whether planning was successful. */
-  /* Check that the planning was successful */
+  /* 现在，调用规划管道并检查规划是否成功。 */
+  /* 检查规划是否成功 */
   if (res.error_code_.val != res.error_code_.SUCCESS)
   {
     ROS_ERROR("Could not compute plan successfully");
     return 0;
   }
 
-  // Visualize the result
+  // 可视化结果
   // ^^^^^^^^^^^^^^^^^^^^
   ros::Publisher display_publisher =
       node_handle.advertise<moveit_msgs::DisplayTrajectory>("/move_group/display_planned_path", 1, true);
   moveit_msgs::DisplayTrajectory display_trajectory;
 
-  /* Visualize the trajectory */
+  /* 可视化运动轨迹 */
   ROS_INFO("Visualizing the trajectory");
   moveit_msgs::MotionPlanResponse response;
   res.getMessage(response);
@@ -189,17 +174,17 @@ int main(int argc, char** argv)
   visual_tools.publishTrajectoryLine(display_trajectory.trajectory.back(), joint_model_group);
   visual_tools.trigger();
 
-  /* Wait for user input */
+  /* 等待用户输入 */
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
-  // Joint Space Goals
-  // ^^^^^^^^^^^^^^^^^
-  /* First, set the state in the planning scene to the final state of the last plan */
+  // 关节空间的目标位置
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  /* 首先，将规划场景中的状态设置为上一次运动规划的最终状态 */
   robot_state = planning_scene_monitor::LockedPlanningSceneRO(psm)->getCurrentStateUpdated(response.trajectory_start);
   robot_state->setJointGroupPositions(joint_model_group, response.trajectory.joint_trajectory.points.back().positions);
   moveit::core::robotStateToRobotStateMsg(*robot_state, req.start_state);
 
-  // Now, setup a joint space goal
+  // 现在, 设置一个关节空间下的目标点 。
   moveit::core::RobotState goal_state(*robot_state);
   std::vector<double> joint_values = { -1.0, 0.7, 0.7, -1.5, -0.7, 2.0, 0.0 };
   goal_state.setJointGroupPositions(joint_model_group, joint_values);
@@ -208,44 +193,41 @@ int main(int argc, char** argv)
   req.goal_constraints.clear();
   req.goal_constraints.push_back(joint_goal);
 
-  // Before planning, we will need a Read Only lock on the planning scene so that it does not modify the world
-  // representation while planning
+  // 在执行规划之前，我们需要在规划场景上加只读锁，以便在规划时不会被修改 world representation 。
   {
     planning_scene_monitor::LockedPlanningSceneRO lscene(psm);
-    /* Now, call the pipeline and check whether planning was successful. */
+    /* 现在, 调用规划管道并检查规划是否成功。 */
     planning_pipeline->generatePlan(lscene, req, res);
   }
-  /* Check that the planning was successful */
+  /* 检查规划是否成功。 */
   if (res.error_code_.val != res.error_code_.SUCCESS)
   {
     ROS_ERROR("Could not compute plan successfully");
     return 0;
   }
-  /* Visualize the trajectory */
+  /* 可视化轨迹 */
   ROS_INFO("Visualizing the trajectory");
   res.getMessage(response);
   display_trajectory.trajectory_start = response.trajectory_start;
   display_trajectory.trajectory.push_back(response.trajectory);
-  // Now you should see two planned trajectories in series
+  // 现在您应该看到两个规划的轨迹
   display_publisher.publish(display_trajectory);
   visual_tools.publishTrajectoryLine(display_trajectory.trajectory.back(), joint_model_group);
   visual_tools.trigger();
 
-  /* Wait for user input */
+  /* 等待用户输入 */
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to continue the demo");
 
-  // Using a Planning Request Adapter
-  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  // A planning request adapter allows us to specify a series of operations that
-  // should happen either before planning takes place or after the planning
-  // has been done on the resultant path
+  // 使用规划请求适配器 Planning Request Adapter
+  // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  // 通过规划请求适配器 Planning Request Adapter ，我们可以指定在进行规划之前或完成规划之后在结果路径上应该执行的一系列操作 。
 
-  /* First, set the state in the planning scene to the final state of the last plan */
+  /* 首先, 将规划场景中的状态设置为上一次运动规划的最终状态 */
   robot_state = planning_scene_monitor::LockedPlanningSceneRO(psm)->getCurrentStateUpdated(response.trajectory_start);
   robot_state->setJointGroupPositions(joint_model_group, response.trajectory.joint_trajectory.points.back().positions);
   moveit::core::robotStateToRobotStateMsg(*robot_state, req.start_state);
 
-  // Now, set one of the joints slightly outside its upper limit
+  // 现在, 设置其中一个将其中一个关节值设置为略高于其上限 。
   const moveit::core::JointModel* joint_model = joint_model_group->getJointModel("panda_joint3");
   const moveit::core::JointModel::Bounds& joint_bounds = joint_model->getVariableBounds();
   std::vector<double> tmp_values(1, 0.0);
@@ -255,11 +237,10 @@ int main(int argc, char** argv)
   req.goal_constraints.clear();
   req.goal_constraints.push_back(pose_goal);
 
-  // Before planning, we will need a Read Only lock on the planning scene so that it does not modify the world
-  // representation while planning
+  // 在执行规划之前，我们需要在规划场景上加只读锁，以便在规划时不会被修改 world representation 。
   {
     planning_scene_monitor::LockedPlanningSceneRO lscene(psm);
-    /* Now, call the pipeline and check whether planning was successful. */
+    /* 现在, 调用规划管道并检查规划是否成功 */
     planning_pipeline->generatePlan(lscene, req, res);
   }
   if (res.error_code_.val != res.error_code_.SUCCESS)
@@ -267,17 +248,17 @@ int main(int argc, char** argv)
     ROS_ERROR("Could not compute plan successfully");
     return 0;
   }
-  /* Visualize the trajectory */
+  /* 可视化轨迹 */
   ROS_INFO("Visualizing the trajectory");
   res.getMessage(response);
   display_trajectory.trajectory_start = response.trajectory_start;
   display_trajectory.trajectory.push_back(response.trajectory);
-  /* Now you should see three planned trajectories in series*/
+  /*现在您应该可以看到三个规划的轨迹 */
   display_publisher.publish(display_trajectory);
   visual_tools.publishTrajectoryLine(display_trajectory.trajectory.back(), joint_model_group);
   visual_tools.trigger();
 
-  /* Wait for user input */
+  /* 等待用户输入 */
   visual_tools.prompt("Press 'next' in the RvizVisualToolsGui window to finish the demo");
 
   ROS_INFO("Done");

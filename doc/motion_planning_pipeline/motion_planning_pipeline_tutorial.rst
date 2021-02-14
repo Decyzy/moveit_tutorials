@@ -1,46 +1,41 @@
-Motion Planning Pipeline
-==================================
+运动规划管道 Motion Planning Pipeline
+========================================================
 
-In MoveIt, the motion planners are setup to plan paths. However, there are often
-times when we may want to pre-process the motion planning request or post-process
-the planned path (e.g. for time parameterization). In such cases, we use
-the planning pipeline which chains a motion planner with pre-processing and post-processing
-stages. The pre and post-processing stages, called planning request adapters, can
-be configured by name from the ROS parameter server. In this tutorial, we will
-run you through the C++ code to instantiate and call such a planning pipeline.
+在 MoveIt 中，运动规划器 motion planner 用于规划路径。然而，我们经常需要对运动规划请求进行预处理或后处理(例如用于时间参数化)。在这种情况下，我们使用规划管道  planning pipeline ，其将一个运动规划器与预处理和后处理阶段连接起来。所谓的前处理和后处理阶段（称为规划请求适配器 planning request adapter ），可以在 ROS 的参数服务器上按名称配置。在本教程中，我们将让您运行 c++ 代码来实例化和调用这样的 Planning Pipeline 。
 
-Getting Started
+开始
 ---------------
-If you haven't already done so, make sure you've completed the steps in `Getting Started <../getting_started/getting_started.html>`_.
+请先确保已经完成了 `入门 <../getting_started/getting_started.html>`__ 里的步骤。
 
-Running the Code
+运行代码
 ----------------
-Open two shells. In the first shell start RViz and wait for everything to finish loading: ::
+打开两个 shell 。在第一个 shell 中启动 RViz ，并等待所有加载工作完成： ::
 
   roslaunch panda_moveit_config demo.launch
 
-In the second shell, run the launch file: ::
+在第二个 shell 里，运行 launch 文件： ::
 
  roslaunch moveit_tutorials motion_planning_pipeline_tutorial.launch
 
-**Note:** This tutorial uses the **RvizVisualToolsGui** panel to step through the demo. To add this panel to RViz, follow the instructions in the `Visualization Tutorial <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_.
+**注意:** 本教程使用 **RvizVisualToolsGui** 面板来逐步完成演示。 要将此面板添加到 RViz ，请参考 `可视化教程 <../quickstart_in_rviz/quickstart_in_rviz_tutorial.html#rviz-visual-tools>`_ 。
 
-After a short moment, the RViz window should appear and look similar to the one at the top of this page. To progress through each demo step either press the **Next** button in the **RvizVisualToolsGui** panel at the bottom of the screen or select **Key Tool** in the **Tools** panel at the top of the screen and then press **N** on your keyboard while RViz is focused.
+RViz 窗口过一会儿就会出现，看起来和本页面顶部那张截图差不多。想要依次查看每个演示步骤，要么按下窗口底部 **RvizVisualToolsGui** 面板里的 **Next** 按钮，或者在 RViz 窗口聚焦状态下，选择窗口顶部 **Tools** 面板下的 **Key Tool** ，然后按下键盘上的 **N** 。
 
-Expected Output
+预期效果
 ---------------
-In RViz, we should be able to see three trajectories being replayed eventually:
+在 RViz 里，我们最终应该能看到以下三个效果：
 
- 1. The robot moves its right arm to the pose goal in front of it,
- 2. The robot moves its right arm to the joint goal to the side,
- 3. The robot moves its right arm back to the original pose goal in front of it,
+ 1. 机器人移动它的右臂到其前方的一个目标位姿处，
+ 2. 机器人移动它的右臂到其一边的一个目标关节位置处，
+ 3. 机器人移动它的右臂到其前方的初始位姿处。
 
-The Entire Code
+整个代码
 ---------------
-The entire code can be seen :codedir:`here in the MoveIt GitHub project<motion_planning_pipeline>`.
+全部代码可以在 :codedir:`MoveIt GitHub project<motion_planning_pipeline>` 里找到。
 
 .. tutorial-formatter:: ./src/motion_planning_pipeline_tutorial.cpp
 
-The Launch File
+Launch 文件
 ---------------
-The entire launch file is :codedir:`here <motion_planning_pipeline/launch/motion_planning_pipeline_tutorial.launch>` on GitHub. All the code in this tutorial can be compiled and run from the moveit_tutorials package that you have as part of your MoveIt setup.
+整个 launch 文件在 GitHub 上的 :codedir:`这里<motion_planning_pipeline/launch/motion_planning_pipeline_tutorial.launch>` 可见。本教程中的所有代码都可从 **moveit_tutorials** 包中运行，这个包是 MoveIt 安装的一部分。
+

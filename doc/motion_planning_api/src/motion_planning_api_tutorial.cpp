@@ -130,7 +130,7 @@ int main(int argc, char** argv)
   visual_tools.deleteAllMarkers();  // 清除所有旧的 markers
   visual_tools.trigger();
 
-  /*远程控制是一种自我审查工具，允许用户通过 RViz 中的按钮和快捷键来逐步地执行高级脚本。 */
+  /* 远程控制是一种自我审查工具，允许用户通过 RViz 中的按钮和快捷键来逐步地执行高级脚本。 */
   visual_tools.loadRemoteControl();
 
   /* RViz 提供了许多类型的 markers，在本 demo 中，我们将使用文本，圆柱体和球体 */
