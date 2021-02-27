@@ -1,8 +1,8 @@
 # MoveIt 中文教程（个人翻译版）
 
-官方教程的 Master 分支的中文翻译，内容同步于 2021 年 1 月 19 日。
+官方教程的 Master 分支的中文翻译，内容同步于 2021 年 2 月 26 日。
 
-> commit id：ea5ab20a1bfd162d59fb351593950b0136b72864
+> commit id：623dede236b006a8f1973ac336114d471ccaaa41
 
 [MoveIt 中文教程（个人翻译版）](https://decyzy.github.io/moveit_tutorials/index.html)
 

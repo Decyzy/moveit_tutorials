@@ -8,3 +8,4 @@ native_build
 *.gdb
 _build
 .vscode
+.DS_Store
